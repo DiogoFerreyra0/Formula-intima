@@ -658,7 +658,84 @@
     </div>
 </footer>
 
+<!-- ==========================================
+     DRAWER DEL CARRITO DE COMPRAS
+     ========================================== -->
+<div id="carrito-drawer" class="carrito-drawer" aria-hidden="true">
+    <div class="carrito-drawer__overlay" id="carrito-overlay"></div>
+    
+    <aside class="carrito-drawer__panel" role="dialog" aria-modal="true" aria-label="Carrito de compras">
+        
+        <!-- Cabecera del Carrito -->
+        <header class="carrito-drawer__cabecera">
+            <div>
+                <span class="carrito-drawer__subtitulo">TU SELECCIÓN</span>
+                <h2 class="carrito-drawer__titulo">Carrito de compras</h2>
+            </div>
+            <button type="button" class="carrito-drawer__boton-cerrar" id="carrito-cerrar" aria-label="Cerrar carrito">
+                &times;
+            </button>
+        </header>
 
+        <!-- Lista de Productos Agregados -->
+        <div class="carrito-drawer__cuerpo" id="carrito-items-contenedor">
+            <!-- Se inyecta dinámicamente desde JavaScript -->
+        </div>
+
+        <!-- Acordeón Cupón de Descuento -->
+        <div class="carrito-cupon">
+            <button type="button" class="carrito-cupon__toggle" id="cupon-toggle">
+                <span>¿Tenés un cupón de descuento?</span>
+                <span class="carrito-cupon__icono">∨</span>
+            </button>
+            <div class="carrito-cupon__formulario" id="cupon-contenido">
+                <input type="text" id="cupon-input" class="carrito-cupon__input" placeholder="Ingresá tu código">
+                <button type="button" class="carrito-cupon__boton" id="cupon-aplicar">Aplicar</button>
+            </div>
+        </div>
+
+        <!-- Resumen y Totales -->
+        <footer class="carrito-drawer__pie">
+            <div class="carrito-totales">
+                <div class="carrito-totales__fila">
+                    <span>Subtotal</span>
+                    <span id="carrito-subtotal">$ 0</span>
+                </div>
+                <div class="carrito-totales__fila">
+                    <span>Envío</span>
+                    <span style="color: #28a745; font-weight: 600;">A coordinar</span>
+                </div>
+                <div class="carrito-totales__separador"></div>
+                <div class="carrito-totales__fila carrito-totales__fila--total">
+                    <span class="carrito-totales__etiqueta-total">Total</span>
+                    <span class="carrito-totales__monto-total" id="carrito-total">$ 0</span>
+                </div>
+                <div class="carrito-totales__cuotas" id="carrito-cuotas-texto">
+                    o 3 cuotas sin interés de $ 0
+                </div>
+            </div>
+
+            <!-- Botón Principal hacia WhatsApp -->
+            <button type="button" class="carrito-drawer__boton-comprar" id="boton-iniciar-compra">
+                Iniciar compra
+            </button>
+
+            <!-- Sello de Confianza -->
+            <div class="carrito-drawer__seguridad">
+                <span aria-hidden="true">&#x1F6E1;</span> Compra protegida y envío discreto
+            </div>
+        </footer>
+
+    </aside>
+</div>
+
+<!-- Supabase CDN (v2) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Script principal de la tienda -->
+    <script src="main.js"></script>
+
+    
 
 </body>
 </html>

@@ -1332,3 +1332,362 @@ button, input, select {
         padding: 0.8rem;
     }
 }
+
+/* ==========================================================================
+   ESTILOS: CARRITO DE COMPRAS LATERAL (DRAWER)
+   ========================================================================== */
+.carrito-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    visibility: hidden;
+    transition: visibility 0.3s ease;
+}
+
+.carrito-drawer--activo {
+    visibility: visible;
+}
+
+.carrito-drawer__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(64, 23, 31, 0.45);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.carrito-drawer--activo .carrito-drawer__overlay {
+    opacity: 1;
+}
+
+.carrito-drawer__panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 480px;
+    height: 100%;
+    background-color: #FFFFFF;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 2;
+}
+
+.carrito-drawer--activo .carrito-drawer__panel {
+    transform: translateX(0);
+}
+
+/* Cabecera */
+.carrito-drawer__cabecera {
+    padding: 1.8rem 1.5rem 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--color-borde);
+}
+
+.carrito-drawer__subtitulo {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-texto-claro);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.carrito-drawer__titulo {
+    font-family: var(--fuente-interfaz);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-texto-oscuro);
+    line-height: 1.1;
+    margin-top: 0.2rem;
+}
+
+.carrito-drawer__boton-cerrar {
+    background: none;
+    border: 1px solid var(--color-texto-oscuro);
+    border-radius: 4px;
+    width: 38px;
+    height: 38px;
+    font-size: 1.5rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-texto-oscuro);
+    transition: background-color 0.2s ease;
+}
+
+.carrito-drawer__boton-cerrar:hover {
+    background-color: var(--color-fondo-secundario);
+}
+
+/* Lista de Productos */
+.carrito-drawer__cuerpo {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.carrito-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #F0F0F0;
+    position: relative;
+}
+
+.carrito-item__imagen-caja {
+    width: 80px;
+    height: 80px;
+    background-color: #F6F6F6;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carrito-item__imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.carrito-item__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.carrito-item__marca {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--color-texto-claro);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.carrito-item__titulo {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-texto-oscuro);
+    line-height: 1.3;
+}
+
+/* Control de Cantidades [- 1 +] */
+.carrito-item__cantidad {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #D0D0D0;
+    border-radius: 3px;
+    margin-top: 0.4rem;
+    width: fit-content;
+}
+
+.carrito-item__btn-cant {
+    background: none;
+    border: none;
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--color-texto-oscuro);
+}
+
+.carrito-item__cant-numero {
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0 0.5rem;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Precios y Borrar */
+.carrito-item__col-derecha {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.carrito-item__btn-eliminar {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #999;
+    align-self: flex-end;
+    line-height: 1;
+}
+
+.carrito-item__btn-eliminar:hover {
+    color: var(--color-primario);
+}
+
+.carrito-item__precio {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-texto-oscuro);
+}
+
+.carrito-vacio {
+    text-align: center;
+    margin: auto 0;
+    color: var(--color-texto-claro);
+}
+
+.carrito-vacio p {
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+}
+
+/* Acordeón de Cupones */
+.carrito-cupon {
+    border-top: 1px solid #F0F0F0;
+    border-bottom: 1px solid #F0F0F0;
+    padding: 1rem 1.5rem;
+}
+
+.carrito-cupon__toggle {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-texto-oscuro);
+    cursor: pointer;
+}
+
+.carrito-cupon__formulario {
+    display: none;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+}
+
+.carrito-cupon__formulario--activo {
+    display: flex;
+}
+
+.carrito-cupon__input {
+    flex: 1;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.carrito-cupon__boton {
+    background-color: var(--color-secundario);
+    color: #FFF;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+/* Pie y Totales */
+.carrito-drawer__pie {
+    padding: 1.5rem;
+    background-color: #FAFAFA;
+    border-top: 1px solid var(--color-borde);
+}
+
+.carrito-totales {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.2rem;
+}
+
+.carrito-totales__fila {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.carrito-totales__separador {
+    height: 1px;
+    background-color: var(--color-borde);
+    margin: 0.4rem 0;
+}
+
+.carrito-totales__fila--total {
+    align-items: baseline;
+    color: var(--color-texto-oscuro);
+}
+
+.carrito-totales__etiqueta-total {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.carrito-totales__monto-total {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #111111;
+}
+
+.carrito-totales__cuotas {
+    text-align: right;
+    font-size: 0.75rem;
+    color: #888;
+}
+
+/* Botón Iniciar Compra (Negro/Oscuro idéntico a la imagen) */
+.carrito-drawer__boton-comprar {
+    width: 100%;
+    background-color: #222222;
+    color: #FFFFFF;
+    border: none;
+    padding: 1.1rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.carrito-drawer__boton-comprar:hover {
+    background-color: var(--color-primario);
+    transform: translateY(-2px);
+}
+
+.carrito-drawer__boton-comprar:disabled {
+    background-color: #CCCCCC;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.carrito-drawer__seguridad {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #777;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
