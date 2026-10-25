@@ -273,6 +273,214 @@
     </div>
 </section>
 
+<main class="catalogo" id="contenido-principal">
+    <div class="catalogo__contenedor">
+        
+        <!-- Migas de Pan (Breadcrumbs) -->
+        <nav class="catalogo__migas" aria-label="Navegación de ruta">
+            <ol class="migas__lista">
+                <li class="migas__item"><a href="/" class="migas__enlace">Inicio</a></li>
+                <li class="migas__separador" aria-hidden="true">></li>
+                <li class="migas__item" aria-current="page"><span class="migas__actual">Todos los productos</span></li>
+            </ol>
+        </nav>
+
+        <!-- Cabecera del Catálogo -->
+        <header class="catalogo__encabezado">
+            <div class="catalogo__info-principal">
+                <span class="catalogo__subtitulo-marca">SELECCIÓN FÓRMULA ÍNTIMA</span>
+                <h2 class="catalogo__titulo">Todo para disfrutar a tu manera</h2>
+                <p class="catalogo__contador">92 productos elegidos para vos</p>
+            </div>
+            <div class="catalogo__ordenar">
+                <label for="ordenar-catalogo" class="catalogo__ordenar-etiqueta">Ordenar por</label>
+                <select id="ordenar-catalogo" name="ordenar" class="catalogo__ordenar-select">
+                    <option value="destacados">Destacados</option>
+                    <option value="precio-menor">Precio: menor a mayor</option>
+                    <option value="precio-mayor">Precio: mayor a menor</option>
+                    <option value="alfabetico-az">A - Z</option>
+                    <option value="alfabetico-za">Z - A</option>
+                    <option value="mas-nuevos">Más nuevo al más viejo</option>
+                    <option value="mas-viejos">Más viejo al más nuevo</option>
+                    <option value="mas-vendidos">Más vendidos</option>
+                </select>
+            </div>
+        </header>
+
+        <!-- Cuerpo del Catálogo: Filtros y Grilla -->
+        <div class="catalogo__cuerpo">
+            
+            <!-- Barra Lateral de Filtros ("Filtrar por") -->
+            <aside class="filtros" aria-label="Filtros de productos">
+                <div class="filtros__cabecera">
+                    <h3 class="filtros__titulo">Filtrar por</h3>
+                    <button type="button" class="filtros__limpiar" aria-label="Limpiar todos los filtros">Limpiar</button>
+                </div>
+
+                <form class="filtros__formulario" id="formulario-filtros">
+                    
+                    <!-- Categorías -->
+                    <fieldset class="filtro-grupo">
+                        <legend class="filtro-grupo__leyenda">Categorías</legend>
+                        <div class="filtro-grupo__cabecera">
+                            <span class="filtro-grupo__nombre">Categorías</span>
+                            <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
+                        </div>
+                        <div class="filtro-grupo__lista">
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="categoria" value="cosmetica" class="filtro-opcion__checkbox" checked>
+                                <span class="filtro-opcion__texto">Cosmética y geles (28)</span>
+                            </label>
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="categoria" value="sextoys" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Sex Toys (24)</span>
+                            </label>
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="categoria" value="lenceria" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Lencería (21)</span>
+                            </label>
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="categoria" value="fetiche" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Fetiche / Bondage (12)</span>
+                            </label>
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="categoria" value="bienestar" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Bienestar (7)</span>
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <!-- Color -->
+                    <fieldset class="filtro-grupo">
+                        <legend class="filtro-grupo__leyenda">Color</legend>
+                        <div class="filtro-grupo__cabecera">
+                            <span class="filtro-grupo__nombre">Color</span>
+                            <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
+                        </div>
+                    </fieldset>
+
+                    <!-- Modelo -->
+                    <fieldset class="filtro-grupo">
+                        <legend class="filtro-grupo__leyenda">Modelo</legend>
+                        <div class="filtro-grupo__cabecera">
+                            <span class="filtro-grupo__nombre">Modelo</span>
+                            <span class="filtro-grupo__icono" aria-hidden="true">∨</span>
+                        </div>
+                    </fieldset>
+
+                    <!-- Marca -->
+                    <fieldset class="filtro-grupo">
+                        <legend class="filtro-grupo__leyenda">Marca</legend>
+                        <div class="filtro-grupo__cabecera">
+                            <span class="filtro-grupo__nombre">Marca</span>
+                            <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
+                        </div>
+                        <div class="filtro-grupo__lista">
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="marca" value="sexitive" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Sexitive</span>
+                            </label>
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="marca" value="pretty-love" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Pretty Love</span>
+                            </label>
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="marca" value="satisfyer" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Satisfyer</span>
+                            </label>
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="marca" value="lovense" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Lovense</span>
+                            </label>
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="marca" value="svakom" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Svakom</span>
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <!-- Precio -->
+                    <fieldset class="filtro-grupo filtro-grupo--sin-borde">
+                        <legend class="filtro-grupo__leyenda">Precio</legend>
+                        <div class="filtro-grupo__cabecera">
+                            <span class="filtro-grupo__nombre">Precio</span>
+                            <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
+                        </div>
+                        <div class="filtro-precio">
+                            <input type="number" class="filtro-precio__input" placeholder="Desde" aria-label="Precio mínimo">
+                            <span class="filtro-precio__separador" aria-hidden="true">—</span>
+                            <input type="number" class="filtro-precio__input" placeholder="Hasta" aria-label="Precio máximo">
+                        </div>
+                        <button type="submit" class="filtro-precio__boton">Aplicar</button>
+                    </fieldset>
+                </form>
+            </aside>
+
+            <!-- Sección de Productos (Grilla con una única tarjeta base) -->
+            <section class="productos-seccion">
+                <div class="productos-grilla" aria-label="Listado de productos">
+                    
+                    <!-- Tarjeta de Producto (Plantilla Base para inyección dinámica) -->
+                    <article class="tarjeta-producto" itemscope itemtype="https://schema.org/Product">
+                        
+                        <!-- Badges Superiores -->
+                        <div class="tarjeta-producto__badges">
+                            <span class="tarjeta-producto__etiqueta tarjeta-producto__etiqueta--descuento">20% OFF</span>
+                            <span class="tarjeta-producto__etiqueta tarjeta-producto__etiqueta--envio">Envío gratis</span>
+                        </div>
+                        
+                        <!-- Botón Favorito -->
+                        <button type="button" class="tarjeta-producto__favorito" aria-label="Agregar a favoritos">♡</button>
+                        
+                        <!-- Imagen del Producto -->
+                        <a href="/productos/gel-dante-al-infierno" class="tarjeta-producto__imagen-contenedor" aria-hidden="true" tabindex="-1">
+                            <img src="https://www.formulaintima.com.ar/img/dante-al-infierno.jpg" alt="Gel Lubricante Sexitive Dante al Infierno 500ml" class="tarjeta-producto__imagen" itemprop="image">
+                        </a>
+
+                        <!-- Cuerpo de la Tarjeta -->
+                        <div class="tarjeta-producto__cuerpo">
+                            <span class="tarjeta-producto__marca" itemprop="brand">Sexitive</span>
+                            
+                            <a href="/productos/gel-dante-al-infierno" class="tarjeta-producto__titulo-enlace">
+                                <h3 class="tarjeta-producto__titulo" itemprop="name">Gel Lubricante Sexitive Dante al Infierno 500ml</h3>
+                            </a>
+                            
+                            <!-- Precios y Ofertas -->
+                            <div class="tarjeta-producto__precios" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                <meta itemprop="priceCurrency" content="ARS">
+                                <div class="tarjeta-producto__precio-tachado">$34.999</div>
+                                <div class="tarjeta-producto__precio-oferta">
+                                    $<span itemprop="price">27.999</span>
+                                </div>
+                                <div class="tarjeta-producto__cuotas">3 cuotas sin interés de $9.333</div>
+                                <div class="tarjeta-producto__transferencia">$25.199 con Transferencia o depósito bancario</div>
+                                <link itemprop="availability" href="https://schema.org/InStock" />
+                            </div>
+
+                            <!-- Botones de Acción -->
+                            <div class="tarjeta-producto__acciones">
+                                <button type="button" class="tarjeta-producto__boton tarjeta-producto__boton--comprar" aria-label="Agregar Gel Lubricante Sexitive Dante al Infierno al carrito">
+                                    Agregar al carrito
+                                </button>
+                                <a href="/productos/gel-dante-al-infierno" class="tarjeta-producto__boton tarjeta-producto__boton--ver" aria-label="Ver detalles del producto">
+                                    Ver
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- Fin Tarjeta de Producto -->
+
+                </div>
+
+                <!-- Botón Ver Más Productos -->
+                <div class="catalogo__paginacion">
+                    <button type="button" class="catalogo__boton-ver-mas">Ver más productos</button>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</main>
 
 
 
