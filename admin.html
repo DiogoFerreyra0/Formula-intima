@@ -120,8 +120,12 @@
 
         .admin-principal {
             max-width: 1300px;
-            margin: 2rem auto;
+            margin: 2rem auto 5rem;
             padding: 0 1.5rem;
+        }
+
+        .admin-seccion-bloque {
+            margin-bottom: 4rem;
         }
 
         .admin-encabezado {
@@ -130,7 +134,7 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid var(--color-borde);
         }
@@ -143,7 +147,7 @@
 
         .admin-encabezado__acciones {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             align-items: center;
             flex-wrap: wrap;
         }
@@ -152,15 +156,51 @@
             background-color: var(--color-primario);
             color: var(--color-fondo);
             border: none;
-            padding: 0.75rem 1.4rem;
+            padding: 0.75rem 1.3rem;
             border-radius: 4px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 700;
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
         .boton-primario:hover {
             background-color: var(--color-oscuro);
+        }
+
+        .boton-gmail {
+            background-color: #EA4335;
+            color: #FFFFFF;
+            border: none;
+            padding: 0.75rem 1.3rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .boton-gmail:hover {
+            background-color: #D33426;
+        }
+
+        .boton-secundario-admin {
+            background-color: var(--color-tarjeta);
+            color: var(--color-oscuro);
+            border: 1px solid var(--color-borde);
+            padding: 0.75rem 1.2rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .boton-secundario-admin:hover {
+            background-color: var(--color-fondo-caja);
         }
 
         .input-busqueda {
@@ -170,7 +210,7 @@
             background-color: var(--color-tarjeta);
             font-size: 0.9rem;
             outline: none;
-            width: 260px;
+            width: 250px;
         }
 
         .toast {
@@ -415,39 +455,75 @@
     </header>
 
     <main class="admin-principal">
-        <div class="admin-encabezado">
-            <div>
-                <h1 class="admin-encabezado__titulo">Gestión de Catálogo</h1>
-                <p style="color: var(--color-texto-suave); font-size: 0.9rem;">Creá, modificá o eliminá los productos que se muestran en la tienda.</p>
-            </div>
-            <div class="admin-encabezado__acciones">
-                <input type="text" id="filtro-busqueda" class="input-busqueda" placeholder="Buscar por título o marca...">
-                <button id="boton-nuevo-producto" class="boton-primario">+ Nuevo Producto</button>
-            </div>
-        </div>
-
+        
         <div id="toast-mensaje" class="toast"></div>
 
-        <div class="tabla-contenedor">
-            <table class="tabla-productos">
-                <thead>
-                    <tr>
-                        <th>Foto</th>
-                        <th>Título</th>
-                        <th>Marca</th>
-                        <th>Categoría</th>
-                        <th>Precio Oferta</th>
-                        <th>Transferencia</th>
-                        <th>Etiquetas</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="cuerpo-tabla-productos"></tbody>
-            </table>
-        </div>
+        <!-- SECCIÓN 1: GESTIÓN DE PRODUCTOS -->
+        <section class="admin-seccion-bloque">
+            <div class="admin-encabezado">
+                <div>
+                    <h1 class="admin-encabezado__titulo">Gestión de Catálogo</h1>
+                    <p style="color: var(--color-texto-suave); font-size: 0.9rem;">Creá, modificá o eliminá los productos que se muestran en la tienda.</p>
+                </div>
+                <div class="admin-encabezado__acciones">
+                    <input type="text" id="filtro-busqueda" class="input-busqueda" placeholder="Buscar por título o marca...">
+                    <button id="boton-nuevo-producto" class="boton-primario">+ Nuevo Producto</button>
+                </div>
+            </div>
+
+            <div class="tabla-contenedor">
+                <table class="tabla-productos">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Título</th>
+                            <th>Marca</th>
+                            <th>Categoría</th>
+                            <th>Precio Oferta</th>
+                            <th>Transferencia</th>
+                            <th>Etiquetas</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo-tabla-productos"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: SUSCRIPTORES DEL NEWSLETTER -->
+        <section class="admin-seccion-bloque">
+            <div class="admin-encabezado">
+                <div>
+                    <h2 class="admin-encabezado__titulo">Suscriptores del Newsletter</h2>
+                    <p style="color: var(--color-texto-suave); font-size: 0.9rem;">Clientes que se sumaron a la comunidad desde la tienda online.</p>
+                </div>
+                <div class="admin-encabezado__acciones">
+                    <button type="button" class="boton-secundario-admin" onclick="window.copiarTodosLosCorreos()">📋 Copiar todos</button>
+                    <button type="button" class="boton-secundario-admin" onclick="window.descargarExcelSuscriptores()">📊 Descargar Excel (CSV)</button>
+                    <button type="button" class="boton-gmail" onclick="window.redactarEnGmail()">✉️ Redactar en Gmail (CCO)</button>
+                </div>
+            </div>
+
+            <div class="tabla-contenedor">
+                <table class="tabla-productos">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Correo Electrónico</th>
+                            <th>Fecha de Registro</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo-tabla-newsletter">
+                        <!-- Suscriptores inyectados dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
     </main>
 
-    <!-- MODAL CREAR / EDITAR -->
+    <!-- MODAL CREAR / EDITAR PRODUCTO -->
     <div id="modal-producto" class="modal">
         <div class="modal__caja">
             <div class="modal__cabecera">
@@ -634,15 +710,19 @@
         ];
 
         let productosLocales = [];
+        let suscriptoresLocales = [];
         let imagenBase64Temporal = "";
 
         const usuarioEmailSpan = document.getElementById('usuario-email');
         const cuerpoTabla = document.getElementById('cuerpo-tabla-productos');
+        const cuerpoTablaNewsletter = document.getElementById('cuerpo-tabla-newsletter');
         const toastMensaje = document.getElementById('toast-mensaje');
         const modal = document.getElementById('modal-producto');
         const formProducto = document.getElementById('formulario-producto');
 
-        // 1. Verificar sesión
+        // ==========================================
+        // 1. SEGURIDAD Y ACCESO
+        // ==========================================
         async function verificarAcceso() {
             if (clienteSupabase) {
                 const { data: { session } } = await clienteSupabase.auth.getSession();
@@ -654,6 +734,7 @@
                 usuarioEmailSpan.textContent = sesionLocal.email + " (Modo Local)";
             }
             cargarProductos();
+            cargarSuscriptores();
         }
         verificarAcceso();
 
@@ -663,7 +744,9 @@
             window.location.href = 'login.html';
         });
 
-        // 2. Cargar productos
+        // ==========================================
+        // 2. GESTIÓN DE PRODUCTOS
+        // ==========================================
         async function cargarProductos() {
             if (clienteSupabase) {
                 const { data } = await clienteSupabase.from('productos').select('*').order('created_at', { ascending: false });
@@ -708,14 +791,12 @@
             `).join('');
         }
 
-        // Buscador interno del admin
         document.getElementById('filtro-busqueda').addEventListener('input', (e) => {
             const q = e.target.value.toLowerCase().trim();
             const filtrados = productosLocales.filter(p => p.titulo.toLowerCase().includes(q) || p.marca.toLowerCase().includes(q));
             renderizarTabla(filtrados);
         });
 
-        // 3. Subida de foto desde la PC (convierte a Base64 para funcionar sin servidor)
         document.getElementById('campo-foto-archivo').addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (!file) return;
@@ -730,7 +811,6 @@
             reader.readAsDataURL(file);
         });
 
-        // 4. Abrir y cerrar Modal
         document.getElementById('boton-nuevo-producto').addEventListener('click', () => {
             formProducto.reset();
             document.getElementById('producto-id').value = '';
@@ -775,7 +855,6 @@
             modal.style.display = 'flex';
         };
 
-        // 5. Guardar Producto
         formProducto.addEventListener('submit', async (e) => {
             e.preventDefault();
             const idExistente = document.getElementById('producto-id').value;
@@ -812,7 +891,6 @@
             renderizarTabla(productosLocales);
         });
 
-        // 6. Borrar Producto
         window.borrarProducto = function(id) {
             const prod = productosLocales.find(p => String(p.id) === String(id));
             if (!prod) return;
@@ -822,6 +900,119 @@
             localStorage.setItem('fi_catalogo_admin', JSON.stringify(productosLocales));
             renderizarTabla(productosLocales);
             mostrarNotificacion("Producto eliminado.");
+        };
+
+        // ==========================================
+        // 3. GESTIÓN DEL NEWSLETTER (OPCIÓN 1)
+        // ==========================================
+        async function cargarSuscriptores() {
+            if (clienteSupabase) {
+                try {
+                    const { data } = await clienteSupabase.from('suscriptores').select('*').order('created_at', { ascending: false });
+                    suscriptoresLocales = data || [];
+                } catch (e) {
+                    suscriptoresLocales = [];
+                }
+            } else {
+                const guardados = localStorage.getItem('fi_suscriptores_newsletter');
+                if (guardados) {
+                    suscriptoresLocales = JSON.parse(guardados);
+                } else {
+                    suscriptoresLocales = [
+                        { id: "s1", email: "carolina.m@gmail.com", fecha: "24/10/2026, 17:30" },
+                        { id: "s2", email: "lucia_perez@hotmail.com", fecha: "25/10/2026, 10:15" },
+                        { id: "s3", email: "valeria.ba@outlook.com", fecha: "25/10/2026, 11:40" }
+                    ];
+                    localStorage.setItem('fi_suscriptores_newsletter', JSON.stringify(suscriptoresLocales));
+                }
+            }
+            renderizarTablaNewsletter(suscriptoresLocales);
+        }
+
+        function renderizarTablaNewsletter(lista) {
+            if (lista.length === 0) {
+                cuerpoTablaNewsletter.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:2rem; color:#777;">Aún no hay correos suscriptos. Cuando se anoten en la web aparecerán acá.</td></tr>`;
+                return;
+            }
+
+            cuerpoTablaNewsletter.innerHTML = lista.map((s, index) => `
+                <tr>
+                    <td><strong>${index + 1}</strong></td>
+                    <td><strong>${s.email}</strong></td>
+                    <td style="color:#666;">${s.fecha || s.created_at || 'Reciente'}</td>
+                    <td>
+                        <div class="acciones-fila">
+                            <a href="mailto:${s.email}" class="boton-accion" style="text-decoration:none; display:inline-flex; align-items:center;">✉️ Escribir</a>
+                            <button type="button" class="boton-accion boton-accion--borrar" onclick="window.eliminarSuscriptor('${s.id}')">🗑️</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        window.eliminarSuscriptor = function(id) {
+            const suscriptor = suscriptoresLocales.find(s => String(s.id) === String(id));
+            if (!suscriptor) return;
+            if (!confirm(`¿Eliminar al suscriptor "${suscriptor.email}"?`)) return;
+
+            suscriptoresLocales = suscriptoresLocales.filter(s => String(s.id) !== String(id));
+            localStorage.setItem('fi_suscriptores_newsletter', JSON.stringify(suscriptoresLocales));
+            renderizarTablaNewsletter(suscriptoresLocales);
+            mostrarNotificacion("Suscriptor eliminado de la lista.");
+        };
+
+        // Botón 1: Redactar directo en Gmail con todos los correos en CCO (Copia Oculta)
+        window.redactarEnGmail = function() {
+            if (suscriptoresLocales.length === 0) {
+                alert("No hay correos registrados todavía.");
+                return;
+            }
+
+            const listaMails = suscriptoresLocales.map(s => s.email).join(',');
+            const asunto = encodeURIComponent("Novedades exclusivas | Fórmula Íntima 🌸");
+            const cuerpo = encodeURIComponent("¡Hola!\n\nTe escribimos desde Fórmula Íntima para compartirte nuestros nuevos lanzamientos y beneficios exclusivos para la comunidad.\n\n");
+
+            // URL directa para abrir redactor de Gmail en CCO (BCC)
+            const urlGmail = `https://mail.google.com/mail/?view=cm&fs=1&bcc=${encodeURIComponent(listaMails)}&su=${asunto}&body=${cuerpo}`;
+            window.open(urlGmail, '_blank');
+        };
+
+        // Botón 2: Copiar todos los correos al portapapeles
+        window.copiarTodosLosCorreos = function() {
+            if (suscriptoresLocales.length === 0) {
+                alert("No hay correos para copiar.");
+                return;
+            }
+            const listaMails = suscriptoresLocales.map(s => s.email).join(', ');
+            navigator.clipboard.writeText(listaMails).then(() => {
+                mostrarNotificacion("¡Correos copiados al portapapeles! Listos para pegar en CCO.");
+            }).catch(() => {
+                prompt("Copia los correos manualmente:", listaMails);
+            });
+        };
+
+        // Botón 3: Descargar Excel (CSV)
+        window.descargarExcelSuscriptores = function() {
+            if (suscriptoresLocales.length === 0) {
+                alert("No hay correos para exportar.");
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,\uFEFF"; // Byte Order Mark para compatibilidad con Excel
+            csvContent += "Numero,Correo Electronico,Fecha de Registro\n";
+
+            suscriptoresLocales.forEach((s, i) => {
+                csvContent += `${i + 1},${s.email},"${s.fecha || s.created_at || 'Reciente'}"\n`;
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `suscriptores_formula_intima_${Date.now()}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            mostrarNotificacion("Archivo CSV descargado con éxito.");
         };
 
         function mostrarNotificacion(texto) {

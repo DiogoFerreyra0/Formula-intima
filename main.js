@@ -1,11 +1,11 @@
 /* ==========================================================================
-   FÓRMULA ÍNTIMA - MAIN.JS (SIN CONFLICTO DE VARIABLES GLOBALES)
+   FÓRMULA ÍNTIMA - MAIN.JS (CATÁLOGO + FILTROS + CARRITO + NEWSLETTER)
    ========================================================================== */
 
 // NÚMERO DE WHATSAPP OFICIAL DEL LOCAL
 const WHATSAPP_NUMERO = "5491145678900"; 
 
-// SUPABASE CONFIG (Usamos clienteSupabase para no chocar con window.supabase)
+// SUPABASE CONFIG
 const SUPABASE_URL = "https://TU_PROYECTO.supabase.co";
 const SUPABASE_ANON_KEY = "TU_CLAVE_ANON_PUBLICA";
 
@@ -158,10 +158,10 @@ const DATOS_MODALES_INFO = {
         badge: "NUESTRA IDENTIDAD",
         titulo: "Acerca de Fórmula Íntima",
         contenido: `
-            <p>Fórmula Íntima nace con el propósito de abordar la sexualidad desde una mirada amplia, natural y consciente.</p>
-            <p>Más que ofrecer productos, buscamos crear un espacio donde el placer, el bienestar y la salud sexual convivan con información, acompañamiento y respeto, derribando prejuicios y mitos.</p>
+            <p>Fórmula Íntima nace con el propósito de abordar la sexualidad desde una mirada amplia, natural y consciente[cite: 46].</p>
+            <p>Más que ofrecer productos, buscamos crear un espacio donde el placer, el bienestar y la salud sexual convivan con información, acompañamiento y respeto, derribando prejuicios y mitos[cite: 46].</p>
             <div class="modal-info__destacado">
-                Celebramos la diversidad de cuerpos, identidades y talles. El placer es para todes.
+                Celebramos la diversidad de cuerpos, identidades y talles. El placer es para todes[cite: 46].
             </div>
         `
     },
@@ -174,7 +174,7 @@ const DATOS_MODALES_INFO = {
             <p><strong>¿Cómo coordino el pago y la entrega?</strong><br>
             Al presionar "Iniciar compra" en el carrito, se genera un mensaje automático con tus productos y precios y te deriva directo a nuestro WhatsApp oficial para coordinar todo de forma personalizada.</p>
             <p><strong>¿Tienen atención confidencial?</strong><br>
-            Sí, te asesoramos de manera 100% privada, cálida y sin prejuicios.</p>
+            Sí, te asesoramos de manera 100% privada, cálida y sin prejuicios[cite: 46].</p>
         `
     },
     "envios": {
@@ -247,29 +247,25 @@ try {
 }
 
 // ==========================================================================
-// 1. FUNCIONES GLOBALES DE FILTROS Y CONEXIÓN CON EL FOOTER
+// 1. FILTROS Y NAVEGACIÓN
 // ==========================================================================
 window.filtrarDesdeEnlace = function(categoriaClave) {
     const formFiltros = document.getElementById('formulario-filtros');
     const buscadorInput = document.getElementById('input-buscar');
     
-    // Limpiar selecciones anteriores
     if (formFiltros) formFiltros.reset();
     if (buscadorInput) buscadorInput.value = '';
 
-    // Marcar el checkbox en "Filtrar por"
     const checkbox = document.querySelector(`input[name="categoria"][value="${categoriaClave}"]`);
     if (checkbox) {
         checkbox.checked = true;
     }
 
-    // Actualizar migas de pan
     const migasActual = document.getElementById('migas-categoria-actual');
     if (migasActual) {
         migasActual.textContent = NOMBRES_CATEGORIAS[categoriaClave] || "Todos los productos";
     }
 
-    // Filtrar productos y bajar/subir hasta el catálogo
     window.aplicarFiltros();
 
     const seccionCatalogo = document.getElementById('contenido-principal');
@@ -296,7 +292,6 @@ window.aplicarFiltros = function() {
 
     let resultado = [...todosLosProductos];
 
-    // 1. Buscador
     const textoBuscador = buscadorInput ? buscadorInput.value.toLowerCase().trim() : '';
     if (textoBuscador !== '') {
         resultado = resultado.filter(p => 
@@ -305,35 +300,30 @@ window.aplicarFiltros = function() {
         );
     }
 
-    // 2. Categorías
     const categoriasSeleccionadas = Array.from(document.querySelectorAll('input[name="categoria"]:checked'))
         .map(input => input.value.toLowerCase());
     if (categoriasSeleccionadas.length > 0) {
         resultado = resultado.filter(p => p.categoria && categoriasSeleccionadas.includes(p.categoria.toLowerCase()));
     }
 
-    // 3. Marcas
     const marcasSeleccionadas = Array.from(document.querySelectorAll('input[name="marca"]:checked'))
         .map(input => input.value.toLowerCase());
     if (marcasSeleccionadas.length > 0) {
         resultado = resultado.filter(p => p.marca && marcasSeleccionadas.includes(p.marca.toLowerCase()));
     }
 
-    // 4. Colores
     const coloresSeleccionados = Array.from(document.querySelectorAll('input[name="color"]:checked'))
         .map(input => input.value.toLowerCase());
     if (coloresSeleccionados.length > 0) {
         resultado = resultado.filter(p => p.color && coloresSeleccionados.includes(p.color.toLowerCase()));
     }
 
-    // 5. Modelos
     const modelosSeleccionados = Array.from(document.querySelectorAll('input[name="modelo"]:checked'))
         .map(input => input.value.toLowerCase());
     if (modelosSeleccionados.length > 0) {
         resultado = resultado.filter(p => p.modelo && modelosSeleccionados.includes(p.modelo.toLowerCase()));
     }
 
-    // 6. Rango de Precio
     const precioDesde = inputPrecioDesde && inputPrecioDesde.value ? parseFloat(inputPrecioDesde.value) : 0;
     const precioHasta = inputPrecioHasta && inputPrecioHasta.value ? parseFloat(inputPrecioHasta.value) : Infinity;
 
@@ -342,7 +332,6 @@ window.aplicarFiltros = function() {
         return precio >= precioDesde && precio <= precioHasta;
     });
 
-    // 7. Ordenamiento
     const orden = selectOrden ? selectOrden.value : 'destacados';
     switch (orden) {
         case 'precio-menor':
@@ -478,7 +467,7 @@ function actualizarContadoresCategorias() {
 }
 
 // ==========================================================================
-// 3. CARRITO DE COMPRAS LATERAL Y WHATSAPP
+// 3. CARRITO DE COMPRAS Y WHATSAPP
 // ==========================================================================
 window.abrirDrawerCarrito = function() {
     const carritoDrawer = document.getElementById('carrito-drawer');
@@ -641,7 +630,68 @@ window.enviarPedidoAWhatsApp = function() {
 };
 
 // ==========================================================================
-// 4. CARDS FLOTANTES DEL FOOTER (MODALES)
+// 4. SUSCRIPCIÓN NEWSLETTER (GUARDADO EN BD Y LOCALSTORAGE)
+// ==========================================================================
+window.suscribirNewsletter = async function(event) {
+    event.preventDefault();
+    const inputEmail = document.getElementById('input-email-newsletter');
+    const boton = document.getElementById('boton-newsletter');
+    const mensajeAlerta = document.getElementById('mensaje-newsletter');
+
+    if (!inputEmail || !inputEmail.value) return;
+
+    const email = inputEmail.value.trim().toLowerCase();
+    boton.disabled = true;
+    boton.textContent = "Sumando...";
+
+    try {
+        const nuevoSuscriptor = {
+            id: String(Date.now()),
+            email: email,
+            fecha: new Date().toLocaleDateString('es-AR', {
+                year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
+            })
+        };
+
+        // 1. Guardar en Supabase (si está configurado)
+        if (clienteSupabase) {
+            await clienteSupabase.from('suscriptores').insert([{ email: email }]);
+        }
+
+        // 2. Guardar en memoria local compartida con admin.html
+        let suscriptoresLocales = [];
+        try {
+            suscriptoresLocales = JSON.parse(localStorage.getItem('fi_suscriptores_newsletter')) || [];
+        } catch (e) {
+            suscriptoresLocales = [];
+        }
+
+        const yaExiste = suscriptoresLocales.some(s => s.email === email);
+        if (!yaExiste) {
+            suscriptoresLocales.unshift(nuevoSuscriptor);
+            localStorage.setItem('fi_suscriptores_newsletter', JSON.stringify(suscriptoresLocales));
+        }
+
+        mensajeAlerta.textContent = "¡Te sumaste con éxito a la comunidad de Fórmula Íntima! 🌸";
+        mensajeAlerta.className = "newsletter__alerta newsletter__alerta--exito";
+        mensajeAlerta.style.display = "block";
+        inputEmail.value = "";
+
+    } catch (err) {
+        mensajeAlerta.textContent = "Hubo un inconveniente al registrar tu correo. Inténtalo nuevamente.";
+        mensajeAlerta.className = "newsletter__alerta newsletter__alerta--error";
+        mensajeAlerta.style.display = "block";
+    } finally {
+        boton.disabled = false;
+        boton.textContent = "Quiero sumarme";
+        setTimeout(() => {
+            mensajeAlerta.style.display = "none";
+        }, 5000);
+    }
+};
+
+// ==========================================================================
+// 5. CARDS FLOTANTES DEL FOOTER (MODALES)
 // ==========================================================================
 window.abrirModalInfo = function(clave) {
     const modalInfo = document.getElementById('modal-info');
@@ -711,10 +761,9 @@ window.verDetalleRapido = function(id) {
 };
 
 // ==========================================================================
-// 5. INICIALIZACIÓN AUTOMÁTICA
+// 6. INICIALIZACIÓN AUTOMÁTICA
 // ==========================================================================
 async function iniciarTienda() {
-    // Si la dueña creó o editó productos en admin.html, los carga automáticamente
     const guardadosEnAdmin = localStorage.getItem('fi_catalogo_admin');
     if (guardadosEnAdmin) {
         try {
@@ -728,6 +777,21 @@ async function iniciarTienda() {
     actualizarCarritoUI();
     actualizarContadoresCategorias();
     window.aplicarFiltros();
+
+    if (clienteSupabase) {
+        try {
+            const { data, error } = await clienteSupabase
+                .from('productos')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (!error && data && data.length > 0) {
+                todosLosProductos = data;
+                actualizarContadoresCategorias();
+                window.aplicarFiltros();
+            }
+        } catch (err) {}
+    }
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
