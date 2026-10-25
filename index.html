@@ -108,12 +108,13 @@
             </div>
 
             <!-- Acciones de Usuario (Carrito y Cuenta) -->
+            <!-- Acciones de Usuario (Carrito y Cuenta) -->
             <div class="cabecera__acciones">
-                <a href="/carrito" class="carrito-enlace" aria-label="Ver carrito de compras">
+                <button type="button" class="carrito-enlace" id="boton-abrir-carrito" aria-label="Ver carrito de compras">
                     <span class="carrito-enlace__icono" aria-hidden="true">🛒</span>
                     <span class="carrito-enlace__texto">Mi carrito</span>
-                    <span class="carrito-enlace__contador" aria-label="2 productos en el carrito">2</span>
-                </a>
+                    <span class="carrito-enlace__contador" aria-label="0 productos en el carrito">0</span>
+                </button>
             </div>
 
         </div>
@@ -310,106 +311,139 @@
         <!-- Cuerpo del Catálogo: Filtros y Grilla -->
         <div class="catalogo__cuerpo">
             
+            
             <!-- Barra Lateral de Filtros ("Filtrar por") -->
             <aside class="filtros" aria-label="Filtros de productos">
                 <div class="filtros__cabecera">
                     <h3 class="filtros__titulo">Filtrar por</h3>
-                    <button type="button" class="filtros__limpiar" aria-label="Limpiar todos los filtros">Limpiar</button>
+                    <button type="button" class="filtros__limpiar" id="boton-limpiar-filtros" aria-label="Limpiar todos los filtros">Limpiar</button>
                 </div>
 
                 <form class="filtros__formulario" id="formulario-filtros">
                     
-                    <!-- Categorías -->
+                    <!-- 1. Categorías -->
                     <fieldset class="filtro-grupo">
                         <legend class="filtro-grupo__leyenda">Categorías</legend>
-                        <div class="filtro-grupo__cabecera">
+                        <div class="filtro-grupo__cabecera" role="button" tabindex="0">
                             <span class="filtro-grupo__nombre">Categorías</span>
                             <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
                         </div>
                         <div class="filtro-grupo__lista">
                             <label class="filtro-opcion">
-                                <input type="checkbox" name="categoria" value="cosmetica" class="filtro-opcion__checkbox" checked>
-                                <span class="filtro-opcion__texto">Cosmética y geles (28)</span>
+                                <input type="checkbox" name="categoria" value="cosmetica" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Cosmética y geles <span class="filtro-conteo" data-cat="cosmetica"></span></span>
                             </label>
                             <label class="filtro-opcion">
                                 <input type="checkbox" name="categoria" value="sextoys" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Sex Toys (24)</span>
+                                <span class="filtro-opcion__texto">Sex Toys <span class="filtro-conteo" data-cat="sextoys"></span></span>
                             </label>
                             <label class="filtro-opcion">
                                 <input type="checkbox" name="categoria" value="lenceria" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Lencería (21)</span>
+                                <span class="filtro-opcion__texto">Lencería <span class="filtro-conteo" data-cat="lenceria"></span></span>
                             </label>
                             <label class="filtro-opcion">
                                 <input type="checkbox" name="categoria" value="fetiche" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Fetiche / Bondage (12)</span>
+                                <span class="filtro-opcion__texto">Fetiche / Bondage <span class="filtro-conteo" data-cat="fetiche"></span></span>
                             </label>
                             <label class="filtro-opcion">
                                 <input type="checkbox" name="categoria" value="bienestar" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Bienestar (7)</span>
+                                <span class="filtro-opcion__texto">Bienestar <span class="filtro-conteo" data-cat="bienestar"></span></span>
                             </label>
                         </div>
                     </fieldset>
 
-                    <!-- Color -->
+                    <!-- 2. Color -->
                     <fieldset class="filtro-grupo">
                         <legend class="filtro-grupo__leyenda">Color</legend>
-                        <div class="filtro-grupo__cabecera">
+                        <div class="filtro-grupo__cabecera" role="button" tabindex="0">
                             <span class="filtro-grupo__nombre">Color</span>
                             <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
                         </div>
-                    </fieldset>
-
-                    <!-- Modelo -->
-                    <fieldset class="filtro-grupo">
-                        <legend class="filtro-grupo__leyenda">Modelo</legend>
-                        <div class="filtro-grupo__cabecera">
-                            <span class="filtro-grupo__nombre">Modelo</span>
-                            <span class="filtro-grupo__icono" aria-hidden="true">∨</span>
+                        <div class="filtro-grupo__lista">
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="color" value="negro" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Negro</span>
+                            </label>
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="color" value="rojo" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Rojo</span>
+                            </label>
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="color" value="piel" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Piel</span>
+                            </label>
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="color" value="rosa" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Rosa</span>
+                            </label>
                         </div>
                     </fieldset>
 
-                    <!-- Marca -->
+                    <!-- 3. Modelo -->
+                    <fieldset class="filtro-grupo">
+                        <legend class="filtro-grupo__leyenda">Modelo</legend>
+                        <div class="filtro-grupo__cabecera" role="button" tabindex="0">
+                            <span class="filtro-grupo__nombre">Modelo</span>
+                            <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
+                        </div>
+                        <div class="filtro-grupo__lista">
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="modelo" value="delfin" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Delfín</span>
+                            </label>
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="modelo" value="liso" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Liso</span>
+                            </label>
+                            <label class="filtro-opcion">
+                                <input type="checkbox" name="modelo" value="ondas" class="filtro-opcion__checkbox">
+                                <span class="filtro-opcion__texto">Ondas</span>
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <!-- 4. Marca -->
                     <fieldset class="filtro-grupo">
                         <legend class="filtro-grupo__leyenda">Marca</legend>
-                        <div class="filtro-grupo__cabecera">
+                        <div class="filtro-grupo__cabecera" role="button" tabindex="0">
                             <span class="filtro-grupo__nombre">Marca</span>
                             <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
                         </div>
                         <div class="filtro-grupo__lista">
                             <label class="filtro-opcion">
-                                <input type="checkbox" name="marca" value="sexitive" class="filtro-opcion__checkbox">
+                                <input type="checkbox" name="marca" value="Sexitive" class="filtro-opcion__checkbox">
                                 <span class="filtro-opcion__texto">Sexitive</span>
                             </label>
                             <label class="filtro-opcion">
-                                <input type="checkbox" name="marca" value="pretty-love" class="filtro-opcion__checkbox">
+                                <input type="checkbox" name="marca" value="Pretty Love" class="filtro-opcion__checkbox">
                                 <span class="filtro-opcion__texto">Pretty Love</span>
                             </label>
                             <label class="filtro-opcion">
-                                <input type="checkbox" name="marca" value="satisfyer" class="filtro-opcion__checkbox">
+                                <input type="checkbox" name="marca" value="Satisfyer" class="filtro-opcion__checkbox">
                                 <span class="filtro-opcion__texto">Satisfyer</span>
                             </label>
                             <label class="filtro-opcion">
-                                <input type="checkbox" name="marca" value="lovense" class="filtro-opcion__checkbox">
+                                <input type="checkbox" name="marca" value="Lovense" class="filtro-opcion__checkbox">
                                 <span class="filtro-opcion__texto">Lovense</span>
                             </label>
                             <label class="filtro-opcion">
-                                <input type="checkbox" name="marca" value="svakom" class="filtro-opcion__checkbox">
+                                <input type="checkbox" name="marca" value="Svakom" class="filtro-opcion__checkbox">
                                 <span class="filtro-opcion__texto">Svakom</span>
                             </label>
                         </div>
                     </fieldset>
 
-                    <!-- Precio -->
+                    <!-- 5. Precio -->
                     <fieldset class="filtro-grupo filtro-grupo--sin-borde">
                         <legend class="filtro-grupo__leyenda">Precio</legend>
-                        <div class="filtro-grupo__cabecera">
+                        <div class="filtro-grupo__cabecera" role="button" tabindex="0">
                             <span class="filtro-grupo__nombre">Precio</span>
                             <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
                         </div>
                         <div class="filtro-precio">
-                            <input type="number" class="filtro-precio__input" placeholder="Desde" aria-label="Precio mínimo">
+                            <input type="number" id="filtro-precio-desde" class="filtro-precio__input" placeholder="Desde" aria-label="Precio mínimo">
                             <span class="filtro-precio__separador" aria-hidden="true">—</span>
-                            <input type="number" class="filtro-precio__input" placeholder="Hasta" aria-label="Precio máximo">
+                            <input type="number" id="filtro-precio-hasta" class="filtro-precio__input" placeholder="Hasta" aria-label="Precio máximo">
                         </div>
                         <button type="submit" class="filtro-precio__boton">Aplicar</button>
                     </fieldset>
@@ -607,16 +641,17 @@
                 </ul>
             </div>
 
+           
             <!-- Columna 3: Información y Ayuda -->
             <div class="pie-pagina__columna">
                 <h4 class="pie-pagina__titulo">Información y ayuda</h4>
                 <ul class="pie-pagina__lista">
-                    <li><a href="/acerca-de" class="pie-pagina__enlace">Acerca de Fórmula Íntima</a></li>
-                    <li><a href="/preguntas-frecuentes" class="pie-pagina__enlace">Preguntas frecuentes</a></li>
-                    <li><a href="/envios" class="pie-pagina__enlace">Formas de envío</a></li>
-                    <li><a href="/pagos" class="pie-pagina__enlace">Formas de pago</a></li>
-                    <li><a href="/como-comprar" class="pie-pagina__enlace">Cómo comprar</a></li>
-                    <li><a href="/devoluciones" class="pie-pagina__enlace">Políticas de devolución</a></li>
+                    <li><button type="button" class="pie-pagina__enlace-modal" data-modal="acerca">Acerca de Fórmula Íntima</button></li>
+                    <li><button type="button" class="pie-pagina__enlace-modal" data-modal="faq">Preguntas frecuentes</button></li>
+                    <li><button type="button" class="pie-pagina__enlace-modal" data-modal="envios">Formas de envío</button></li>
+                    <li><button type="button" class="pie-pagina__enlace-modal" data-modal="pagos">Formas de pago</button></li>
+                    <li><button type="button" class="pie-pagina__enlace-modal" data-modal="como-comprar">Cómo comprar</button></li>
+                    <li><button type="button" class="pie-pagina__enlace-modal" data-modal="devoluciones">Políticas de devolución</button></li>
                 </ul>
             </div>
 
@@ -729,12 +764,32 @@
     </aside>
 </div>
 
-<!-- Supabase CDN (v2) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <!-- Script principal de la tienda -->
     <script src="main.js"></script>
 
+    <!-- ==========================================
+     CARD FLOTANTE / MODAL DE INFORMACIÓN
+     ========================================== -->
+<div id="modal-info" class="modal-info" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-info__overlay" id="modal-info-overlay"></div>
+    <div class="modal-info__card">
+        <header class="modal-info__cabecera">
+            <span class="modal-info__badge" id="modal-info-badge">INFORMACIÓN</span>
+            <button type="button" class="modal-info__cerrar" id="modal-info-cerrar" aria-label="Cerrar ventana">&times;</button>
+        </header>
+        <div class="modal-info__cuerpo">
+            <h3 class="modal-info__titulo" id="modal-info-titulo">Título</h3>
+            <div class="modal-info__texto" id="modal-info-contenido">
+                <!-- Se inyecta dinámicamente con JavaScript -->
+            </div>
+        </div>
+        <footer class="modal-info__pie">
+            <button type="button" class="modal-info__boton-entendido" id="modal-info-btn-ok">Entendido</button>
+        </footer>
+    </div>
+</div>
     
 
 </body>

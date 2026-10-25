@@ -181,6 +181,10 @@ button, input, select {
     color: var(--color-secundario);
     font-size: 0.95rem;
     position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
 }
 
 .carrito-enlace__icono {
@@ -1690,4 +1694,209 @@ button, input, select {
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
+}
+
+/* Estados interactivos para el acordeón de filtros */
+.filtro-grupo__cabecera {
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+.filtro-grupo__cabecera:hover {
+    color: var(--color-primario);
+}
+
+.filtro-grupo--cerrado .filtro-grupo__lista,
+.filtro-grupo--cerrado .filtro-precio,
+.filtro-grupo--cerrado .filtro-precio__boton {
+    display: none;
+}
+
+.filtro-conteo {
+    font-size: 0.8rem;
+    color: var(--color-texto-claro);
+    margin-left: 3px;
+}
+
+/* ==========================================================================
+   ESTILOS: BOTONES DE MODAL EN FOOTER Y CARD FLOTANTE (POPUP)
+   ========================================================================== */
+
+/* Botones en la lista del footer */
+.pie-pagina__enlace-modal {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: 0.85rem;
+    color: #555555;
+    cursor: pointer;
+    text-align: left;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.pie-pagina__enlace-modal:hover {
+    color: var(--color-primario);
+    transform: translateX(4px);
+}
+
+/* Contenedor Modal */
+.modal-info {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.25s ease, opacity 0.25s ease;
+}
+
+.modal-info--activo {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-info__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(64, 23, 31, 0.6); /* Borgoña con transparencia */
+    backdrop-filter: blur(4px);
+}
+
+/* Card Flotante */
+.modal-info__card {
+    position: relative;
+    z-index: 2;
+    background-color: #FFFFFF;
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 580px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 45px rgba(64, 23, 31, 0.25);
+    transform: scale(0.92);
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-info--activo .modal-info__card {
+    transform: scale(1);
+}
+
+/* Cabecera */
+.modal-info__cabecera {
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-fondo-secundario);
+    border-bottom: 1px solid var(--color-borde);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.modal-info__badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-primario);
+}
+
+.modal-info__cerrar {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: var(--color-secundario);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.modal-info__cerrar:hover {
+    transform: scale(1.15);
+    color: var(--color-primario);
+}
+
+/* Cuerpo con Scroll suave */
+.modal-info__cuerpo {
+    padding: 1.8rem 1.5rem;
+    overflow-y: auto;
+}
+
+.modal-info__titulo {
+    font-family: var(--fuente-titulos);
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--color-primario);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.modal-info__texto p {
+    font-size: 0.95rem;
+    color: #444444;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.modal-info__texto ol,
+.modal-info__texto ul {
+    margin-left: 1.2rem;
+    margin-bottom: 1rem;
+    color: #444444;
+    font-size: 0.92rem;
+}
+
+.modal-info__texto li {
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
+}
+
+.modal-info__destacado {
+    background-color: var(--color-fondo-principal);
+    border-left: 3px solid var(--color-primario);
+    padding: 0.8rem 1rem;
+    margin: 1rem 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.9rem;
+    color: var(--color-secundario);
+    font-weight: 600;
+}
+
+/* Pie */
+.modal-info__pie {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--color-borde);
+    background-color: #FAFAFA;
+    display: flex;
+    justify-content: flex-end;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.modal-info__boton-entendido {
+    background-color: var(--color-secundario);
+    color: var(--color-fondo-principal);
+    border: none;
+    padding: 0.65rem 1.8rem;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.modal-info__boton-entendido:hover {
+    background-color: var(--color-primario);
 }
