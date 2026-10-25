@@ -12,62 +12,16 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.formulaintima.com.ar">
 
-    <!-- Open Graph (Facebook / LinkedIn) -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.formulaintima.com.ar">
     <meta property="og:title" content="Fórmula Íntima | Placer, bienestar e información">
     <meta property="og:description" content="Productos elegidos con cuidado, asesoramiento profesional y educación para vivir tu intimidad con libertad.">
-    <!-- Aquí iría la URL de la imagen hero real del manual -->
     <meta property="og:image" content="https://www.formulaintima.com.ar/img/hero-modelo-real.jpg">
     <meta property="og:locale" content="es_AR">
 
-    <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://www.formulaintima.com.ar">
-    <meta name="twitter:title" content="Fórmula Íntima | Sex Shop y Lencería Inclusiva">
-    <meta name="twitter:description" content="Un espacio libre de prejuicios para tu bienestar sexual y reproductivo.">
-    <meta name="twitter:image" content="https://www.formulaintima.com.ar/img/hero-modelo-real.jpg">
-    <link rel="stylesheet" href="./style/style.css">
-    <!-- Schema Markup (JSON-LD) para e-commerce local y producto de ejemplo -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Store",
-          "@id": "https://www.formulaintima.com.ar",
-          "name": "Fórmula Íntima",
-          "url": "https://www.formulaintima.com.ar",
-          "description": "Sex shop, lencería inclusiva y espacio de bienestar sexual y ESI.",
-          "image": "https://www.formulaintima.com.ar/img/logo.png",
-          "telephone": "+541138975942",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Buenos Aires",
-            "addressCountry": "AR"
-          }
-        },
-        {
-          "@type": "Product",
-          "name": "Gel Lubricante Sexitive Dante al Infierno 500ml",
-          "image": "https://www.formulaintima.com.ar/img/dante-al-infierno.jpg",
-          "description": "Gel íntimo lubricante ultra deslizante. Formato 500ml.",
-          "brand": {
-            "@type": "Brand",
-            "name": "Sexitive"
-          },
-          "offers": {
-            "@type": "Offer",
-            "url": "https://www.formulaintima.com.ar/productos/gel-dante-al-infierno",
-            "priceCurrency": "ARS",
-            "price": "27999.00",
-            "itemCondition": "https://schema.org/NewCondition",
-            "availability": "https://schema.org/InStock"
-          }
-        }
-      ]
-    }
-    </script>
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="./style/style.css?v=5">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -75,722 +29,652 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="cabecera" itemscope itemtype="https://schema.org/WPHeader">
-    <!-- Barra Superior de Anuncios -->
-    <div class="cabecera__anuncio">
-        <div class="cabecera__contenedor">
-            <p class="cabecera__anuncio-texto">
-                Envío gratis superando los $100.000 <span class="cabecera__anuncio-separador" aria-hidden="true">&bull;</span> Descuento extra por Transferencia Bancaria
-            </p>
-        </div>
-    </div>
-
-    <!-- Barra Principal de Navegación e Identidad -->
-    <div class="cabecera__principal">
-        <div class="cabecera__contenedor cabecera__contenedor--flex">
-            
-            <!-- Logotipo -->
-            <div class="cabecera__logo-contenedor">
-                <a href="/" class="cabecera__logo-enlace" aria-label="Fórmula Íntima - Inicio">
-                    <h1 class="cabecera__logo-texto">Fórmula Íntima</h1>
-                </a>
-            </div>
-
-            <!-- Buscador -->
-            <div class="cabecera__buscador">
-                <form class="buscador" action="/buscar" method="GET" role="search">
-                    <label for="input-buscar" class="sr-only">Buscar productos</label>
-                    <input type="search" id="input-buscar" name="q" class="buscador__input" placeholder="Buscar productos...">
-                    <button type="submit" class="buscador__boton" aria-label="Buscar">
-                        <span class="buscador__icono" aria-hidden="true">🔍</span>
-                    </button>
-                </form>
-            </div>
-
-            <!-- Acciones de Usuario (Carrito y Cuenta) -->
-            <!-- Acciones de Usuario (Carrito y Cuenta) -->
-            <div class="cabecera__acciones">
-                <button type="button" class="carrito-enlace" id="boton-abrir-carrito" aria-label="Ver carrito de compras">
-                    <span class="carrito-enlace__icono" aria-hidden="true">🛒</span>
-                    <span class="carrito-enlace__texto">Mi carrito</span>
-                    <span class="carrito-enlace__contador" aria-label="0 productos en el carrito">0</span>
-                </button>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Menú de Categorías (Mega-Menú) -->
-    <nav class="navegacion-principal" aria-label="Menú principal de categorías">
-        <div class="cabecera__contenedor">
-            <ul class="navegacion-principal__lista">
-                <li class="navegacion-principal__item">
-                    <a href="/sex-shop" class="navegacion-principal__enlace">
-                        Sex Shop <span class="navegacion-principal__flecha" aria-hidden="true">▾</span>
-                    </a>
-                </li>
-                <li class="navegacion-principal__item">
-                    <a href="/lenceria-y-ropa" class="navegacion-principal__enlace">
-                        Lencería y ropa <span class="navegacion-principal__flecha" aria-hidden="true">▾</span>
-                    </a>
-                </li>
-                <li class="navegacion-principal__item">
-                    <a href="/lubricantes" class="navegacion-principal__enlace">
-                        Lubricantes <span class="navegacion-principal__flecha" aria-hidden="true">▾</span>
-                    </a>
-                </li>
-                <li class="navegacion-principal__item">
-                    <a href="/higiene-y-cuidado" class="navegacion-principal__enlace">
-                        Higiene y cuidado <span class="navegacion-principal__flecha" aria-hidden="true">▾</span>
-                    </a>
-                </li>
-                <li class="navegacion-principal__item">
-                    <a href="/esi-y-bienestar" class="navegacion-principal__enlace">
-                        ESI y Bienestar <span class="navegacion-principal__flecha" aria-hidden="true">▾</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
-
-
-    <section class="hero" aria-label="Sección principal de bienvenida">
-    <div class="hero__contenedor">
-        
-        <!-- Columna de Texto e Información -->
-        <div class="hero__contenido">
-            <span class="hero__subtitulo-superior">SEXUALIDAD CONSCIENTE &bull; BIENESTAR REAL</span>
-            
-            <h2 class="hero__titulo">Placer, bienestar e información en un espacio libre de prejuicios</h2>
-            
-            <p class="hero__descripcion">
-                Productos elegidos con cuidado, asesoramiento profesional y educación para vivir tu intimidad con libertad.
-            </p>
-            
-            <div class="hero__acciones">
-                <a href="/catalogo" class="hero__boton-primario">Explorar tienda</a>
-                <a href="#nuestra-mirada" class="hero__enlace-secundario">Conocé nuestra mirada &rarr;</a>
-            </div>
-
-            <!-- Iconos de Confianza Inferiores -->
-            <div class="hero__garantias">
-                <div class="garantia-item">
-                    <span class="garantia-item__icono" aria-hidden="true">&#x1F6E1;</span>
-                    <span class="garantia-item__texto">Compra 100% segura</span>
-                </div>
-                <div class="garantia-item">
-                    <span class="garantia-item__icono" aria-hidden="true">&#x1F4E6;</span>
-                    <span class="garantia-item__texto">Envíos discretos</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Columna de Imagen Principal -->
-        <div class="hero__multimedia">
-            <div class="hero__imagen-marco">
-                <figure class="hero__figura">
-                    <!-- Sustituir la ruta de la imagen según corresponda (ej: modelo real o bodegón) -->
-                    <img src="https://www.formulaintima.com.ar/img/hero-modelo-real.jpg" alt="Modelo real vistiendo lencería de encaje con estética inclusiva de Fórmula Íntima" class="hero__imagen" loading="eager">
-                    <figcaption class="sr-only">Imagen principal de Fórmula Íntima</figcaption>
-                </figure>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<section class="accesos-rapidos" aria-label="Accesos rápidos de navegación">
-    <div class="accesos-rapidos__contenedor">
-        <ul class="accesos-rapidos__lista">
-            
-            <!-- Item 1: Productos -->
-            <li class="accesos-rapidos__item">
-                <a href="/productos" class="accesos-rapidos__enlace">
-                    <div class="accesos-rapidos__icono-caja">
-                        <span class="accesos-rapidos__icono" aria-hidden="true">🛍️</span>
-                    </div>
-                    <span class="accesos-rapidos__titulo">Productos</span>
-                    <span class="accesos-rapidos__subtitulo">DESCUBRIR</span>
-                </a>
-            </li>
-
-            <!-- Item 2: Lencería -->
-            <li class="accesos-rapidos__item">
-                <a href="/lenceria" class="accesos-rapidos__enlace">
-                    <div class="accesos-rapidos__icono-caja">
-                        <span class="accesos-rapidos__icono" aria-hidden="true">❤️</span>
-                    </div>
-                    <span class="accesos-rapidos__titulo">Lencería</span>
-                    <span class="accesos-rapidos__subtitulo">DESCUBRIR</span>
-                </a>
-            </li>
-
-            <!-- Item 3: Promos -->
-            <li class="accesos-rapidos__item">
-                <a href="/promos" class="accesos-rapidos__enlace">
-                    <div class="accesos-rapidos__icono-caja">
-                        <span class="accesos-rapidos__icono" aria-hidden="true">🏷️</span>
-                    </div>
-                    <span class="accesos-rapidos__titulo">Promos</span>
-                    <span class="accesos-rapidos__subtitulo">DESCUBRIR</span>
-                </a>
-            </li>
-
-            <!-- Item 4: Talles -->
-            <li class="accesos-rapidos__item">
-                <a href="/talles" class="accesos-rapidos__enlace">
-                    <div class="accesos-rapidos__icono-caja">
-                        <span class="accesos-rapidos__icono" aria-hidden="true">📏</span>
-                    </div>
-                    <span class="accesos-rapidos__titulo">Talles</span>
-                    <span class="accesos-rapidos__subtitulo">GUÍA INCLUSIVA</span>
-                </a>
-            </li>
-
-            <!-- Item 5: Envíos -->
-            <li class="accesos-rapidos__item">
-                <a href="/envios" class="accesos-rapidos__enlace">
-                    <div class="accesos-rapidos__icono-caja">
-                        <span class="accesos-rapidos__icono" aria-hidden="true">📦</span>
-                    </div>
-                    <span class="accesos-rapidos__titulo">Envíos</span>
-                    <span class="accesos-rapidos__subtitulo">TODO EL PAÍS</span>
-                </a>
-            </li>
-
-            <!-- Item 6: ESI -->
-            <li class="accesos-rapidos__item">
-                <a href="/esi-bienestar" class="accesos-rapidos__enlace">
-                    <div class="accesos-rapidos__icono-caja">
-                        <span class="accesos-rapidos__icono" aria-hidden="true">🩺</span>
-                    </div>
-                    <span class="accesos-rapidos__titulo">ESI</span>
-                    <span class="accesos-rapidos__subtitulo">DESCUBRIR</span>
-                </a>
-            </li>
-
-        </ul>
-    </div>
-</section>
-
-<main class="catalogo" id="contenido-principal">
-    <div class="catalogo__contenedor">
-        
-        <!-- Migas de Pan (Breadcrumbs) -->
-        <nav class="catalogo__migas" aria-label="Navegación de ruta">
-            <ol class="migas__lista">
-                <li class="migas__item"><a href="/" class="migas__enlace">Inicio</a></li>
-                <li class="migas__separador" aria-hidden="true">></li>
-                <li class="migas__item" aria-current="page"><span class="migas__actual">Todos los productos</span></li>
-            </ol>
-        </nav>
-
-        <!-- Cabecera del Catálogo -->
-        <header class="catalogo__encabezado">
-            <div class="catalogo__info-principal">
-                <span class="catalogo__subtitulo-marca">SELECCIÓN FÓRMULA ÍNTIMA</span>
-                <h2 class="catalogo__titulo">Todo para disfrutar a tu manera</h2>
-                <p class="catalogo__contador">92 productos elegidos para vos</p>
-            </div>
-            <div class="catalogo__ordenar">
-                <label for="ordenar-catalogo" class="catalogo__ordenar-etiqueta">Ordenar por</label>
-                <select id="ordenar-catalogo" name="ordenar" class="catalogo__ordenar-select">
-                    <option value="destacados">Destacados</option>
-                    <option value="precio-menor">Precio: menor a mayor</option>
-                    <option value="precio-mayor">Precio: mayor a menor</option>
-                    <option value="alfabetico-az">A - Z</option>
-                    <option value="alfabetico-za">Z - A</option>
-                    <option value="mas-nuevos">Más nuevo al más viejo</option>
-                    <option value="mas-viejos">Más viejo al más nuevo</option>
-                    <option value="mas-vendidos">Más vendidos</option>
-                </select>
-            </div>
-        </header>
-
-        <!-- Cuerpo del Catálogo: Filtros y Grilla -->
-        <div class="catalogo__cuerpo">
-            
-            
-            <!-- Barra Lateral de Filtros ("Filtrar por") -->
-            <aside class="filtros" aria-label="Filtros de productos">
-                <div class="filtros__cabecera">
-                    <h3 class="filtros__titulo">Filtrar por</h3>
-                    <button type="button" class="filtros__limpiar" id="boton-limpiar-filtros" aria-label="Limpiar todos los filtros">Limpiar</button>
-                </div>
-
-                <form class="filtros__formulario" id="formulario-filtros">
-                    
-                    <!-- 1. Categorías -->
-                    <fieldset class="filtro-grupo">
-                        <legend class="filtro-grupo__leyenda">Categorías</legend>
-                        <div class="filtro-grupo__cabecera" role="button" tabindex="0">
-                            <span class="filtro-grupo__nombre">Categorías</span>
-                            <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
-                        </div>
-                        <div class="filtro-grupo__lista">
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="categoria" value="cosmetica" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Cosmética y geles <span class="filtro-conteo" data-cat="cosmetica"></span></span>
-                            </label>
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="categoria" value="sextoys" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Sex Toys <span class="filtro-conteo" data-cat="sextoys"></span></span>
-                            </label>
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="categoria" value="lenceria" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Lencería <span class="filtro-conteo" data-cat="lenceria"></span></span>
-                            </label>
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="categoria" value="fetiche" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Fetiche / Bondage <span class="filtro-conteo" data-cat="fetiche"></span></span>
-                            </label>
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="categoria" value="bienestar" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Bienestar <span class="filtro-conteo" data-cat="bienestar"></span></span>
-                            </label>
-                        </div>
-                    </fieldset>
-
-                    <!-- 2. Color -->
-                    <fieldset class="filtro-grupo">
-                        <legend class="filtro-grupo__leyenda">Color</legend>
-                        <div class="filtro-grupo__cabecera" role="button" tabindex="0">
-                            <span class="filtro-grupo__nombre">Color</span>
-                            <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
-                        </div>
-                        <div class="filtro-grupo__lista">
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="color" value="negro" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Negro</span>
-                            </label>
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="color" value="rojo" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Rojo</span>
-                            </label>
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="color" value="piel" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Piel</span>
-                            </label>
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="color" value="rosa" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Rosa</span>
-                            </label>
-                        </div>
-                    </fieldset>
-
-                    <!-- 3. Modelo -->
-                    <fieldset class="filtro-grupo">
-                        <legend class="filtro-grupo__leyenda">Modelo</legend>
-                        <div class="filtro-grupo__cabecera" role="button" tabindex="0">
-                            <span class="filtro-grupo__nombre">Modelo</span>
-                            <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
-                        </div>
-                        <div class="filtro-grupo__lista">
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="modelo" value="delfin" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Delfín</span>
-                            </label>
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="modelo" value="liso" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Liso</span>
-                            </label>
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="modelo" value="ondas" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Ondas</span>
-                            </label>
-                        </div>
-                    </fieldset>
-
-                    <!-- 4. Marca -->
-                    <fieldset class="filtro-grupo">
-                        <legend class="filtro-grupo__leyenda">Marca</legend>
-                        <div class="filtro-grupo__cabecera" role="button" tabindex="0">
-                            <span class="filtro-grupo__nombre">Marca</span>
-                            <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
-                        </div>
-                        <div class="filtro-grupo__lista">
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="marca" value="Sexitive" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Sexitive</span>
-                            </label>
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="marca" value="Pretty Love" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Pretty Love</span>
-                            </label>
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="marca" value="Satisfyer" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Satisfyer</span>
-                            </label>
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="marca" value="Lovense" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Lovense</span>
-                            </label>
-                            <label class="filtro-opcion">
-                                <input type="checkbox" name="marca" value="Svakom" class="filtro-opcion__checkbox">
-                                <span class="filtro-opcion__texto">Svakom</span>
-                            </label>
-                        </div>
-                    </fieldset>
-
-                    <!-- 5. Precio -->
-                    <fieldset class="filtro-grupo filtro-grupo--sin-borde">
-                        <legend class="filtro-grupo__leyenda">Precio</legend>
-                        <div class="filtro-grupo__cabecera" role="button" tabindex="0">
-                            <span class="filtro-grupo__nombre">Precio</span>
-                            <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
-                        </div>
-                        <div class="filtro-precio">
-                            <input type="number" id="filtro-precio-desde" class="filtro-precio__input" placeholder="Desde" aria-label="Precio mínimo">
-                            <span class="filtro-precio__separador" aria-hidden="true">—</span>
-                            <input type="number" id="filtro-precio-hasta" class="filtro-precio__input" placeholder="Hasta" aria-label="Precio máximo">
-                        </div>
-                        <button type="submit" class="filtro-precio__boton">Aplicar</button>
-                    </fieldset>
-                </form>
-            </aside>
-
-            <!-- Sección de Productos (Grilla con una única tarjeta base) -->
-            <section class="productos-seccion">
-                <div class="productos-grilla" aria-label="Listado de productos">
-                    
-                    <!-- Tarjeta de Producto (Plantilla Base para inyección dinámica) -->
-                    <article class="tarjeta-producto" itemscope itemtype="https://schema.org/Product">
-                        
-                        <!-- Badges Superiores -->
-                        <div class="tarjeta-producto__badges">
-                            <span class="tarjeta-producto__etiqueta tarjeta-producto__etiqueta--descuento">20% OFF</span>
-                            <span class="tarjeta-producto__etiqueta tarjeta-producto__etiqueta--envio">Envío gratis</span>
-                        </div>
-                        
-                        <!-- Botón Favorito -->
-                        <button type="button" class="tarjeta-producto__favorito" aria-label="Agregar a favoritos">♡</button>
-                        
-                        <!-- Imagen del Producto -->
-                        <a href="/productos/gel-dante-al-infierno" class="tarjeta-producto__imagen-contenedor" aria-hidden="true" tabindex="-1">
-                            <img src="https://www.formulaintima.com.ar/img/dante-al-infierno.jpg" alt="Gel Lubricante Sexitive Dante al Infierno 500ml" class="tarjeta-producto__imagen" itemprop="image">
-                        </a>
-
-                        <!-- Cuerpo de la Tarjeta -->
-                        <div class="tarjeta-producto__cuerpo">
-                            <span class="tarjeta-producto__marca" itemprop="brand">Sexitive</span>
-                            
-                            <a href="/productos/gel-dante-al-infierno" class="tarjeta-producto__titulo-enlace">
-                                <h3 class="tarjeta-producto__titulo" itemprop="name">Gel Lubricante Sexitive Dante al Infierno 500ml</h3>
-                            </a>
-                            
-                            <!-- Precios y Ofertas -->
-                            <div class="tarjeta-producto__precios" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                                <meta itemprop="priceCurrency" content="ARS">
-                                <div class="tarjeta-producto__precio-tachado">$34.999</div>
-                                <div class="tarjeta-producto__precio-oferta">
-                                    $<span itemprop="price">27.999</span>
-                                </div>
-                                <div class="tarjeta-producto__cuotas">3 cuotas sin interés de $9.333</div>
-                                <div class="tarjeta-producto__transferencia">$25.199 con Transferencia o depósito bancario</div>
-                                <link itemprop="availability" href="https://schema.org/InStock" />
-                            </div>
-
-                            <!-- Botones de Acción -->
-                            <div class="tarjeta-producto__acciones">
-                                <button type="button" class="tarjeta-producto__boton tarjeta-producto__boton--comprar" aria-label="Agregar Gel Lubricante Sexitive Dante al Infierno al carrito">
-                                    Agregar al carrito
-                                </button>
-                                <a href="/productos/gel-dante-al-infierno" class="tarjeta-producto__boton tarjeta-producto__boton--ver" aria-label="Ver detalles del producto">
-                                    Ver
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- Fin Tarjeta de Producto -->
-
-                </div>
-
-                <!-- Botón Ver Más Productos -->
-                <div class="catalogo__paginacion">
-                    <button type="button" class="catalogo__boton-ver-mas">Ver más productos</button>
-                </div>
-            </section>
-
-        </div>
-    </div>
-</main>
-
-<section class="pilares" id="nuestra-mirada" aria-label="Nuestros pilares institucionales">
-    <div class="pilares__contenedor">
-        
-        <!-- Cabecera de la Sección -->
-        <div class="pilares__encabezado">
-            <div class="pilares__titulo-bloque">
-                <span class="pilares__subtitulo">MUCHO MÁS QUE UNA TIENDA</span>
-                <h2 class="pilares__titulo">Nuestros pilares</h2>
-            </div>
-            <div class="pilares__descripcion-principal">
-                <p>Creemos en una sexualidad libre, informada y cuidada. Por eso cada decisión que tomamos nace de estos valores.</p>
-            </div>
-        </div>
-
-        <!-- Grilla de Tarjetas de Pilares -->
-        <div class="pilares__grilla">
-            
-            <!-- Pilar 1: Salud y Bienestar -->
-            <article class="pilar-tarjeta">
-                <div class="pilar-tarjeta__cabecera">
-                    <span class="pilar-tarjeta__numero" aria-hidden="true">01</span>
-                    <span class="pilar-tarjeta__icono" aria-hidden="true">❤️</span>
-                </div>
-                <div class="pilar-tarjeta__cuerpo">
-                    <h3 class="pilar-tarjeta__titulo">Salud y Bienestar</h3>
-                    <p class="pilar-tarjeta__texto">
-                        Cuidar el cuerpo, escuchar los deseos y tomar decisiones responsables también es placer.
-                    </p>
-                </div>
-                <div class="pilar-tarjeta__pie">
-                    <a href="/nosotros/salud-y-bienestar" class="pilar-tarjeta__enlace">CONOCER MÁS &rarr;</a>
-                </div>
-            </article>
-
-            <!-- Pilar 2: Educación (ESI) -->
-            <article class="pilar-tarjeta">
-                <div class="pilar-tarjeta__cabecera">
-                    <span class="pilar-tarjeta__numero" aria-hidden="true">02</span>
-                    <span class="pilar-tarjeta__icono" aria-hidden="true">📖</span>
-                </div>
-                <div class="pilar-tarjeta__cuerpo">
-                    <h3 class="pilar-tarjeta__titulo">Educación (ESI)</h3>
-                    <p class="pilar-tarjeta__texto">
-                        Información clara, accesible y profesional para derribar mitos, tabúes y prejuicios.
-                    </p>
-                </div>
-                <div class="pilar-tarjeta__pie">
-                    <a href="/nosotros/educacion-esi" class="pilar-tarjeta__enlace">CONOCER MÁS &rarr;</a>
-                </div>
-            </article>
-
-            <!-- Pilar 3: Inclusión -->
-            <article class="pilar-tarjeta">
-                <div class="pilar-tarjeta__cabecera">
-                    <span class="pilar-tarjeta__numero" aria-hidden="true">03</span>
-                    <span class="pilar-tarjeta__icono" aria-hidden="true">📏</span>
-                </div>
-                <div class="pilar-tarjeta__cuerpo">
-                    <h3 class="pilar-tarjeta__titulo">Inclusión</h3>
-                    <p class="pilar-tarjeta__texto">
-                        Celebramos la diversidad de cuerpos, identidades, deseos y talles. El placer es para todes.
-                    </p>
-                </div>
-                <div class="pilar-tarjeta__pie">
-                    <a href="/nosotros/inclusion" class="pilar-tarjeta__enlace">CONOCER MÁS &rarr;</a>
-                </div>
-            </article>
-
-        </div>
-
-    </div>
-</section>
-
-<section class="newsletter" aria-label="Suscripción a novedades y ESI">
-    <div class="newsletter__contenedor">
-        
-        <div class="newsletter__info">
-            <span class="newsletter__subtitulo">UNA COMUNIDAD SIN PREJUICIOS</span>
-            <h2 class="newsletter__titulo">Recibí novedades íntimas</h2>
-            <p class="newsletter__descripcion">
-                Contenido ESI, lanzamientos y beneficios exclusivos. Cero spam, mucha información.
-            </p>
-        </div>
-
-        <div class="newsletter__formulario-contenedor">
-            <form class="newsletter__formulario" action="/suscripcion" method="POST">
-                <label for="input-email-newsletter" class="sr-only">Tu email</label>
-                <input type="email" id="input-email-newsletter" name="email" class="newsletter__input" placeholder="Tu email" required>
-                <button type="submit" class="newsletter__boton">Quiero sumarme</button>
-            </form>
-        </div>
-
-    </div>
-</section>
-
-<footer class="pie-pagina" itemscope itemtype="https://schema.org/WPFooter">
-    <div class="pie-pagina__contenedor">
-        
-        <!-- Contenido Superior del Footer (Columnas) -->
-        <div class="pie-pagina__columnas">
-            
-            <!-- Columna 1: Información de Marca y Redes -->
-            <div class="pie-pagina__columna pie-pagina__columna--marca">
-                <h3 class="pie-pagina__logo">Fórmula Íntima</h3>
-                <p class="pie-pagina__descripcion">
-                    Placer, bienestar e información en un espacio libre de prejuicios.
-                </p>
-                <div class="pie-pagina__redes">
-                    <a href="https://instagram.com" class="redes__enlace" aria-label="Instagram" target="_blank" rel="noopener">📷</a>
-                    <a href="https://facebook.com" class="redes__enlace" aria-label="Facebook" target="_blank" rel="noopener">📘</a>
-                    <a href="https://tiktok.com" class="redes__enlace" aria-label="TikTok" target="_blank" rel="noopener">🎵</a>
-                </div>
-            </div>
-
-            <!-- Columna 2: Productos -->
-            <div class="pie-pagina__columna">
-                <h4 class="pie-pagina__titulo">Productos</h4>
-                <ul class="pie-pagina__lista">
-                    <li><a href="/sex-toys" class="pie-pagina__enlace">Sex Toys</a></li>
-                    <li><a href="/cosmetica" class="pie-pagina__enlace">Cosmética y Geles</a></li>
-                    <li><a href="/lenceria" class="pie-pagina__enlace">Lencería</a></li>
-                    <li><a href="/fetiche" class="pie-pagina__enlace">Fetiche / Bondage</a></li>
-                </ul>
-            </div>
-
-           
-            <!-- Columna 3: Información y Ayuda -->
-            <div class="pie-pagina__columna">
-                <h4 class="pie-pagina__titulo">Información y ayuda</h4>
-                <ul class="pie-pagina__lista">
-                    <li><button type="button" class="pie-pagina__enlace-modal" data-modal="acerca">Acerca de Fórmula Íntima</button></li>
-                    <li><button type="button" class="pie-pagina__enlace-modal" data-modal="faq">Preguntas frecuentes</button></li>
-                    <li><button type="button" class="pie-pagina__enlace-modal" data-modal="envios">Formas de envío</button></li>
-                    <li><button type="button" class="pie-pagina__enlace-modal" data-modal="pagos">Formas de pago</button></li>
-                    <li><button type="button" class="pie-pagina__enlace-modal" data-modal="como-comprar">Cómo comprar</button></li>
-                    <li><button type="button" class="pie-pagina__enlace-modal" data-modal="devoluciones">Políticas de devolución</button></li>
-                </ul>
-            </div>
-
-            <!-- Columna 4: Estamos Cerca (Contacto) -->
-            <div class="pie-pagina__columna">
-                <h4 class="pie-pagina__titulo">Estamos cerca</h4>
-                <ul class="pie-pagina__lista pie-pagina__lista--contacto">
-                    <li>WhatsApp: +54 9 11 4567 8900</li>
-                    <li>hola@formulaintima.com.ar</li>
-                    <li>Lun a Vie 9 a 18 h</li>
-                    <li>Sábados 10 a 14 h</li>
-                </ul>
-            </div>
-
-        </div>
-
-        <!-- Línea divisoria -->
-        <hr class="pie-pagina__divisor">
-
-        <!-- Contenido Inferior del Footer (Pagos, Legales y Copyright) -->
-        <div class="pie-pagina__inferior">
-            <div class="pie-pagina__pagos-envios">
-                <span class="pie-pagina__pagos-etiqueta">Pagá como quieras</span>
-                <div class="pie-pagina__iconos-pago">
-                    <span class="badge-pago">Mercado Pago</span>
-                    <span class="badge-envio">Andreani</span>
-                </div>
-            </div>
-
-            <div class="pie-pagina__legales">
-                <p class="pie-pagina__copyright">&copy; 2026 Fórmula Íntima. Todos los derechos reservados.</p>
-                <div class="pie-pagina__enlaces-legales">
-                    <a href="https://www.argentina.gob.ar/produccion/defensadelconsumidor/formulario" class="legales__enlace" target="_blank" rel="noopener">Defensa de las y los consumidores</a>
-                    <a href="/arrepentimiento" class="legales__boton-arrepentimiento">Botón de arrepentimiento</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</footer>
-
-<!-- ==========================================
-     DRAWER DEL CARRITO DE COMPRAS
-     ========================================== -->
-<div id="carrito-drawer" class="carrito-drawer" aria-hidden="true">
-    <div class="carrito-drawer__overlay" id="carrito-overlay"></div>
-    
-    <aside class="carrito-drawer__panel" role="dialog" aria-modal="true" aria-label="Carrito de compras">
-        
-        <!-- Cabecera del Carrito -->
-        <header class="carrito-drawer__cabecera">
-            <div>
-                <span class="carrito-drawer__subtitulo">TU SELECCIÓN</span>
-                <h2 class="carrito-drawer__titulo">Carrito de compras</h2>
-            </div>
-            <button type="button" class="carrito-drawer__boton-cerrar" id="carrito-cerrar" aria-label="Cerrar carrito">
-                &times;
-            </button>
-        </header>
-
-        <!-- Lista de Productos Agregados -->
-        <div class="carrito-drawer__cuerpo" id="carrito-items-contenedor">
-            <!-- Se inyecta dinámicamente desde JavaScript -->
-        </div>
-
-        <!-- Acordeón Cupón de Descuento -->
-        <div class="carrito-cupon">
-            <button type="button" class="carrito-cupon__toggle" id="cupon-toggle">
-                <span>¿Tenés un cupón de descuento?</span>
-                <span class="carrito-cupon__icono">∨</span>
-            </button>
-            <div class="carrito-cupon__formulario" id="cupon-contenido">
-                <input type="text" id="cupon-input" class="carrito-cupon__input" placeholder="Ingresá tu código">
-                <button type="button" class="carrito-cupon__boton" id="cupon-aplicar">Aplicar</button>
-            </div>
-        </div>
-
-        <!-- Resumen y Totales -->
-        <footer class="carrito-drawer__pie">
-            <div class="carrito-totales">
-                <div class="carrito-totales__fila">
-                    <span>Subtotal</span>
-                    <span id="carrito-subtotal">$ 0</span>
-                </div>
-                <div class="carrito-totales__fila">
-                    <span>Envío</span>
-                    <span style="color: #28a745; font-weight: 600;">A coordinar</span>
-                </div>
-                <div class="carrito-totales__separador"></div>
-                <div class="carrito-totales__fila carrito-totales__fila--total">
-                    <span class="carrito-totales__etiqueta-total">Total</span>
-                    <span class="carrito-totales__monto-total" id="carrito-total">$ 0</span>
-                </div>
-                <div class="carrito-totales__cuotas" id="carrito-cuotas-texto">
-                    o 3 cuotas sin interés de $ 0
-                </div>
-            </div>
-
-            <!-- Botón Principal hacia WhatsApp -->
-            <button type="button" class="carrito-drawer__boton-comprar" id="boton-iniciar-compra">
-                Iniciar compra
-            </button>
-
-            <!-- Sello de Confianza -->
-            <div class="carrito-drawer__seguridad">
-                <span aria-hidden="true">&#x1F6E1;</span> Compra protegida y envío discreto
-            </div>
-        </footer>
-
-    </aside>
-</div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
-    <!-- Script principal de la tienda -->
-    <script src="main.js"></script>
 
     <!-- ==========================================
-     CARD FLOTANTE / MODAL DE INFORMACIÓN
-     ========================================== -->
-<div id="modal-info" class="modal-info" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="modal-info__overlay" id="modal-info-overlay"></div>
-    <div class="modal-info__card">
-        <header class="modal-info__cabecera">
-            <span class="modal-info__badge" id="modal-info-badge">INFORMACIÓN</span>
-            <button type="button" class="modal-info__cerrar" id="modal-info-cerrar" aria-label="Cerrar ventana">&times;</button>
-        </header>
-        <div class="modal-info__cuerpo">
-            <h3 class="modal-info__titulo" id="modal-info-titulo">Título</h3>
-            <div class="modal-info__texto" id="modal-info-contenido">
-                <!-- Se inyecta dinámicamente con JavaScript -->
+         CABECERA / HEADER
+         ========================================== -->
+    <header class="cabecera" itemscope itemtype="https://schema.org/WPHeader">
+        <!-- Barra Superior de Anuncios -->
+        <div class="cabecera__anuncio">
+            <div class="cabecera__contenedor">
+                <p class="cabecera__anuncio-texto">
+                    Envío gratis superando los $100.000 <span class="cabecera__anuncio-separador" aria-hidden="true">&bull;</span> Descuento extra por Transferencia Bancaria
+                </p>
             </div>
         </div>
-        <footer class="modal-info__pie">
-            <button type="button" class="modal-info__boton-entendido" id="modal-info-btn-ok">Entendido</button>
-        </footer>
-    </div>
-</div>
-    
 
+        <!-- Barra Principal -->
+        <div class="cabecera__principal">
+            <div class="cabecera__contenedor cabecera__contenedor--flex">
+                
+                <!-- Logotipo -->
+                <div class="cabecera__logo-contenedor">
+                    <a href="index.html" class="cabecera__logo-enlace" aria-label="Fórmula Íntima - Inicio">
+                        <h1 class="cabecera__logo-texto">Fórmula Íntima</h1>
+                    </a>
+                </div>
+
+                <!-- Buscador -->
+                <div class="cabecera__buscador">
+                    <form class="buscador" onsubmit="event.preventDefault(); aplicarFiltros();" role="search">
+                        <label for="input-buscar" class="sr-only">Buscar productos</label>
+                        <input type="search" id="input-buscar" name="q" class="buscador__input" placeholder="Buscar productos...">
+                        <button type="submit" class="buscador__boton" aria-label="Buscar">
+                            <span class="buscador__icono" aria-hidden="true">🔍</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Botón Mi Carrito -->
+                <div class="cabecera__acciones">
+                    <button type="button" class="carrito-enlace" id="boton-abrir-carrito" onclick="abrirDrawerCarrito()" aria-label="Ver carrito de compras">
+                        <span class="carrito-enlace__icono" aria-hidden="true">🛒</span>
+                        <span class="carrito-enlace__texto">Mi carrito</span>
+                        <span class="carrito-enlace__contador" id="carrito-badge-contador">0</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Menú de Categorías Conectado a los Filtros -->
+        <nav class="navegacion-principal" aria-label="Menú principal de categorías">
+            <div class="cabecera__contenedor">
+                <ul class="navegacion-principal__lista">
+                    <li class="navegacion-principal__item">
+                        <button type="button" class="navegacion-principal__enlace" onclick="filtrarDesdeEnlace('sextoys')">
+                            Sex Shop <span class="navegacion-principal__flecha" aria-hidden="true">▾</span>
+                        </button>
+                    </li>
+                    <li class="navegacion-principal__item">
+                        <button type="button" class="navegacion-principal__enlace" onclick="filtrarDesdeEnlace('lenceria')">
+                            Lencería y ropa <span class="navegacion-principal__flecha" aria-hidden="true">▾</span>
+                        </button>
+                    </li>
+                    <li class="navegacion-principal__item">
+                        <button type="button" class="navegacion-principal__enlace" onclick="filtrarDesdeEnlace('cosmetica')">
+                            Cosmética y Geles <span class="navegacion-principal__flecha" aria-hidden="true">▾</span>
+                        </button>
+                    </li>
+                    <li class="navegacion-principal__item">
+                        <button type="button" class="navegacion-principal__enlace" onclick="filtrarDesdeEnlace('fetiche')">
+                            Fetiche / Bondage <span class="navegacion-principal__flecha" aria-hidden="true">▾</span>
+                        </button>
+                    </li>
+                    <li class="navegacion-principal__item">
+                        <button type="button" class="navegacion-principal__enlace" onclick="filtrarDesdeEnlace('bienestar')">
+                            ESI y Bienestar <span class="navegacion-principal__flecha" aria-hidden="true">▾</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ==========================================
+         SECCIÓN HERO
+         ========================================== -->
+    <section class="hero" aria-label="Sección principal de bienvenida">
+        <div class="hero__contenedor">
+            
+            <div class="hero__contenido">
+                <span class="hero__subtitulo-superior">SEXUALIDAD CONSCIENTE &bull; BIENESTAR REAL</span>
+                
+                <h2 class="hero__titulo">Placer, bienestar e información en un espacio libre de prejuicios</h2>
+                
+                <p class="hero__descripcion">
+                    Productos elegidos con cuidado, asesoramiento profesional y educación para vivir tu intimidad con libertad.
+                </p>
+                
+                <div class="hero__acciones">
+                    <a href="#contenido-principal" class="hero__boton-primario">Explorar tienda</a>
+                    <a href="#nuestra-mirada" class="hero__enlace-secundario">Conocé nuestra mirada &rarr;</a>
+                </div>
+
+                <div class="hero__garantias">
+                    <div class="garantia-item">
+                        <span class="garantia-item__icono" aria-hidden="true">&#x1F6E1;</span>
+                        <span class="garantia-item__texto">Compra 100% segura</span>
+                    </div>
+                    <div class="garantia-item">
+                        <span class="garantia-item__icono" aria-hidden="true">&#x1F4E6;</span>
+                        <span class="garantia-item__texto">Envíos discretos</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero__multimedia">
+                <div class="hero__imagen-marco">
+                    <figure class="hero__figura">
+                        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80" alt="Estética cálida e inclusiva de Fórmula Íntima" class="hero__imagen" loading="eager">
+                        <figcaption class="sr-only">Imagen principal de Fórmula Íntima</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================
+         ACCESOS RÁPIDOS CON ICONOS
+         ========================================== -->
+    <section class="accesos-rapidos" aria-label="Accesos rápidos de navegación">
+        <div class="accesos-rapidos__contenedor">
+            <ul class="accesos-rapidos__lista">
+                
+                <li class="accesos-rapidos__item">
+                    <a href="#contenido-principal" onclick="limpiarFiltros()" class="accesos-rapidos__enlace">
+                        <div class="accesos-rapidos__icono-caja">
+                            <span class="accesos-rapidos__icono" aria-hidden="true">🛍️</span>
+                        </div>
+                        <span class="accesos-rapidos__titulo">Productos</span>
+                        <span class="accesos-rapidos__subtitulo">DESCUBRIR</span>
+                    </a>
+                </li>
+
+                <li class="accesos-rapidos__item">
+                    <a href="#contenido-principal" onclick="event.preventDefault(); filtrarDesdeEnlace('lenceria');" class="accesos-rapidos__enlace">
+                        <div class="accesos-rapidos__icono-caja">
+                            <span class="accesos-rapidos__icono" aria-hidden="true">❤️</span>
+                        </div>
+                        <span class="accesos-rapidos__titulo">Lencería</span>
+                        <span class="accesos-rapidos__subtitulo">DESCUBRIR</span>
+                    </a>
+                </li>
+
+                <li class="accesos-rapidos__item">
+                    <a href="#contenido-principal" class="accesos-rapidos__enlace">
+                        <div class="accesos-rapidos__icono-caja">
+                            <span class="accesos-rapidos__icono" aria-hidden="true">🏷️</span>
+                        </div>
+                        <span class="accesos-rapidos__titulo">Promos</span>
+                        <span class="accesos-rapidos__subtitulo">DESCUBRIR</span>
+                    </a>
+                </li>
+
+                <li class="accesos-rapidos__item">
+                    <a href="#nuestra-mirada" class="accesos-rapidos__enlace">
+                        <div class="accesos-rapidos__icono-caja">
+                            <span class="accesos-rapidos__icono" aria-hidden="true">📏</span>
+                        </div>
+                        <span class="accesos-rapidos__titulo">Talles</span>
+                        <span class="accesos-rapidos__subtitulo">GUÍA INCLUSIVA</span>
+                    </a>
+                </li>
+
+                <li class="accesos-rapidos__item">
+                    <a href="#envios" onclick="event.preventDefault(); abrirModalInfo('envios');" class="accesos-rapidos__enlace">
+                        <div class="accesos-rapidos__icono-caja">
+                            <span class="accesos-rapidos__icono" aria-hidden="true">📦</span>
+                        </div>
+                        <span class="accesos-rapidos__titulo">Envíos</span>
+                        <span class="accesos-rapidos__subtitulo">TODO EL PAÍS</span>
+                    </a>
+                </li>
+
+                <li class="accesos-rapidos__item">
+                    <a href="#contenido-principal" onclick="event.preventDefault(); filtrarDesdeEnlace('bienestar');" class="accesos-rapidos__enlace">
+                        <div class="accesos-rapidos__icono-caja">
+                            <span class="accesos-rapidos__icono" aria-hidden="true">🩺</span>
+                        </div>
+                        <span class="accesos-rapidos__titulo">ESI</span>
+                        <span class="accesos-rapidos__subtitulo">DESCUBRIR</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         CATÁLOGO DE PRODUCTOS Y FILTROS
+         ========================================== -->
+    <main class="catalogo" id="contenido-principal">
+        <div class="catalogo__contenedor">
+            
+            <!-- Migas de Pan -->
+            <nav class="catalogo__migas" aria-label="Navegación de ruta">
+                <ol class="migas__lista">
+                    <li class="migas__item"><a href="index.html" class="migas__enlace">Inicio</a></li>
+                    <li class="migas__separador" aria-hidden="true">></li>
+                    <li class="migas__item" aria-current="page"><span class="migas__actual" id="migas-categoria-actual">Todos los productos</span></li>
+                </ol>
+            </nav>
+
+            <!-- Cabecera del Catálogo -->
+            <header class="catalogo__encabezado">
+                <div class="catalogo__info-principal">
+                    <span class="catalogo__subtitulo-marca">SELECCIÓN FÓRMULA ÍNTIMA</span>
+                    <h2 class="catalogo__titulo">Todo para disfrutar a tu manera</h2>
+                    <p class="catalogo__contador">Cargando productos...</p>
+                </div>
+                <div class="catalogo__ordenar">
+                    <label for="ordenar-catalogo" class="catalogo__ordenar-etiqueta">Ordenar por</label>
+                    <select id="ordenar-catalogo" name="ordenar" class="catalogo__ordenar-select" onchange="aplicarFiltros()">
+                        <option value="destacados">Destacados</option>
+                        <option value="precio-menor">Precio: menor a mayor</option>
+                        <option value="precio-mayor">Precio: mayor a menor</option>
+                        <option value="alfabetico-az">A - Z</option>
+                        <option value="alfabetico-za">Z - A</option>
+                    </select>
+                </div>
+            </header>
+
+            <!-- Cuerpo del Catálogo: Filtros y Grilla -->
+            <div class="catalogo__cuerpo">
+                
+                <!-- Barra Lateral de Filtros ("Filtrar por") -->
+                <aside class="filtros" aria-label="Filtros de productos">
+                    <div class="filtros__cabecera">
+                        <h3 class="filtros__titulo">Filtrar por</h3>
+                        <button type="button" class="filtros__limpiar" id="boton-limpiar-filtros" onclick="limpiarFiltros()">Limpiar</button>
+                    </div>
+
+                    <form class="filtros__formulario" id="formulario-filtros" onsubmit="event.preventDefault(); aplicarFiltros();">
+                        
+                        <!-- 1. Categorías -->
+                        <fieldset class="filtro-grupo">
+                            <legend class="filtro-grupo__leyenda">Categorías</legend>
+                            <div class="filtro-grupo__cabecera" onclick="toggleAcordeonFiltro(this)">
+                                <span class="filtro-grupo__nombre">Categorías</span>
+                                <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
+                            </div>
+                            <div class="filtro-grupo__lista">
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="categoria" value="cosmetica" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Cosmética y geles <span class="filtro-conteo" data-cat="cosmetica"></span></span>
+                                </label>
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="categoria" value="sextoys" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Sex Toys <span class="filtro-conteo" data-cat="sextoys"></span></span>
+                                </label>
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="categoria" value="lenceria" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Lencería <span class="filtro-conteo" data-cat="lenceria"></span></span>
+                                </label>
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="categoria" value="fetiche" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Fetiche / Bondage <span class="filtro-conteo" data-cat="fetiche"></span></span>
+                                </label>
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="categoria" value="bienestar" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Bienestar <span class="filtro-conteo" data-cat="bienestar"></span></span>
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <!-- 2. Color -->
+                        <fieldset class="filtro-grupo">
+                            <legend class="filtro-grupo__leyenda">Color</legend>
+                            <div class="filtro-grupo__cabecera" onclick="toggleAcordeonFiltro(this)">
+                                <span class="filtro-grupo__nombre">Color</span>
+                                <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
+                            </div>
+                            <div class="filtro-grupo__lista">
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="color" value="negro" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Negro</span>
+                                </label>
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="color" value="rojo" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Rojo</span>
+                                </label>
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="color" value="piel" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Piel</span>
+                                </label>
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="color" value="rosa" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Rosa</span>
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <!-- 3. Modelo -->
+                        <fieldset class="filtro-grupo">
+                            <legend class="filtro-grupo__leyenda">Modelo</legend>
+                            <div class="filtro-grupo__cabecera" onclick="toggleAcordeonFiltro(this)">
+                                <span class="filtro-grupo__nombre">Modelo</span>
+                                <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
+                            </div>
+                            <div class="filtro-grupo__lista">
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="modelo" value="delfin" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Delfín</span>
+                                </label>
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="modelo" value="liso" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Liso</span>
+                                </label>
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="modelo" value="ondas" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Ondas</span>
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <!-- 4. Marca -->
+                        <fieldset class="filtro-grupo">
+                            <legend class="filtro-grupo__leyenda">Marca</legend>
+                            <div class="filtro-grupo__cabecera" onclick="toggleAcordeonFiltro(this)">
+                                <span class="filtro-grupo__nombre">Marca</span>
+                                <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
+                            </div>
+                            <div class="filtro-grupo__lista">
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="marca" value="Sexitive" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Sexitive</span>
+                                </label>
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="marca" value="Pretty Love" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Pretty Love</span>
+                                </label>
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="marca" value="Satisfyer" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Satisfyer</span>
+                                </label>
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="marca" value="Lovense" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Lovense</span>
+                                </label>
+                                <label class="filtro-opcion">
+                                    <input type="checkbox" name="marca" value="Svakom" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Svakom</span>
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <!-- 5. Precio -->
+                        <fieldset class="filtro-grupo filtro-grupo--sin-borde">
+                            <legend class="filtro-grupo__leyenda">Precio</legend>
+                            <div class="filtro-grupo__cabecera" onclick="toggleAcordeonFiltro(this)">
+                                <span class="filtro-grupo__nombre">Precio</span>
+                                <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
+                            </div>
+                            <div class="filtro-precio">
+                                <input type="number" id="filtro-precio-desde" class="filtro-precio__input" placeholder="Desde" aria-label="Precio mínimo">
+                                <span class="filtro-precio__separador" aria-hidden="true">—</span>
+                                <input type="number" id="filtro-precio-hasta" class="filtro-precio__input" placeholder="Hasta" aria-label="Precio máximo">
+                            </div>
+                            <button type="submit" class="filtro-precio__boton">Aplicar</button>
+                        </fieldset>
+                    </form>
+                </aside>
+
+                <!-- Sección de Productos -->
+                <section class="productos-seccion">
+                    <div class="productos-grilla" id="grilla-productos" aria-label="Listado de productos">
+                        <!-- Los productos se cargan dinámicamente con main.js -->
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- ==========================================
+         PILARES INSTITUCIONALES
+         ========================================== -->
+    <section class="pilares" id="nuestra-mirada" aria-label="Nuestros pilares institucionales">
+        <div class="pilares__contenedor">
+            
+            <div class="pilares__encabezado">
+                <div class="pilares__titulo-bloque">
+                    <span class="pilares__subtitulo">MUCHO MÁS QUE UNA TIENDA</span>
+                    <h2 class="pilares__titulo">Nuestros pilares</h2>
+                </div>
+                <div class="pilares__descripcion-principal">
+                    <p>Creemos en una sexualidad libre, informada y cuidada. Por eso cada decisión que tomamos nace de estos valores.</p>
+                </div>
+            </div>
+
+            <div class="pilares__grilla">
+                <article class="pilar-tarjeta">
+                    <div class="pilar-tarjeta__cabecera">
+                        <span class="pilar-tarjeta__numero" aria-hidden="true">01</span>
+                        <span class="pilar-tarjeta__icono" aria-hidden="true">❤️</span>
+                    </div>
+                    <div class="pilar-tarjeta__cuerpo">
+                        <h3 class="pilar-tarjeta__titulo">Salud y Bienestar</h3>
+                        <p class="pilar-tarjeta__texto">
+                            Cuidar el cuerpo, escuchar los deseos y tomar decisiones responsables también es placer.
+                        </p>
+                    </div>
+                    <div class="pilar-tarjeta__pie">
+                        <button type="button" class="pilar-tarjeta__enlace" onclick="abrirModalInfo('acerca')">CONOCER MÁS &rarr;</button>
+                    </div>
+                </article>
+
+                <article class="pilar-tarjeta">
+                    <div class="pilar-tarjeta__cabecera">
+                        <span class="pilar-tarjeta__numero" aria-hidden="true">02</span>
+                        <span class="pilar-tarjeta__icono" aria-hidden="true">📖</span>
+                    </div>
+                    <div class="pilar-tarjeta__cuerpo">
+                        <h3 class="pilar-tarjeta__titulo">Educación (ESI)</h3>
+                        <p class="pilar-tarjeta__texto">
+                            Información clara, accesible y profesional para derribar mitos, tabúes y prejuicios.
+                        </p>
+                    </div>
+                    <div class="pilar-tarjeta__pie">
+                        <button type="button" class="pilar-tarjeta__enlace" onclick="abrirModalInfo('acerca')">CONOCER MÁS &rarr;</button>
+                    </div>
+                </article>
+
+                <article class="pilar-tarjeta">
+                    <div class="pilar-tarjeta__cabecera">
+                        <span class="pilar-tarjeta__numero" aria-hidden="true">03</span>
+                        <span class="pilar-tarjeta__icono" aria-hidden="true">📏</span>
+                    </div>
+                    <div class="pilar-tarjeta__cuerpo">
+                        <h3 class="pilar-tarjeta__titulo">Inclusión</h3>
+                        <p class="pilar-tarjeta__texto">
+                            Celebramos la diversidad de cuerpos, identidades, deseos y talles. El placer es para todes.
+                        </p>
+                    </div>
+                    <div class="pilar-tarjeta__pie">
+                        <button type="button" class="pilar-tarjeta__enlace" onclick="abrirModalInfo('acerca')">CONOCER MÁS &rarr;</button>
+                    </div>
+                </article>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================
+         NEWSLETTER
+         ========================================== -->
+    <section class="newsletter" aria-label="Suscripción a novedades y ESI">
+        <div class="newsletter__contenedor">
+            <div class="newsletter__info">
+                <span class="newsletter__subtitulo">UNA COMUNIDAD SIN PREJUICIOS</span>
+                <h2 class="newsletter__titulo">Recibí novedades íntimas</h2>
+                <p class="newsletter__descripcion">
+                    Contenido ESI, lanzamientos y beneficios exclusivos. Cero spam, mucha información.
+                </p>
+            </div>
+
+            <div class="newsletter__formulario-contenedor">
+                <form class="newsletter__formulario" onsubmit="event.preventDefault(); alert('¡Gracias por sumarte a la comunidad de Fórmula Íntima!'); this.reset();">
+                    <label for="input-email-newsletter" class="sr-only">Tu email</label>
+                    <input type="email" id="input-email-newsletter" name="email" class="newsletter__input" placeholder="Tu email" required>
+                    <button type="submit" class="newsletter__boton">Quiero sumarme</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         PIE DE PÁGINA / FOOTER FUNCIONAL
+         ========================================== -->
+    <footer class="pie-pagina" itemscope itemtype="https://schema.org/WPFooter">
+        <div class="pie-pagina__contenedor">
+            
+            <div class="pie-pagina__columnas">
+                
+                <!-- Columna 1: Marca y Redes -->
+                <div class="pie-pagina__columna pie-pagina__columna--marca">
+                    <h3 class="pie-pagina__logo">Fórmula Íntima</h3>
+                    <p class="pie-pagina__descripcion">
+                        Placer, bienestar e información en un espacio libre de prejuicios.
+                    </p>
+                    <div class="pie-pagina__redes">
+                        <a href="https://instagram.com" class="redes__enlace" aria-label="Instagram" target="_blank" rel="noopener">📷</a>
+                        <a href="https://facebook.com" class="redes__enlace" aria-label="Facebook" target="_blank" rel="noopener">📘</a>
+                        <a href="https://tiktok.com" class="redes__enlace" aria-label="TikTok" target="_blank" rel="noopener">🎵</a>
+                    </div>
+                </div>
+
+                <!-- Columna 2: Productos (Conectado a los filtros de "Filtrar por") -->
+                <div class="pie-pagina__columna">
+                    <h4 class="pie-pagina__titulo">Productos</h4>
+                    <ul class="pie-pagina__lista">
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="filtrarDesdeEnlace('sextoys')">Sex Toys</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="filtrarDesdeEnlace('cosmetica')">Cosmética y Geles</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="filtrarDesdeEnlace('lenceria')">Lencería</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="filtrarDesdeEnlace('fetiche')">Fetiche / Bondage</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="filtrarDesdeEnlace('bienestar')">Bienestar / ESI</button></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Información y Ayuda (Conectado a las Cards Flotantes) -->
+                <div class="pie-pagina__columna">
+                    <h4 class="pie-pagina__titulo">Información y ayuda</h4>
+                    <ul class="pie-pagina__lista">
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="abrirModalInfo('acerca')">Acerca de Fórmula Íntima</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="abrirModalInfo('faq')">Preguntas frecuentes</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="abrirModalInfo('envios')">Formas de envío</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="abrirModalInfo('pagos')">Formas de pago</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="abrirModalInfo('como-comprar')">Cómo comprar</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="abrirModalInfo('devoluciones')">Políticas de devolución</button></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 4: Contacto -->
+                <div class="pie-pagina__columna">
+                    <h4 class="pie-pagina__titulo">Estamos cerca</h4>
+                    <ul class="pie-pagina__lista pie-pagina__lista--contacto">
+                        <li>WhatsApp: +54 9 11 4567 8900</li>
+                        <li>hola@formulaintima.com.ar</li>
+                        <li>Lun a Vie 9 a 18 h</li>
+                        <li>Sábados 10 a 14 h</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <hr class="pie-pagina__divisor">
+
+            <div class="pie-pagina__inferior">
+                <div class="pie-pagina__pagos-envios">
+                    <span class="pie-pagina__pagos-etiqueta">Pagá como quieras</span>
+                    <div class="pie-pagina__iconos-pago">
+                        <span class="badge-pago">Mercado Pago</span>
+                        <span class="badge-envio">Andreani</span>
+                    </div>
+                </div>
+
+                <div class="pie-pagina__legales">
+                    <p class="pie-pagina__copyright">&copy; 2026 Fórmula Íntima. Todos los derechos reservados.</p>
+                    <div class="pie-pagina__enlaces-legales">
+                        <a href="https://www.argentina.gob.ar/produccion/defensadelconsumidor/formulario" class="legales__enlace" target="_blank" rel="noopener">Defensa de las y los consumidores</a>
+                        <button type="button" class="legales__boton-arrepentimiento" onclick="abrirModalInfo('devoluciones')">Botón de arrepentimiento</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         DRAWER LATERAL DEL CARRITO DE COMPRAS
+         ========================================== -->
+    <div id="carrito-drawer" class="carrito-drawer" aria-hidden="true">
+        <div class="carrito-drawer__overlay" onclick="cerrarDrawerCarrito()"></div>
+        
+        <aside class="carrito-drawer__panel" role="dialog" aria-modal="true" aria-label="Carrito de compras">
+            
+            <header class="carrito-drawer__cabecera">
+                <div>
+                    <span class="carrito-drawer__subtitulo">TU SELECCIÓN</span>
+                    <h2 class="carrito-drawer__titulo">Carrito de compras</h2>
+                </div>
+                <button type="button" class="carrito-drawer__boton-cerrar" onclick="cerrarDrawerCarrito()" aria-label="Cerrar carrito">
+                    &times;
+                </button>
+            </header>
+
+            <div class="carrito-drawer__cuerpo" id="carrito-items-contenedor">
+                <!-- Productos del carrito -->
+            </div>
+
+            <div class="carrito-cupon">
+                <button type="button" class="carrito-cupon__toggle" onclick="toggleCuponCarrito()">
+                    <span>¿Tenés un cupón de descuento?</span>
+                    <span class="carrito-cupon__icono">∨</span>
+                </button>
+                <div class="carrito-cupon__formulario" id="cupon-contenido">
+                    <input type="text" id="cupon-input" class="carrito-cupon__input" placeholder="Ingresá tu código">
+                    <button type="button" class="carrito-cupon__boton" onclick="alert('Cupón verificado al iniciar la compra por WhatsApp.')">Aplicar</button>
+                </div>
+            </div>
+
+            <footer class="carrito-drawer__pie">
+                <div class="carrito-totales">
+                    <div class="carrito-totales__fila">
+                        <span>Subtotal</span>
+                        <span id="carrito-subtotal">$ 0</span>
+                    </div>
+                    <div class="carrito-totales__fila">
+                        <span>Envío</span>
+                        <span style="color: #28a745; font-weight: 600;">A coordinar</span>
+                    </div>
+                    <div class="carrito-totales__separador"></div>
+                    <div class="carrito-totales__fila carrito-totales__fila--total">
+                        <span class="carrito-totales__etiqueta-total">Total</span>
+                        <span class="carrito-totales__monto-total" id="carrito-total">$ 0</span>
+                    </div>
+                    <div class="carrito-totales__cuotas" id="carrito-cuotas-texto">
+                        o 3 cuotas sin interés de $ 0
+                    </div>
+                </div>
+
+                <button type="button" class="carrito-drawer__boton-comprar" id="boton-iniciar-compra" onclick="enviarPedidoAWhatsApp()">
+                    Iniciar compra
+                </button>
+
+                <div class="carrito-drawer__seguridad">
+                    <span aria-hidden="true">&#x1F6E1;</span> Compra protegida y envío discreto
+                </div>
+            </footer>
+
+        </aside>
+    </div>
+
+    <!-- ==========================================
+         CARD FLOTANTE / MODAL DE INFORMACIÓN
+         ========================================== -->
+    <div id="modal-info" class="modal-info" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-info__overlay" onclick="cerrarModalInfo()"></div>
+        <div class="modal-info__card">
+            <header class="modal-info__cabecera">
+                <span class="modal-info__badge" id="modal-info-badge">INFORMACIÓN</span>
+                <button type="button" class="modal-info__cerrar" onclick="cerrarModalInfo()" aria-label="Cerrar ventana">&times;</button>
+            </header>
+            <div class="modal-info__cuerpo">
+                <h3 class="modal-info__titulo" id="modal-info-titulo">Título</h3>
+                <div class="modal-info__texto" id="modal-info-contenido">
+                    <!-- Contenido dinámico -->
+                </div>
+            </div>
+            <footer class="modal-info__pie">
+                <button type="button" class="modal-info__boton-entendido" onclick="cerrarModalInfo()">Entendido</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="main.js"></script>
 </body>
 </html>

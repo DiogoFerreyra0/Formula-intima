@@ -1,8 +1,11 @@
 /* ==========================================================================
-   FÓRMULA ÍNTIMA - MAIN.JS (CATÁLOGO + FILTROS + CARRITO WHATSAPP BLINDADO)
+   FÓRMULA ÍNTIMA - MAIN.JS (CATÁLOGO + FILTROS + CARRITO WHATSAPP + MODALES)
    ========================================================================== */
 
+// NÚMERO DE WHATSAPP OFICIAL DEL LOCAL
 const WHATSAPP_NUMERO = "5491145678900"; 
+
+// SUPABASE CONFIG
 const SUPABASE_URL = "https://TU_PROYECTO.supabase.co";
 const SUPABASE_ANON_KEY = "TU_CLAVE_ANON_PUBLICA";
 
@@ -10,7 +13,7 @@ const supabase = (typeof window.supabase !== 'undefined' && SUPABASE_URL !== "ht
     ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
 
-// PRODUCTOS BASE CON ATRIBUTOS
+// PRODUCTOS DE DEMOSTRACIÓN (Listos para probar filtros y carrito de inmediato)
 const PRODUCTOS_LOCALES_DEMO = [
     {
         id: "1",
@@ -101,45 +104,139 @@ const PRODUCTOS_LOCALES_DEMO = [
         badge_descuento: "15% OFF",
         envio_gratis: false,
         imagen_url: "https://via.placeholder.com/350x350/F4E4D9/40171F?text=Aceite+Vainilla"
+    },
+    {
+        id: "7",
+        titulo: "Mini Vibrador Punto G Qamra Delfín",
+        marca: "Pretty Love",
+        categoria: "sextoys",
+        color: "rojo",
+        modelo: "delfin",
+        precio_tachado: 14000,
+        precio_oferta: 11200,
+        precio_transferencia: 10080,
+        cuotas: "3 cuotas sin interés de $3.733",
+        badge_descuento: "20% OFF",
+        envio_gratis: true,
+        imagen_url: "https://via.placeholder.com/350x350/F4E4D9/40171F?text=Vibrador+Delfin"
+    },
+    {
+        id: "8",
+        titulo: "Arnés y Conjunto de Cuero Fetiche",
+        marca: "Fórmula Íntima",
+        categoria: "fetiche",
+        color: "negro",
+        modelo: "ondas",
+        precio_tachado: 45000,
+        precio_oferta: 38000,
+        precio_transferencia: 34200,
+        cuotas: "3 cuotas sin interés de $12.666",
+        badge_descuento: "15% OFF",
+        envio_gratis: true,
+        imagen_url: "https://via.placeholder.com/350x350/F4E4D9/40171F?text=Arnes+Cuero"
     }
 ];
 
-// ESTADO
+// CONTENIDO DE LAS CARDS FLOTANTES DEL FOOTER
+const DATOS_MODALES_INFO = {
+    "acerca": {
+        badge: "NUESTRA IDENTIDAD",
+        titulo: "Acerca de Fórmula Íntima",
+        contenido: `
+            <p>Fórmula Íntima nace con el propósito de abordar la sexualidad desde una mirada amplia, natural y consciente.</p>
+            <p>Más que ofrecer productos, buscamos crear un espacio donde el placer, el bienestar y la salud sexual convivan con información, acompañamiento y respeto, derribando prejuicios y mitos.</p>
+            <div class="modal-info__destacado">
+                Celebramos la diversidad de cuerpos, identidades y talles. El placer es para todes.
+            </div>
+        `
+    },
+    "faq": {
+        badge: "AYUDA FRECUENTE",
+        titulo: "Preguntas Frecuentes",
+        contenido: `
+            <p><strong>¿El envío es realmente discreto?</strong><br>
+            Totalmente. Los paquetes no tienen logos, nombres del rubro ni alusión a sex shop. Llegan en cajas o bolsas neutras y cerradas.</p>
+            <p><strong>¿Cómo coordino el pago y la entrega?</strong><br>
+            Al presionar "Iniciar compra" en el carrito, se genera un mensaje automático con tus productos y precios y te deriva directo a nuestro WhatsApp oficial para coordinar todo de forma personalizada.</p>
+            <p><strong>¿Tienen atención confidencial?</strong><br>
+            Sí, te asesoramos de manera 100% privada, cálida y sin prejuicios.</p>
+        `
+    },
+    "envios": {
+        badge: "LOGÍSTICA Y ENTREGA",
+        titulo: "Formas de Envío",
+        contenido: `
+            <p>Realizamos envíos a todo el país garantizando la máxima confidencialidad:</p>
+            <ul>
+                <li><strong>Andreani a domicilio o sucursal:</strong> Seguimiento online y empaque neutro sin identificación del rubro.</li>
+                <li><strong>Envíos express en el día:</strong> Por mensajería privada en CABA y GBA coordinando horario por WhatsApp.</li>
+            </ul>
+            <div class="modal-info__destacado">
+                📦 Empaque 100% discreto: nadie sabe lo que hay dentro del paquete.
+            </div>
+        `
+    },
+    "pagos": {
+        badge: "MEDIOS DE PAGO",
+        titulo: "Formas de Pago",
+        contenido: `
+            <p>Podés abonar tu pedido como te resulte más cómodo:</p>
+            <ul>
+                <li><strong>Transferencia o Depósito Bancario:</strong> Tenés un descuento extra exclusivo sobre el precio de oferta.</li>
+                <li><strong>Mercado Pago:</strong> Dinero en cuenta, tarjetas de débito y crédito.</li>
+                <li><strong>Cuotas sin interés:</strong> 3 cuotas sin interés disponibles en toda la tienda.</li>
+            </ul>
+            <p>Al enviarnos tu pedido por WhatsApp te pasamos el alias bancario o el link de pago al instante.</p>
+        `
+    },
+    "como-comprar": {
+        badge: "COMPRA POR WHATSAPP",
+        titulo: "¿Cómo comprar en la tienda?",
+        contenido: `
+            <p>El modo de compra es directo, personalizado y sin vueltas a través de WhatsApp:</p>
+            <ol>
+                <li><strong>Elegí tus productos:</strong> Navegá el catálogo y presioná <em>"Agregar al carrito"</em> en lo que te guste.</li>
+                <li><strong>Revisá tu selección:</strong> En el carrito lateral podés sumar cantidades y ver el total calculado automáticamente.</li>
+                <li><strong>Iniciá la compra:</strong> Tocá el botón <em>"Iniciar compra"</em>.</li>
+                <li><strong>Mensaje automático a WhatsApp:</strong> El sistema arma el mensaje con tu lista de productos y el total, y te abre nuestro WhatsApp para finalizar el pago y el envío discreto.</li>
+            </ol>
+        `
+    },
+    "devoluciones": {
+        badge: "GARANTÍA Y CUIDADO",
+        titulo: "Políticas de Devolución",
+        contenido: `
+            <p>Por normativas de salud, bioseguridad e higiene en artículos de uso íntimo y lencería, los cambios o devoluciones aplican únicamente ante <strong>fallas de funcionamiento o fabricación</strong>.</p>
+            <p>Todos los dispositivos electrónicos son testeados previamente. Ante cualquier inconveniente o gestión de arrepentimiento de compra, escribinos por WhatsApp indicando tu pedido.</p>
+        `
+    }
+};
+
+// ESTADO GLOBAL
 let todosLosProductos = [];
 let productosFiltrados = [];
 let carrito = JSON.parse(localStorage.getItem('fi_carrito_v2')) || [];
 
-// ELEMENTOS DEL DOM
-const contenedorGrilla = document.querySelector('.productos-grilla');
-const contadorProductos = document.querySelector('.catalogo__contador');
-const selectOrden = document.getElementById('ordenar-catalogo');
-const buscadorInput = document.getElementById('input-buscar');
-const formFiltros = document.getElementById('formulario-filtros');
-const botonLimpiar = document.getElementById('boton-limpiar-filtros') || document.querySelector('.filtros__limpiar');
-const inputPrecioDesde = document.getElementById('filtro-precio-desde');
-const inputPrecioHasta = document.getElementById('filtro-precio-hasta');
-const contadorCarritoBadge = document.querySelector('.carrito-enlace__contador');
-const botonAbrirCarrito = document.getElementById('boton-abrir-carrito') || document.querySelector('.carrito-enlace');
-
-// Elementos Drawer Carrito
-const carritoDrawer = document.getElementById('carrito-drawer');
-const carritoOverlay = document.getElementById('carrito-overlay');
-const carritoCerrar = document.getElementById('carrito-cerrar');
-const carritoItemsContenedor = document.getElementById('carrito-items-contenedor');
-const carritoSubtotalTexto = document.getElementById('carrito-subtotal');
-const carritoTotalTexto = document.getElementById('carrito-total');
-const carritoCuotasTexto = document.getElementById('carrito-cuotas-texto');
-const botonIniciarCompra = document.getElementById('boton-iniciar-compra');
-
 // ==========================================================================
-// 1. INICIALIZACIÓN INMEDIATA Y SEGURA
+// 1. INICIALIZACIÓN
 // ==========================================================================
 function iniciarTienda() {
     actualizarCarritoUI();
     obtenerProductos();
-    configurarEventosFiltros();
-    configurarAcordeonesFiltros();
-    configurarEventosDrawer();
+
+    // Buscador en vivo
+    const buscadorInput = document.getElementById('input-buscar');
+    if (buscadorInput) {
+        buscadorInput.addEventListener('input', aplicarFiltros);
+    }
+
+    // Cerrar modales con tecla Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            cerrarModalInfo();
+            cerrarDrawerCarrito();
+        }
+    });
 }
 
 if (document.readyState === 'loading') {
@@ -159,7 +256,6 @@ async function obtenerProductos() {
             if (error) throw error;
             todosLosProductos = (data && data.length > 0) ? data : PRODUCTOS_LOCALES_DEMO;
         } catch (err) {
-            console.warn("Usando catálogo local de respaldo:", err.message);
             todosLosProductos = PRODUCTOS_LOCALES_DEMO;
         }
     } else {
@@ -184,46 +280,54 @@ function actualizarContadoresCategorias() {
 }
 
 // ==========================================================================
-// 2. FILTROS Y ACORDEÓN
+// 2. CONEXIÓN DEL FOOTER Y MENÚ CON "FILTRAR POR"
 // ==========================================================================
-function configurarEventosFiltros() {
-    if (formFiltros) {
-        formFiltros.addEventListener('change', (e) => {
-            if (e.target.type !== 'number') aplicarFiltros();
-        });
-        formFiltros.addEventListener('submit', (e) => {
-            e.preventDefault();
-            aplicarFiltros();
-        });
+window.filtrarDesdeEnlace = function(categoriaClave) {
+    const formFiltros = document.getElementById('formulario-filtros');
+    const buscadorInput = document.getElementById('input-buscar');
+    
+    // 1. Limpiar filtros anteriores
+    if (formFiltros) formFiltros.reset();
+    if (buscadorInput) buscadorInput.value = '';
+
+    // 2. Marcar el checkbox correspondiente en "Filtrar por"
+    const checkbox = document.querySelector(`input[name="categoria"][value="${categoriaClave}"]`);
+    if (checkbox) {
+        checkbox.checked = true;
     }
 
-    if (buscadorInput) buscadorInput.addEventListener('input', aplicarFiltros);
-    if (selectOrden) selectOrden.addEventListener('change', aplicarFiltros);
+    // 3. Ejecutar el filtrado
+    aplicarFiltros();
 
-    if (botonLimpiar) {
-        botonLimpiar.addEventListener('click', (e) => {
-            e.preventDefault();
-            limpiarFiltros();
-        });
+    // 4. Desplazar suavemente hacia el catálogo de productos
+    const seccionCatalogo = document.getElementById('contenido-principal');
+    if (seccionCatalogo) {
+        seccionCatalogo.scrollIntoView({ behavior: 'smooth' });
     }
-}
+};
 
-function configurarAcordeonesFiltros() {
-    document.querySelectorAll('.filtro-grupo__cabecera').forEach(cabecera => {
-        cabecera.addEventListener('click', () => {
-            const grupo = cabecera.closest('.filtro-grupo');
-            const icono = cabecera.querySelector('.filtro-grupo__icono');
-            grupo.classList.toggle('filtro-grupo--cerrado');
-            if (icono) {
-                icono.textContent = grupo.classList.contains('filtro-grupo--cerrado') ? '∨' : '∧';
-            }
-        });
-    });
-}
+window.toggleAcordeonFiltro = function(cabecera) {
+    const grupo = cabecera.closest('.filtro-grupo');
+    const icono = cabecera.querySelector('.filtro-grupo__icono');
+    if (!grupo) return;
+    grupo.classList.toggle('filtro-grupo--cerrado');
+    if (icono) {
+        icono.textContent = grupo.classList.contains('filtro-grupo--cerrado') ? '∨' : '∧';
+    }
+};
 
-function aplicarFiltros() {
+// ==========================================================================
+// 3. APLICAR FILTROS ("FILTRAR POR")
+// ==========================================================================
+window.aplicarFiltros = function() {
+    const buscadorInput = document.getElementById('input-buscar');
+    const inputPrecioDesde = document.getElementById('filtro-precio-desde');
+    const inputPrecioHasta = document.getElementById('filtro-precio-hasta');
+    const selectOrden = document.getElementById('ordenar-catalogo');
+
     let resultado = [...todosLosProductos];
 
+    // Buscador
     const textoBuscador = buscadorInput ? buscadorInput.value.toLowerCase().trim() : '';
     if (textoBuscador !== '') {
         resultado = resultado.filter(p => 
@@ -232,30 +336,35 @@ function aplicarFiltros() {
         );
     }
 
+    // Categorías
     const categoriasSeleccionadas = Array.from(document.querySelectorAll('input[name="categoria"]:checked'))
         .map(input => input.value.toLowerCase());
     if (categoriasSeleccionadas.length > 0) {
         resultado = resultado.filter(p => p.categoria && categoriasSeleccionadas.includes(p.categoria.toLowerCase()));
     }
 
+    // Marcas
     const marcasSeleccionadas = Array.from(document.querySelectorAll('input[name="marca"]:checked'))
         .map(input => input.value.toLowerCase());
     if (marcasSeleccionadas.length > 0) {
         resultado = resultado.filter(p => p.marca && marcasSeleccionadas.includes(p.marca.toLowerCase()));
     }
 
+    // Colores
     const coloresSeleccionados = Array.from(document.querySelectorAll('input[name="color"]:checked'))
         .map(input => input.value.toLowerCase());
     if (coloresSeleccionados.length > 0) {
         resultado = resultado.filter(p => p.color && coloresSeleccionados.includes(p.color.toLowerCase()));
     }
 
+    // Modelos
     const modelosSeleccionados = Array.from(document.querySelectorAll('input[name="modelo"]:checked'))
         .map(input => input.value.toLowerCase());
     if (modelosSeleccionados.length > 0) {
         resultado = resultado.filter(p => p.modelo && modelosSeleccionados.includes(p.modelo.toLowerCase()));
     }
 
+    // Precio
     const precioDesde = inputPrecioDesde && inputPrecioDesde.value ? parseFloat(inputPrecioDesde.value) : 0;
     const precioHasta = inputPrecioHasta && inputPrecioHasta.value ? parseFloat(inputPrecioHasta.value) : Infinity;
 
@@ -264,6 +373,7 @@ function aplicarFiltros() {
         return precio >= precioDesde && precio <= precioHasta;
     });
 
+    // Ordenamiento
     const orden = selectOrden ? selectOrden.value : 'destacados';
     switch (orden) {
         case 'precio-menor':
@@ -282,19 +392,25 @@ function aplicarFiltros() {
 
     productosFiltrados = resultado;
     renderizarProductos(productosFiltrados);
-}
+};
 
-function limpiarFiltros() {
+window.limpiarFiltros = function() {
+    const formFiltros = document.getElementById('formulario-filtros');
+    const buscadorInput = document.getElementById('input-buscar');
+    const selectOrden = document.getElementById('ordenar-catalogo');
+
     if (formFiltros) formFiltros.reset();
     if (buscadorInput) buscadorInput.value = '';
     if (selectOrden) selectOrden.value = 'destacados';
     aplicarFiltros();
-}
+};
 
 // ==========================================================================
-// 3. RENDERIZADO DEL CATÁLOGO
+// 4. RENDERIZAR PRODUCTOS
 // ==========================================================================
 function renderizarProductos(productos) {
+    const contenedorGrilla = document.getElementById('grilla-productos') || document.querySelector('.productos-grilla');
+    const contadorProductos = document.querySelector('.catalogo__contador');
     if (!contenedorGrilla) return;
 
     if (contadorProductos) {
@@ -304,9 +420,9 @@ function renderizarProductos(productos) {
     if (productos.length === 0) {
         contenedorGrilla.innerHTML = `
             <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: #777;">
-                <p style="font-size: 1.2rem; margin-bottom: 1rem;">No se encontraron productos con los filtros seleccionados.</p>
+                <p style="font-size: 1.15rem; margin-bottom: 1rem;">No encontramos productos con esos filtros seleccionados.</p>
                 <button type="button" onclick="limpiarFiltros()" class="catalogo__boton-ver-mas" style="padding: 0.6rem 1.5rem; cursor: pointer;">
-                    Restablecer filtros
+                    Ver todos los productos
                 </button>
             </div>
         `;
@@ -341,14 +457,14 @@ function renderizarProductos(productos) {
                 
                 <button type="button" class="tarjeta-producto__favorito" onclick="toggleFavorito(this)" aria-label="Favorito">♡</button>
                 
-                <a href="#producto-${prod.id}" class="tarjeta-producto__imagen-contenedor" aria-hidden="true" tabindex="-1">
+                <a href="#producto-${prod.id}" onclick="event.preventDefault(); verDetalleRapido('${prod.id}')" class="tarjeta-producto__imagen-contenedor">
                     <img src="${foto}" alt="${prod.titulo}" class="tarjeta-producto__imagen" itemprop="image" loading="lazy">
                 </a>
 
                 <div class="tarjeta-producto__cuerpo">
                     <span class="tarjeta-producto__marca" itemprop="brand">${prod.marca || 'Fórmula Íntima'}</span>
                     
-                    <a href="#producto-${prod.id}" class="tarjeta-producto__titulo-enlace">
+                    <a href="#producto-${prod.id}" onclick="event.preventDefault(); verDetalleRapido('${prod.id}')" class="tarjeta-producto__titulo-enlace">
                         <h3 class="tarjeta-producto__titulo" itemprop="name">${prod.titulo}</h3>
                     </a>
                     
@@ -378,38 +494,32 @@ function renderizarProductos(productos) {
 }
 
 // ==========================================================================
-// 4. CARRITO DE COMPRAS LATERAL (DRAWER)
+// 5. CARRITO DE COMPRAS LATERAL Y WHATSAPP
 // ==========================================================================
-function configurarEventosDrawer() {
-    if (botonAbrirCarrito) {
-        botonAbrirCarrito.addEventListener('click', (e) => {
-            e.preventDefault();
-            abrirDrawerCarrito();
-        });
-    }
-    if (carritoCerrar) carritoCerrar.addEventListener('click', cerrarDrawerCarrito);
-    if (carritoOverlay) carritoOverlay.addEventListener('click', cerrarDrawerCarrito);
-
-    if (botonIniciarCompra) {
-        botonIniciarCompra.addEventListener('click', enviarPedidoAWhatsApp);
-    }
-}
-
-function abrirDrawerCarrito() {
+window.abrirDrawerCarrito = function() {
+    const carritoDrawer = document.getElementById('carrito-drawer');
     if (carritoDrawer) {
         carritoDrawer.classList.add('carrito-drawer--activo');
         carritoDrawer.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
     }
-}
+};
 
-function cerrarDrawerCarrito() {
+window.cerrarDrawerCarrito = function() {
+    const carritoDrawer = document.getElementById('carrito-drawer');
     if (carritoDrawer) {
         carritoDrawer.classList.remove('carrito-drawer--activo');
         carritoDrawer.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
     }
-}
+};
+
+window.toggleCuponCarrito = function() {
+    const cuponContenido = document.getElementById('cupon-contenido');
+    if (cuponContenido) {
+        cuponContenido.classList.toggle('carrito-cupon__formulario--activo');
+    }
+};
 
 window.agregarAlCarrito = function(id) {
     const prod = todosLosProductos.find(p => p.id === id);
@@ -459,6 +569,13 @@ function guardarCarrito() {
 }
 
 function actualizarCarritoUI() {
+    const contadorCarritoBadge = document.getElementById('carrito-badge-contador') || document.querySelector('.carrito-enlace__contador');
+    const carritoItemsContenedor = document.getElementById('carrito-items-contenedor');
+    const carritoSubtotalTexto = document.getElementById('carrito-subtotal');
+    const carritoTotalTexto = document.getElementById('carrito-total');
+    const carritoCuotasTexto = document.getElementById('carrito-cuotas-texto');
+    const botonIniciarCompra = document.getElementById('boton-iniciar-compra');
+
     const totalCantidadItems = carrito.reduce((acc, item) => acc + (item.cantidad || 1), 0);
     if (contadorCarritoBadge) contadorCarritoBadge.textContent = totalCantidadItems;
 
@@ -467,8 +584,8 @@ function actualizarCarritoUI() {
     if (carrito.length === 0) {
         carritoItemsContenedor.innerHTML = `
             <div class="carrito-vacio">
-                <p>El carrito de compras está vacío.</p>
-                <span style="font-size: 2rem;">🛍️</span>
+                <p>Tu carrito de compras está vacío.</p>
+                <span style="font-size: 2.2rem;">🛍️</span>
             </div>
         `;
         if (carritoSubtotalTexto) carritoSubtotalTexto.textContent = "$ 0";
@@ -512,28 +629,57 @@ function actualizarCarritoUI() {
     if (carritoCuotasTexto) carritoCuotasTexto.textContent = `o 3 cuotas sin interés de $ ${cuota3.toLocaleString('es-AR')}`;
 }
 
-function enviarPedidoAWhatsApp() {
+window.enviarPedidoAWhatsApp = function() {
     if (carrito.length === 0) return;
 
     const subtotal = carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
     
-    let mensaje = `*¡Hola Fórmula Íntima!* 🌸\nQuiero realizar el siguiente pedido desde la web:\n\n`;
+    let mensaje = `*¡Hola Fórmula Íntima!* 🌸\nQuiero realizar el siguiente pedido desde la tienda online:\n\n`;
 
     carrito.forEach((item, index) => {
         const totalPorItem = (item.precio * item.cantidad).toLocaleString('es-AR');
         mensaje += `*${index + 1}.* ${item.titulo}\n`;
         mensaje += `   • Cantidad: ${item.cantidad}\n`;
-        mensaje += `   • Precio: $${totalPorItem}\n\n`;
+        mensaje += `   • Subtotal: $${totalPorItem}\n\n`;
     });
 
     mensaje += `----------------------------\n`;
-    mensaje += `*Total a abonar: $${subtotal.toLocaleString('es-AR')}*\n`;
-    mensaje += `(Consulte por medios de pago y envío discreto) ✨\n\n`;
+    mensaje += `*Total del pedido: $${subtotal.toLocaleString('es-AR')}*\n`;
+    mensaje += `Quedo a la espera para coordinar el pago y el envío discreto. ✨\n\n`;
     mensaje += `¡Muchas gracias!`;
 
     const urlWhatsApp = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensaje)}`;
     window.open(urlWhatsApp, '_blank');
-}
+};
+
+// ==========================================================================
+// 6. CARDS FLOTANTES DEL FOOTER (INFORMACIÓN Y AYUDA)
+// ==========================================================================
+window.abrirModalInfo = function(clave) {
+    const modalInfo = document.getElementById('modal-info');
+    const modalInfoBadge = document.getElementById('modal-info-badge');
+    const modalInfoTitulo = document.getElementById('modal-info-titulo');
+    const modalInfoContenido = document.getElementById('modal-info-contenido');
+
+    const data = DATOS_MODALES_INFO[clave];
+    if (!data || !modalInfo) return;
+
+    if (modalInfoBadge) modalInfoBadge.textContent = data.badge;
+    if (modalInfoTitulo) modalInfoTitulo.textContent = data.titulo;
+    if (modalInfoContenido) modalInfoContenido.innerHTML = data.contenido;
+
+    modalInfo.classList.add('modal-info--activo');
+    modalInfo.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+};
+
+window.cerrarModalInfo = function() {
+    const modalInfo = document.getElementById('modal-info');
+    if (!modalInfo) return;
+    modalInfo.classList.remove('modal-info--activo');
+    modalInfo.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+};
 
 window.toggleFavorito = function(btn) {
     if (btn.textContent === '♡') {
@@ -548,130 +694,33 @@ window.toggleFavorito = function(btn) {
 window.verDetalleRapido = function(id) {
     const prod = todosLosProductos.find(p => p.id === id);
     if (!prod) return;
-    alert(`"${prod.titulo}"\nMarca: ${prod.marca || 'Fórmula Íntima'}\nPrecio: $${Number(prod.precio_oferta).toLocaleString('es-AR')}\n${prod.cuotas || ''}`);
+    abrirModalInfoPersonalizado(prod);
 };
 
-// ==========================================================================
-// 7. CARDS FLOTANTES (MODALES) DE INFORMACIÓN Y AYUDA
-// ==========================================================================
-const DATOS_MODALES_INFO = {
-    "acerca": {
-        badge: "NUESTRA IDENTIDAD",
-        titulo: "Acerca de Fórmula Íntima",
-        contenido: `
-            <p>Fórmula Íntima nace con el propósito de abordar la sexualidad desde una mirada amplia, natural y consciente.</p>
-            <p>Más que ofrecer productos, buscamos crear un espacio donde el placer, el bienestar y la salud sexual convivan con información, acompañamiento y respeto, derribando prejuicios y mitos.</p>
-            <div class="modal-info__destacado">
-                Celebrar la diversidad de cuerpos, identidades y talles. El placer es para todes.
-            </div>
-        `
-    },
-    "faq": {
-        badge: "AYUDA FRECUENTE",
-        titulo: "Preguntas Frecuentes",
-        contenido: `
-            <p><strong>¿El envío es realmente discreto?</strong><br>
-            Totalmente. Los paquetes no tienen logos, nombres del rubro ni alusión a sex shop. Llegan en cajas o bolsas neutras y precintadas.</p>
-            <p><strong>¿Cómo coordino el pago y la entrega?</strong><br>
-            Al presionar "Iniciar compra" en el carrito, se genera un mensaje detallado con tus artículos y te deriva directo a nuestro WhatsApp oficial para que te asesoremos personalmente.</p>
-            <p><strong>¿Tienen atención confidencial?</strong><br>
-            Sí, te atendemos de forma 100% personalizada y segura sin intermediarios.</p>
-        `
-    },
-    "envios": {
-        badge: "LOGÍSTICA Y ENTREGA",
-        titulo: "Formas de Envío",
-        contenido: `
-            <p>Realizamos envíos a todo el país garantizando la máxima confidencialidad:</p>
-            <ul>
-                <li><strong>Andreani a domicilio o sucursal:</strong> Seguimiento online y empaque neutro sin identificación del rubro.</li>
-                <li><strong>Envíos express en el día:</strong> Por mensajería privada en CABA y GBA coordinando horario por WhatsApp.</li>
-            </ul>
-            <div class="modal-info__destacado">
-                📦 Empaque 100% discreto: nadie sabe lo que hay dentro de la caja.
-            </div>
-        `
-    },
-    "pagos": {
-        badge: "MEDIOS DE PAGO",
-        titulo: "Formas de Pago",
-        contenido: `
-            <p>Podés abonar como te resulte más cómodo:</p>
-            <ul>
-                <li><strong>Transferencia Bancaria:</strong> Descuento extra exclusivo sobre el total de tu pedido.</li>
-                <li><strong>Mercado Pago:</strong> Dinero en cuenta, tarjetas de débito y crédito.</li>
-                <li><strong>Cuotas sin interés:</strong> Disponibles según las promociones vigentes.</li>
-            </ul>
-            <p>Al confirmar tu compra por WhatsApp, te enviamos el link de pago o los datos de la cuenta de manera inmediata.</p>
-        `
-    },
-    "como-comprar": {
-        badge: "GUÍA DE COMPRA",
-        titulo: "¿Cómo comprar en la tienda?",
-        contenido: `
-            <p>El proceso es simple, guiado y 100% seguro a través de WhatsApp:</p>
-            <ol>
-                <li><strong>Elegí tus productos:</strong> Navegá el catálogo y agregá los artículos que desees al carrito.</li>
-                <li><strong>Revisá tu pedido:</strong> En el carrito lateral podés ajustar cantidades y verificar el total.</li>
-                <li><strong>Iniciá la compra:</strong> Hacé clic en el botón <em>"Iniciar compra"</em>.</li>
-                <li><strong>Confirmá por WhatsApp:</strong> Se abrirá la conversación con el detalle exacto de tu pedido armado para que coordinemos el pago y el envío discreto.</li>
-            </ol>
-        `
-    },
-    "devoluciones": {
-        badge: "GARANTÍA Y CUIDADO",
-        titulo: "Políticas de Devolución",
-        contenido: `
-            <p>Por normativas de salud, bioseguridad e higiene en productos de uso íntimo y lencería, solo se aceptan cambios o devoluciones por <strong>fallas de fabricación</strong> dentro de los plazos establecidos.</p>
-            <p>Todos los productos electrónicos son revisados antes de su despacho. En caso de reclamo o ejercicio del botón de arrepentimiento legal, contactanos directamente por WhatsApp con tu número de orden.</p>
-        `
-    }
-};
+function abrirModalInfoPersonalizado(prod) {
+    const modalInfo = document.getElementById('modal-info');
+    const modalInfoBadge = document.getElementById('modal-info-badge');
+    const modalInfoTitulo = document.getElementById('modal-info-titulo');
+    const modalInfoContenido = document.getElementById('modal-info-contenido');
+    if (!modalInfo) return;
 
-// Eventos de apertura y cierre de las Cards Flotantes
-const modalInfo = document.getElementById('modal-info');
-const modalInfoOverlay = document.getElementById('modal-info-overlay');
-const modalInfoCerrar = document.getElementById('modal-info-cerrar');
-const modalInfoBtnOk = document.getElementById('modal-info-btn-ok');
-const modalInfoBadge = document.getElementById('modal-info-badge');
-const modalInfoTitulo = document.getElementById('modal-info-titulo');
-const modalInfoContenido = document.getElementById('modal-info-contenido');
-
-function abrirModalInfo(clave) {
-    const data = DATOS_MODALES_INFO[clave];
-    if (!data || !modalInfo) return;
-
-    modalInfoBadge.textContent = data.badge;
-    modalInfoTitulo.textContent = data.titulo;
-    modalInfoContenido.innerHTML = data.contenido;
+    modalInfoBadge.textContent = prod.marca || 'FÓRMULA ÍNTIMA';
+    modalInfoTitulo.textContent = prod.titulo;
+    modalInfoContenido.innerHTML = `
+        <div style="text-align:center; margin-bottom:1rem; background:#F4E4D9; padding:1rem; border-radius:6px;">
+            <img src="${prod.imagen_url}" alt="${prod.titulo}" style="max-height:200px; margin:0 auto; object-fit:contain;">
+        </div>
+        <p style="font-size:1.4rem; font-weight:800; color:#6D1D26; margin-bottom:0.3rem;">
+            $${Number(prod.precio_oferta).toLocaleString('es-AR')}
+        </p>
+        ${prod.cuotas ? `<p style="font-size:0.85rem; color:#666;">${prod.cuotas}</p>` : ''}
+        ${prod.precio_transferencia ? `<div class="modal-info__destacado">$${Number(prod.precio_transferencia).toLocaleString('es-AR')} abonando por Transferencia Bancaria</div>` : ''}
+        <button type="button" onclick="cerrarModalInfo(); agregarAlCarrito('${prod.id}');" style="width:100%; padding:0.9rem; background:#40171F; color:#FFF8ED; border:none; border-radius:4px; font-weight:700; cursor:pointer; margin-top:0.5rem;">
+            Agregar al carrito
+        </button>
+    `;
 
     modalInfo.classList.add('modal-info--activo');
     modalInfo.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
 }
-
-function cerrarModalInfo() {
-    if (!modalInfo) return;
-    modalInfo.classList.remove('modal-info--activo');
-    modalInfo.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-}
-
-// Conectar botones del footer
-document.querySelectorAll('.pie-pagina__enlace-modal').forEach(boton => {
-    boton.addEventListener('click', () => {
-        const modalClave = boton.getAttribute('data-modal');
-        abrirModalInfo(modalClave);
-    });
-});
-
-if (modalInfoCerrar) modalInfoCerrar.addEventListener('click', cerrarModalInfo);
-if (modalInfoOverlay) modalInfoOverlay.addEventListener('click', cerrarModalInfo);
-if (modalInfoBtnOk) modalInfoBtnOk.addEventListener('click', cerrarModalInfo);
-
-// Cerrar con la tecla ESC
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalInfo && modalInfo.classList.contains('modal-info--activo')) {
-        cerrarModalInfo();
-    }
-});
