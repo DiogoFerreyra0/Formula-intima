@@ -714,26 +714,20 @@ window.verDetalleRapido = function(id) {
 // 5. INICIALIZACIÓN AUTOMÁTICA
 // ==========================================================================
 async function iniciarTienda() {
+    // Si la dueña creó o editó productos en admin.html, los carga automáticamente
+    const guardadosEnAdmin = localStorage.getItem('fi_catalogo_admin');
+    if (guardadosEnAdmin) {
+        try {
+            const parseados = JSON.parse(guardadosEnAdmin);
+            if (Array.isArray(parseados) && parseados.length > 0) {
+                todosLosProductos = parseados;
+            }
+        } catch (e) {}
+    }
+
     actualizarCarritoUI();
     actualizarContadoresCategorias();
     window.aplicarFiltros();
-
-    if (clienteSupabase) {
-        try {
-            const { data, error } = await clienteSupabase
-                .from('productos')
-                .select('*')
-                .order('created_at', { ascending: false });
-
-            if (!error && data && data.length > 0) {
-                todosLosProductos = data;
-                actualizarContadoresCategorias();
-                window.aplicarFiltros();
-            }
-        } catch (err) {
-            console.warn("Usando catálogo local de demostración.");
-        }
-    }
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {

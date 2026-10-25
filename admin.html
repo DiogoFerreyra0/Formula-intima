@@ -11,13 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Supabase CDN (v2) -->
+    <!-- Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
-        /* ==========================================================================
-           RESET Y VARIABLES
-           ========================================================================== */
         *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
@@ -48,9 +45,6 @@
             min-height: 100vh;
         }
 
-        /* ==========================================================================
-           BARRA SUPERIOR DE ADMINISTRACIÓN
-           ========================================================================== */
         .barra-admin {
             background-color: var(--color-oscuro);
             color: var(--color-fondo);
@@ -88,7 +82,6 @@
             font-weight: 700;
             padding: 2px 8px;
             border-radius: 4px;
-            letter-spacing: 0.5px;
             text-transform: uppercase;
         }
 
@@ -103,7 +96,6 @@
             color: var(--color-fondo);
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.2s ease;
         }
 
         .barra-admin__enlace-tienda:hover {
@@ -119,7 +111,6 @@
             cursor: pointer;
             font-weight: 700;
             font-size: 0.85rem;
-            transition: all 0.2s ease;
         }
 
         .barra-admin__boton-salir:hover {
@@ -127,9 +118,6 @@
             border-color: var(--color-peligro);
         }
 
-        /* ==========================================================================
-           CONTENEDOR PRINCIPAL
-           ========================================================================== */
         .admin-principal {
             max-width: 1300px;
             margin: 2rem auto;
@@ -157,6 +145,7 @@
             display: flex;
             gap: 1rem;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .boton-primario {
@@ -168,15 +157,10 @@
             font-size: 0.95rem;
             font-weight: 700;
             cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: background-color 0.2s ease, transform 0.1s ease;
         }
 
         .boton-primario:hover {
             background-color: var(--color-oscuro);
-            transform: translateY(-2px);
         }
 
         .input-busqueda {
@@ -186,14 +170,9 @@
             background-color: var(--color-tarjeta);
             font-size: 0.9rem;
             outline: none;
-            width: 250px;
+            width: 260px;
         }
 
-        .input-busqueda:focus {
-            border-color: var(--color-primario);
-        }
-
-        /* Notificación flotante / Toast */
         .toast {
             display: none;
             padding: 1rem 1.5rem;
@@ -215,9 +194,6 @@
             border: 1px solid #F5C6CB;
         }
 
-        /* ==========================================================================
-           TABLA DE PRODUCTOS
-           ========================================================================== */
         .tabla-contenedor {
             background-color: var(--color-tarjeta);
             border: 1px solid var(--color-borde);
@@ -239,17 +215,12 @@
             font-weight: 700;
             padding: 1rem;
             border-bottom: 1px solid var(--color-borde);
-            white-space: nowrap;
         }
 
         .tabla-productos td {
             padding: 1rem;
             border-bottom: 1px solid var(--color-borde);
             vertical-align: middle;
-        }
-
-        .tabla-productos tr:hover {
-            background-color: #FFFDF9;
         }
 
         .miniatura-foto {
@@ -285,7 +256,6 @@
             cursor: pointer;
             font-size: 0.85rem;
             font-weight: 600;
-            transition: all 0.2s ease;
         }
 
         .boton-accion--editar:hover {
@@ -300,16 +270,7 @@
             color: #FFFFFF;
         }
 
-        .mensaje-vacio {
-            text-align: center;
-            padding: 3rem 1rem;
-            color: var(--color-texto-suave);
-            font-size: 1.1rem;
-        }
-
-        /* ==========================================================================
-           MODAL PARA CREAR / EDITAR PRODUCTO
-           ========================================================================== */
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -317,13 +278,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(64, 23, 31, 0.6); /* Borgoña con opacidad */
+            background-color: rgba(64, 23, 31, 0.6);
             backdrop-filter: blur(3px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
             padding: 1rem;
-            overflow-y: auto;
         }
 
         .modal__caja {
@@ -334,7 +294,6 @@
             max-width: 650px;
             max-height: 90vh;
             overflow-y: auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             display: flex;
             flex-direction: column;
         }
@@ -357,16 +316,15 @@
         .modal__cerrar {
             background: none;
             border: none;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            color: var(--color-oscuro);
         }
 
         .formulario-producto {
             padding: 1.5rem;
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
+            gap: 1.1rem;
         }
 
         .formulario-fila {
@@ -387,18 +345,11 @@
             color: var(--color-oscuro);
         }
 
-        .campo-grupo input, .campo-grupo select, .campo-grupo textarea {
+        .campo-grupo input, .campo-grupo select {
             padding: 0.7rem;
             border: 1px solid var(--color-borde);
             border-radius: 4px;
             font-size: 0.9rem;
-            outline: none;
-            background-color: #FAFAFA;
-        }
-
-        .campo-grupo input:focus, .campo-grupo select:focus, .campo-grupo textarea:focus {
-            border-color: var(--color-primario);
-            background-color: #FFFFFF;
         }
 
         .campo-checkbox {
@@ -409,12 +360,6 @@
             cursor: pointer;
             font-weight: 600;
             font-size: 0.9rem;
-        }
-
-        .campo-checkbox input {
-            width: 17px;
-            height: 17px;
-            accent-color: var(--color-primario);
         }
 
         .vista-previa-contenedor {
@@ -450,26 +395,11 @@
             border-radius: 4px;
             cursor: pointer;
             font-weight: 700;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 600px) {
-            .formulario-fila {
-                grid-template-columns: 1fr;
-            }
-            .admin-encabezado {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .input-busqueda {
-                width: 100%;
-            }
         }
     </style>
 </head>
 <body>
 
-    <!-- BARRA SUPERIOR -->
     <header class="barra-admin">
         <div class="barra-admin__contenedor">
             <div class="barra-admin__marca">
@@ -477,20 +407,18 @@
                 <span class="barra-admin__badge">Administración</span>
             </div>
             <div class="barra-admin__usuario">
-                <span id="usuario-email">Cargando usuario...</span>
-                <a href="index.html" class="barra-admin__enlace-tienda" target="_blank">&nearr; Ver tienda online</a>
+                <span id="usuario-email">Cargando...</span>
+                <a href="index.html" class="barra-admin__enlace-tienda">&nearr; Ir a la tienda online</a>
                 <button id="boton-cerrar-sesion" class="barra-admin__boton-salir">Cerrar sesión</button>
             </div>
         </div>
     </header>
 
-    <!-- ÁREA PRINCIPAL -->
     <main class="admin-principal">
-        
         <div class="admin-encabezado">
             <div>
                 <h1 class="admin-encabezado__titulo">Gestión de Catálogo</h1>
-                <p style="color: var(--color-texto-suave); font-size: 0.9rem;">Creá, modificá o eliminá los productos que se muestran en la web.</p>
+                <p style="color: var(--color-texto-suave); font-size: 0.9rem;">Creá, modificá o eliminá los productos que se muestran en la tienda.</p>
             </div>
             <div class="admin-encabezado__acciones">
                 <input type="text" id="filtro-busqueda" class="input-busqueda" placeholder="Buscar por título o marca...">
@@ -498,10 +426,8 @@
             </div>
         </div>
 
-        <!-- Notificaciones -->
         <div id="toast-mensaje" class="toast"></div>
 
-        <!-- Tabla de Productos -->
         <div class="tabla-contenedor">
             <table class="tabla-productos">
                 <thead>
@@ -516,33 +442,27 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="cuerpo-tabla-productos">
-                    <tr>
-                        <td colspan="8" class="mensaje-vacio">Cargando productos de la base de datos...</td>
-                    </tr>
-                </tbody>
+                <tbody id="cuerpo-tabla-productos"></tbody>
             </table>
         </div>
     </main>
 
-    <!-- MODAL DE CREAR / EDITAR PRODUCTO -->
+    <!-- MODAL CREAR / EDITAR -->
     <div id="modal-producto" class="modal">
         <div class="modal__caja">
             <div class="modal__cabecera">
                 <h2 id="modal-titulo" class="modal__titulo">Nuevo Producto</h2>
-                <button id="modal-boton-cerrar" class="modal__cerrar">&times;</button>
+                <button type="button" id="modal-boton-cerrar" class="modal__cerrar">&times;</button>
             </div>
 
             <form id="formulario-producto" class="formulario-producto">
                 <input type="hidden" id="producto-id">
 
-                <!-- Título -->
                 <div class="campo-grupo">
                     <label for="campo-titulo">Título del producto *</label>
                     <input type="text" id="campo-titulo" required placeholder="Ej: Gel Lubricante Sexitive Dante al Infierno 500ml">
                 </div>
 
-                <!-- Marca y Categoría -->
                 <div class="formulario-fila">
                     <div class="campo-grupo">
                         <label for="campo-marca">Marca *</label>
@@ -553,7 +473,6 @@
                             <option value="Lovense">Lovense</option>
                             <option value="Svakom">Svakom</option>
                             <option value="Fórmula Íntima">Fórmula Íntima</option>
-                            <option value="Otra">Otra</option>
                         </select>
                     </div>
                     <div class="campo-grupo">
@@ -568,23 +487,41 @@
                     </div>
                 </div>
 
-                <!-- Precios -->
                 <div class="formulario-fila">
                     <div class="campo-grupo">
-                        <label for="campo-precio-tachado">Precio original tachado ($)</label>
-                        <input type="number" id="campo-precio-tachado" placeholder="Ej: 34999" step="0.01">
+                        <label for="campo-color">Color</label>
+                        <select id="campo-color">
+                            <option value="negro">Negro</option>
+                            <option value="rojo">Rojo</option>
+                            <option value="rosa">Rosa</option>
+                            <option value="piel">Piel</option>
+                        </select>
                     </div>
                     <div class="campo-grupo">
-                        <label for="campo-precio-oferta">Precio final de venta ($) *</label>
-                        <input type="number" id="campo-precio-oferta" required placeholder="Ej: 27999" step="0.01">
+                        <label for="campo-modelo">Modelo</label>
+                        <select id="campo-modelo">
+                            <option value="liso">Liso</option>
+                            <option value="ondas">Ondas</option>
+                            <option value="delfin">Delfín</option>
+                        </select>
                     </div>
                 </div>
 
-                <!-- Transferencia y Cuotas -->
+                <div class="formulario-fila">
+                    <div class="campo-grupo">
+                        <label for="campo-precio-tachado">Precio original tachado ($)</label>
+                        <input type="number" id="campo-precio-tachado" placeholder="Ej: 34999">
+                    </div>
+                    <div class="campo-grupo">
+                        <label for="campo-precio-oferta">Precio final de venta ($) *</label>
+                        <input type="number" id="campo-precio-oferta" required placeholder="Ej: 27999">
+                    </div>
+                </div>
+
                 <div class="formulario-fila">
                     <div class="campo-grupo">
                         <label for="campo-precio-transferencia">Precio por transferencia ($)</label>
-                        <input type="number" id="campo-precio-transferencia" placeholder="Ej: 25199" step="0.01">
+                        <input type="number" id="campo-precio-transferencia" placeholder="Ej: 25199">
                     </div>
                     <div class="campo-grupo">
                         <label for="campo-cuotas">Texto de cuotas</label>
@@ -592,7 +529,6 @@
                     </div>
                 </div>
 
-                <!-- Badges y Opciones -->
                 <div class="formulario-fila">
                     <div class="campo-grupo">
                         <label for="campo-badge-descuento">Badge de descuento</label>
@@ -606,17 +542,15 @@
                     </div>
                 </div>
 
-                <!-- Foto del Producto -->
                 <div class="campo-grupo">
-                    <label for="campo-foto-archivo">Subir Foto del producto (PNG o JPG)</label>
+                    <label for="campo-foto-archivo">Subir Foto desde tu computadora</label>
                     <input type="file" id="campo-foto-archivo" accept="image/*">
-                    
-                    <label for="campo-foto-url" style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--color-texto-suave);">O pegar enlace directo de imagen (URL):</label>
-                    <input type="url" id="campo-foto-url" placeholder="https://ejemplo.com/foto.jpg">
+                    <label for="campo-foto-url" style="margin-top:0.4rem; font-size:0.8rem; color:#666;">O pegar enlace de imagen (URL):</label>
+                    <input type="url" id="campo-foto-url" placeholder="https://...">
 
                     <div class="vista-previa-contenedor">
                         <img id="img-vista-previa" class="vista-previa-img" alt="Vista previa">
-                        <span id="texto-vista-previa" style="font-size: 0.8rem; color: var(--color-texto-suave);">Sin foto seleccionada</span>
+                        <span id="texto-vista-previa" style="font-size: 0.8rem; color: #666;">Sin foto seleccionada</span>
                     </div>
                 </div>
 
@@ -628,311 +562,273 @@
         </div>
     </div>
 
-    <!-- SCRIPT LOGICA Y SUPABASE -->
     <script>
-        // ==========================================================================
-        // 1. CONFIGURACIÓN DE SUPABASE (Las mismas credenciales de login.html)
-        // ==========================================================================
         const SUPABASE_URL = "https://TU_PROYECTO.supabase.co";
         const SUPABASE_ANON_KEY = "TU_CLAVE_ANON_PUBLICA";
 
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const clienteSupabase = (typeof window.supabase !== 'undefined' && SUPABASE_URL !== "https://TU_PROYECTO.supabase.co")
+            ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+            : null;
 
-        // Elementos DOM
-        const usuarioEmailSpan = document.getElementById('usuario-email');
-        const botonCerrarSesion = document.getElementById('boton-cerrar-sesion');
-        const cuerpoTabla = document.getElementById('cuerpo-tabla-productos');
-        const toastMensaje = document.getElementById('toast-mensaje');
-        const filtroBusqueda = document.getElementById('filtro-busqueda');
-
-        // Modal y Formulario
-        const modal = document.getElementById('modal-producto');
-        const modalTitulo = document.getElementById('modal-titulo');
-        const botonNuevo = document.getElementById('boton-nuevo-producto');
-        const botonCerrarModal = document.getElementById('modal-boton-cerrar');
-        const botonCancelarModal = document.getElementById('modal-boton-cancelar');
-        const formProducto = document.getElementById('formulario-producto');
-        const botonGuardar = document.getElementById('boton-guardar-producto');
-
-        // Campos Formulario
-        const inputId = document.getElementById('producto-id');
-        const inputTitulo = document.getElementById('campo-titulo');
-        const inputMarca = document.getElementById('campo-marca');
-        const inputCategoria = document.getElementById('campo-categoria');
-        const inputPrecioTachado = document.getElementById('campo-precio-tachado');
-        const inputPrecioOferta = document.getElementById('campo-precio-oferta');
-        const inputPrecioTransferencia = document.getElementById('campo-precio-transferencia');
-        const inputCuotas = document.getElementById('campo-cuotas');
-        const inputBadgeDescuento = document.getElementById('campo-badge-descuento');
-        const inputEnvioGratis = document.getElementById('campo-envio-gratis');
-        const inputFotoArchivo = document.getElementById('campo-foto-archivo');
-        const inputFotoUrl = document.getElementById('campo-foto-url');
-        const imgVistaPrevia = document.getElementById('img-vista-previa');
-        const textoVistaPrevia = document.getElementById('texto-vista-previa');
+        const CATALOGO_POR_DEFECTO = [
+            {
+                id: "1",
+                titulo: "Gel Lubricante Sexitive Dante al Infierno 500ml",
+                marca: "Sexitive",
+                categoria: "cosmetica",
+                color: "rojo",
+                modelo: "liso",
+                precio_tachado: 34999,
+                precio_oferta: 27999,
+                precio_transferencia: 25199,
+                cuotas: "3 cuotas sin interés de $9.333",
+                badge_descuento: "20% OFF",
+                envio_gratis: true,
+                imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Dante+al+Infierno"
+            },
+            {
+                id: "2",
+                titulo: "Spray Retardante Sexitive Héroe Extra Time 20ml",
+                marca: "Sexitive",
+                categoria: "cosmetica",
+                color: "negro",
+                modelo: "liso",
+                precio_tachado: 29500,
+                precio_oferta: 23600,
+                precio_transferencia: 21240,
+                cuotas: "3 cuotas sin interés de $7.866",
+                badge_descuento: "20% OFF",
+                envio_gratis: true,
+                imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Heroe+Spray"
+            },
+            {
+                id: "4",
+                titulo: "Succionador de Clítoris — 10 funciones de pulso",
+                marca: "Satisfyer",
+                categoria: "sextoys",
+                color: "rosa",
+                modelo: "ondas",
+                precio_tachado: 89900,
+                precio_oferta: 71920,
+                precio_transferencia: 64728,
+                cuotas: "3 cuotas sin interés de $23.973",
+                badge_descuento: "20% OFF",
+                envio_gratis: true,
+                imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Succionador+Satisfyer"
+            },
+            {
+                id: "5",
+                titulo: "Body de Encaje Línea Inclusiva Real",
+                marca: "Fórmula Íntima",
+                categoria: "lenceria",
+                color: "negro",
+                modelo: "liso",
+                precio_tachado: 62000,
+                precio_oferta: 52700,
+                precio_transferencia: 47430,
+                cuotas: "3 cuotas sin interés de $17.566",
+                badge_descuento: "15% OFF",
+                envio_gratis: true,
+                imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Body+Encaje+Inclusivo"
+            }
+        ];
 
         let productosLocales = [];
+        let imagenBase64Temporal = "";
 
-        // ==========================================================================
-        // 2. SEGURIDAD: VERIFICAR SESIÓN ACTIVA
-        // ==========================================================================
-        async function protegerRuta() {
-            const { data: { session } } = await supabase.auth.getSession();
-            if (!session) {
-                // Si no hay login, vuelve a login.html
-                window.location.href = 'login.html';
-                return;
+        const usuarioEmailSpan = document.getElementById('usuario-email');
+        const cuerpoTabla = document.getElementById('cuerpo-tabla-productos');
+        const toastMensaje = document.getElementById('toast-mensaje');
+        const modal = document.getElementById('modal-producto');
+        const formProducto = document.getElementById('formulario-producto');
+
+        // 1. Verificar sesión
+        async function verificarAcceso() {
+            if (clienteSupabase) {
+                const { data: { session } } = await clienteSupabase.auth.getSession();
+                if (!session) { window.location.href = 'login.html'; return; }
+                usuarioEmailSpan.textContent = session.user.email;
+            } else {
+                const sesionLocal = JSON.parse(localStorage.getItem('fi_admin_sesion'));
+                if (!sesionLocal) { window.location.href = 'login.html'; return; }
+                usuarioEmailSpan.textContent = sesionLocal.email + " (Modo Local)";
             }
-            usuarioEmailSpan.textContent = session.user.email;
             cargarProductos();
         }
-        protegerRuta();
+        verificarAcceso();
 
-        // Cerrar Sesión
-        botonCerrarSesion.addEventListener('click', async () => {
-            await supabase.auth.signOut();
+        document.getElementById('boton-cerrar-sesion').addEventListener('click', async () => {
+            if (clienteSupabase) await clienteSupabase.auth.signOut();
+            localStorage.removeItem('fi_admin_sesion');
             window.location.href = 'login.html';
         });
 
-        // ==========================================================================
-        // 3. CARGAR PRODUCTOS (READ)
-        // ==========================================================================
+        // 2. Cargar productos
         async function cargarProductos() {
-            try {
-                const { data, error } = await supabase
-                    .from('productos')
-                    .select('*')
-                    .order('created_at', { ascending: false });
-
-                if (error) throw error;
-
+            if (clienteSupabase) {
+                const { data } = await clienteSupabase.from('productos').select('*').order('created_at', { ascending: false });
                 productosLocales = data || [];
-                renderizarTabla(productosLocales);
-
-            } catch (err) {
-                mostrarNotificacion("Error al cargar productos: " + err.message, "error");
-                cuerpoTabla.innerHTML = `<tr><td colspan="8" class="mensaje-vacio">No se pudieron cargar los productos. Comprueba tu tabla en Supabase.</td></tr>`;
+            } else {
+                const guardados = localStorage.getItem('fi_catalogo_admin');
+                if (guardados) {
+                    productosLocales = JSON.parse(guardados);
+                } else {
+                    productosLocales = [...CATALOGO_POR_DEFECTO];
+                    localStorage.setItem('fi_catalogo_admin', JSON.stringify(productosLocales));
+                }
             }
+            renderizarTabla(productosLocales);
         }
 
         function renderizarTabla(lista) {
             if (lista.length === 0) {
-                cuerpoTabla.innerHTML = `<tr><td colspan="8" class="mensaje-vacio">No hay productos registrados todavía. ¡Creá el primero!</td></tr>`;
+                cuerpoTabla.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:2.5rem;">No hay productos cargados. ¡Creá el primero!</td></tr>`;
                 return;
             }
 
-            cuerpoTabla.innerHTML = lista.map(p => {
-                const foto = p.imagen_url || 'https://via.placeholder.com/60x60/F4E4D9/40171F?text=Foto';
-                const envioBadge = p.envio_gratis ? `<span class="badge-tabla" style="background:#D4EDDA; color:#155724;">Envío gratis</span>` : '';
-                const descBadge = p.badge_descuento ? `<span class="badge-tabla">${p.badge_descuento}</span>` : '';
-
-                return `
-                    <tr>
-                        <td>
-                            <img src="${foto}" alt="${p.titulo}" class="miniatura-foto">
-                        </td>
-                        <td>
-                            <strong>${p.titulo}</strong>
-                            ${p.cuotas ? `<div style="font-size:0.75rem; color:#777;">${p.cuotas}</div>` : ''}
-                        </td>
-                        <td>${p.marca || '-'}</td>
-                        <td><span class="badge-tabla">${p.categoria}</span></td>
-                        <td><strong>$${Number(p.precio_oferta).toLocaleString('es-AR')}</strong></td>
-                        <td>${p.precio_transferencia ? `$${Number(p.precio_transferencia).toLocaleString('es-AR')}` : '-'}</td>
-                        <td>${descBadge} ${envioBadge}</td>
-                        <td>
-                            <div class="acciones-fila">
-                                <button class="boton-accion boton-accion--editar" onclick="abrirModalEditar('${p.id}')">✏️ Editar</button>
-                                <button class="boton-accion boton-accion--borrar" onclick="borrarProducto('${p.id}', '${p.titulo}')">🗑️</button>
-                            </div>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
+            cuerpoTabla.innerHTML = lista.map(p => `
+                <tr>
+                    <td><img src="${p.imagen_url || 'https://placehold.co/60x60/F4E4D9/6D1D26?text=Foto'}" class="miniatura-foto"></td>
+                    <td><strong>${p.titulo}</strong></td>
+                    <td>${p.marca}</td>
+                    <td><span class="badge-tabla">${p.categoria}</span></td>
+                    <td><strong>$${Number(p.precio_oferta).toLocaleString('es-AR')}</strong></td>
+                    <td>${p.precio_transferencia ? `$${Number(p.precio_transferencia).toLocaleString('es-AR')}` : '-'}</td>
+                    <td>
+                        ${p.badge_descuento ? `<span class="badge-tabla">${p.badge_descuento}</span>` : ''}
+                        ${p.envio_gratis ? `<span class="badge-tabla" style="background:#D4EDDA;color:#155724;">Envío gratis</span>` : ''}
+                    </td>
+                    <td>
+                        <div class="acciones-fila">
+                            <button type="button" class="boton-accion boton-accion--editar" onclick="window.abrirModalEditar('${p.id}')">✏️ Editar</button>
+                            <button type="button" class="boton-accion boton-accion--borrar" onclick="window.borrarProducto('${p.id}')">🗑️</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
         }
 
-        // Filtro de búsqueda en tiempo real
-        filtroBusqueda.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-            const filtrados = productosLocales.filter(p => 
-                p.titulo.toLowerCase().includes(query) || 
-                (p.marca && p.marca.toLowerCase().includes(query)) ||
-                (p.categoria && p.categoria.toLowerCase().includes(query))
-            );
+        // Buscador interno del admin
+        document.getElementById('filtro-busqueda').addEventListener('input', (e) => {
+            const q = e.target.value.toLowerCase().trim();
+            const filtrados = productosLocales.filter(p => p.titulo.toLowerCase().includes(q) || p.marca.toLowerCase().includes(q));
             renderizarTabla(filtrados);
         });
 
-        // ==========================================================================
-        // 4. CREAR Y MODIFICAR PRODUCTO (CREATE / UPDATE)
-        // ==========================================================================
-        botonNuevo.addEventListener('click', () => {
+        // 3. Subida de foto desde la PC (convierte a Base64 para funcionar sin servidor)
+        document.getElementById('campo-foto-archivo').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                imagenBase64Temporal = evt.target.result;
+                const img = document.getElementById('img-vista-previa');
+                img.src = imagenBase64Temporal;
+                img.style.display = 'block';
+                document.getElementById('texto-vista-previa').textContent = file.name;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // 4. Abrir y cerrar Modal
+        document.getElementById('boton-nuevo-producto').addEventListener('click', () => {
             formProducto.reset();
-            inputId.value = '';
-            modalTitulo.textContent = "Nuevo Producto";
-            imgVistaPrevia.style.display = 'none';
-            textoVistaPrevia.textContent = 'Sin foto seleccionada';
+            document.getElementById('producto-id').value = '';
+            imagenBase64Temporal = '';
+            document.getElementById('img-vista-previa').style.display = 'none';
+            document.getElementById('modal-titulo').textContent = 'Nuevo Producto';
             modal.style.display = 'flex';
         });
 
-        function cerrarModal() {
-            modal.style.display = 'none';
-        }
-        botonCerrarModal.addEventListener('click', cerrarModal);
-        botonCancelarModal.addEventListener('click', cerrarModal);
+        function cerrarModal() { modal.style.display = 'none'; }
+        document.getElementById('modal-boton-cerrar').addEventListener('click', cerrarModal);
+        document.getElementById('modal-boton-cancelar').addEventListener('click', cerrarModal);
 
-        // Previsualización de imagen (archivo local)
-        inputFotoArchivo.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                imgVistaPrevia.src = URL.createObjectURL(file);
-                imgVistaPrevia.style.display = 'block';
-                textoVistaPrevia.textContent = file.name;
-            }
-        });
-
-        // Previsualización de imagen (enlace URL)
-        inputFotoUrl.addEventListener('input', (e) => {
-            if (e.target.value.trim() !== '') {
-                imgVistaPrevia.src = e.target.value;
-                imgVistaPrevia.style.display = 'block';
-                textoVistaPrevia.textContent = 'Imagen por URL';
-            }
-        });
-
-        // Abrir Modal para Editar
         window.abrirModalEditar = function(id) {
-            const prod = productosLocales.find(p => p.id === id);
+            const prod = productosLocales.find(p => String(p.id) === String(id));
             if (!prod) return;
 
-            inputId.value = prod.id;
-            inputTitulo.value = prod.titulo;
-            inputMarca.value = prod.marca || 'Sexitive';
-            inputCategoria.value = prod.categoria || 'cosmetica';
-            inputPrecioTachado.value = prod.precio_tachado || '';
-            inputPrecioOferta.value = prod.precio_oferta;
-            inputPrecioTransferencia.value = prod.precio_transferencia || '';
-            inputCuotas.value = prod.cuotas || '';
-            inputBadgeDescuento.value = prod.badge_descuento || '';
-            inputEnvioGratis.checked = prod.envio_gratis ?? true;
-            inputFotoUrl.value = prod.imagen_url || '';
+            document.getElementById('producto-id').value = prod.id;
+            document.getElementById('campo-titulo').value = prod.titulo;
+            document.getElementById('campo-marca').value = prod.marca || 'Sexitive';
+            document.getElementById('campo-categoria').value = prod.categoria || 'cosmetica';
+            document.getElementById('campo-color').value = prod.color || 'negro';
+            document.getElementById('campo-modelo').value = prod.modelo || 'liso';
+            document.getElementById('campo-precio-tachado').value = prod.precio_tachado || '';
+            document.getElementById('campo-precio-oferta').value = prod.precio_oferta;
+            document.getElementById('campo-precio-transferencia').value = prod.precio_transferencia || '';
+            document.getElementById('campo-cuotas').value = prod.cuotas || '';
+            document.getElementById('campo-badge-descuento').value = prod.badge_descuento || '';
+            document.getElementById('campo-envio-gratis').checked = !!prod.envio_gratis;
+            document.getElementById('campo-foto-url').value = (prod.imagen_url && !prod.imagen_url.startsWith('data:')) ? prod.imagen_url : '';
+            imagenBase64Temporal = prod.imagen_url || '';
 
+            const img = document.getElementById('img-vista-previa');
             if (prod.imagen_url) {
-                imgVistaPrevia.src = prod.imagen_url;
-                imgVistaPrevia.style.display = 'block';
-                textoVistaPrevia.textContent = 'Foto actual';
+                img.src = prod.imagen_url;
+                img.style.display = 'block';
             } else {
-                imgVistaPrevia.style.display = 'none';
-                textoVistaPrevia.textContent = 'Sin foto';
+                img.style.display = 'none';
             }
 
-            modalTitulo.textContent = "Modificar Producto";
+            document.getElementById('modal-titulo').textContent = 'Modificar Producto';
             modal.style.display = 'flex';
         };
 
-        // Guardar Formulario
+        // 5. Guardar Producto
         formProducto.addEventListener('submit', async (e) => {
             e.preventDefault();
-            botonGuardar.disabled = true;
-            botonGuardar.textContent = "Guardando...";
+            const idExistente = document.getElementById('producto-id').value;
+            const urlEscrita = document.getElementById('campo-foto-url').value.trim();
+            const imagenFinal = imagenBase64Temporal || urlEscrita || 'https://placehold.co/400x400/F4E4D9/6D1D26?text=Nuevo+Producto';
 
-            try {
-                let urlImagenFinal = inputFotoUrl.value.trim();
+            const nuevoProd = {
+                id: idExistente || String(Date.now()),
+                titulo: document.getElementById('campo-titulo').value.trim(),
+                marca: document.getElementById('campo-marca').value,
+                categoria: document.getElementById('campo-categoria').value,
+                color: document.getElementById('campo-color').value,
+                modelo: document.getElementById('campo-modelo').value,
+                precio_tachado: document.getElementById('campo-precio-tachado').value ? parseFloat(document.getElementById('campo-precio-tachado').value) : null,
+                precio_oferta: parseFloat(document.getElementById('campo-precio-oferta').value),
+                precio_transferencia: document.getElementById('campo-precio-transferencia').value ? parseFloat(document.getElementById('campo-precio-transferencia').value) : null,
+                cuotas: document.getElementById('campo-cuotas').value.trim() || null,
+                badge_descuento: document.getElementById('campo-badge-descuento').value.trim() || null,
+                envio_gratis: document.getElementById('campo-envio-gratis').checked,
+                imagen_url: imagenFinal
+            };
 
-                // Si seleccionó un archivo nuevo, lo sube al bucket 'productos-fotos'
-                if (inputFotoArchivo.files.length > 0) {
-                    const archivo = inputFotoArchivo.files[0];
-                    const extension = archivo.name.split('.').pop();
-                    const nombreArchivo = `${Date.now()}_${Math.random().toString(36).substring(7)}.${extension}`;
-
-                    const { data: uploadData, error: uploadError } = await supabase.storage
-                        .from('productos-fotos')
-                        .upload(nombreArchivo, archivo);
-
-                    if (uploadError) throw uploadError;
-
-                    // Obtiene la URL pública directa
-                    const { data: publicUrlData } = supabase.storage
-                        .from('productos-fotos')
-                        .getPublicUrl(nombreArchivo);
-
-                    urlImagenFinal = publicUrlData.publicUrl;
-                }
-
-                const datosProducto = {
-                    titulo: inputTitulo.value.trim(),
-                    marca: inputMarca.value,
-                    categoria: inputCategoria.value,
-                    precio_tachado: inputPrecioTachado.value ? parseFloat(inputPrecioTachado.value) : null,
-                    precio_oferta: parseFloat(inputPrecioOferta.value),
-                    precio_transferencia: inputPrecioTransferencia.value ? parseFloat(inputPrecioTransferencia.value) : null,
-                    cuotas: inputCuotas.value.trim() || null,
-                    badge_descuento: inputBadgeDescuento.value.trim() || null,
-                    envio_gratis: inputEnvioGratis.checked,
-                    imagen_url: urlImagenFinal || null
-                };
-
-                const idExistente = inputId.value;
-
-                if (idExistente) {
-                    // MODIFICAR (UPDATE)
-                    const { error } = await supabase
-                        .from('productos')
-                        .update(datosProducto)
-                        .eq('id', idExistente);
-
-                    if (error) throw error;
-                    mostrarNotificacion("¡Producto modificado con éxito!", "exito");
-                } else {
-                    // CREAR (INSERT)
-                    const { error } = await supabase
-                        .from('productos')
-                        .insert([datosProducto]);
-
-                    if (error) throw error;
-                    mostrarNotificacion("¡Producto creado con éxito!", "exito");
-                }
-
-                cerrarModal();
-                cargarProductos();
-
-            } catch (err) {
-                mostrarNotificacion("Error al guardar: " + err.message, "error");
-            } finally {
-                botonGuardar.disabled = false;
-                botonGuardar.textContent = "Guardar Producto";
+            if (idExistente) {
+                const idx = productosLocales.findIndex(p => String(p.id) === String(idExistente));
+                if (idx !== -1) productosLocales[idx] = nuevoProd;
+                mostrarNotificacion("¡Producto actualizado! Ya se ve reflejado en la tienda.");
+            } else {
+                productosLocales.unshift(nuevoProd);
+                mostrarNotificacion("¡Producto creado con éxito! Ya aparece en la tienda.");
             }
+
+            localStorage.setItem('fi_catalogo_admin', JSON.stringify(productosLocales));
+            cerrarModal();
+            renderizarTabla(productosLocales);
         });
 
-        // ==========================================================================
-        // 5. BORRAR PRODUCTO (DELETE)
-        // ==========================================================================
-        window.borrarProducto = async function(id, titulo) {
-            const confirmar = confirm(`¿Estás segura de que querés borrar el producto:\n"${titulo}"?`);
-            if (!confirmar) return;
+        // 6. Borrar Producto
+        window.borrarProducto = function(id) {
+            const prod = productosLocales.find(p => String(p.id) === String(id));
+            if (!prod) return;
+            if (!confirm(`¿Estás segura de borrar "${prod.titulo}"?`)) return;
 
-            try {
-                const { error } = await supabase
-                    .from('productos')
-                    .delete()
-                    .eq('id', id);
-
-                if (error) throw error;
-
-                mostrarNotificacion(`Producto "${titulo}" eliminado.`, "exito");
-                cargarProductos();
-
-            } catch (err) {
-                mostrarNotificacion("Error al eliminar: " + err.message, "error");
-            }
+            productosLocales = productosLocales.filter(p => String(p.id) !== String(id));
+            localStorage.setItem('fi_catalogo_admin', JSON.stringify(productosLocales));
+            renderizarTabla(productosLocales);
+            mostrarNotificacion("Producto eliminado.");
         };
 
-        // Utilidad Notificaciones
-        function mostrarNotificacion(texto, tipo = "exito") {
+        function mostrarNotificacion(texto) {
             toastMensaje.textContent = texto;
-            toastMensaje.className = `toast toast--${tipo}`;
-            toastMensaje.style.display = 'block';
-            setTimeout(() => {
-                toastMensaje.style.display = 'none';
-            }, 4000);
+            toastMensaje.className = "toast toast--exito";
+            toastMensaje.style.display = "block";
+            setTimeout(() => { toastMensaje.style.display = "none"; }, 3500);
         }
     </script>
 </body>
