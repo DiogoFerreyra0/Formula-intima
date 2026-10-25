@@ -12,16 +12,8 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.formulaintima.com.ar">
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.formulaintima.com.ar">
-    <meta property="og:title" content="Fórmula Íntima | Placer, bienestar e información">
-    <meta property="og:description" content="Productos elegidos con cuidado, asesoramiento profesional y educación para vivir tu intimidad con libertad.">
-    <meta property="og:image" content="https://www.formulaintima.com.ar/img/hero-modelo-real.jpg">
-    <meta property="og:locale" content="es_AR">
-
     <!-- Estilos CSS -->
-    <link rel="stylesheet" href="./style/style.css?v=5">
+    <link rel="stylesheet" href="./style/style.css?v=6">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +26,6 @@
          CABECERA / HEADER
          ========================================== -->
     <header class="cabecera" itemscope itemtype="https://schema.org/WPHeader">
-        <!-- Barra Superior de Anuncios -->
         <div class="cabecera__anuncio">
             <div class="cabecera__contenedor">
                 <p class="cabecera__anuncio-texto">
@@ -43,31 +34,27 @@
             </div>
         </div>
 
-        <!-- Barra Principal -->
         <div class="cabecera__principal">
             <div class="cabecera__contenedor cabecera__contenedor--flex">
                 
-                <!-- Logotipo -->
                 <div class="cabecera__logo-contenedor">
                     <a href="index.html" class="cabecera__logo-enlace" aria-label="Fórmula Íntima - Inicio">
                         <h1 class="cabecera__logo-texto">Fórmula Íntima</h1>
                     </a>
                 </div>
 
-                <!-- Buscador -->
                 <div class="cabecera__buscador">
-                    <form class="buscador" onsubmit="event.preventDefault(); aplicarFiltros();" role="search">
+                    <form class="buscador" onsubmit="event.preventDefault(); window.aplicarFiltros();" role="search">
                         <label for="input-buscar" class="sr-only">Buscar productos</label>
-                        <input type="search" id="input-buscar" name="q" class="buscador__input" placeholder="Buscar productos...">
+                        <input type="search" id="input-buscar" name="q" class="buscador__input" placeholder="Buscar productos..." oninput="window.aplicarFiltros()">
                         <button type="submit" class="buscador__boton" aria-label="Buscar">
                             <span class="buscador__icono" aria-hidden="true">🔍</span>
                         </button>
                     </form>
                 </div>
 
-                <!-- Botón Mi Carrito -->
                 <div class="cabecera__acciones">
-                    <button type="button" class="carrito-enlace" id="boton-abrir-carrito" onclick="abrirDrawerCarrito()" aria-label="Ver carrito de compras">
+                    <button type="button" class="carrito-enlace" id="boton-abrir-carrito" onclick="window.abrirDrawerCarrito()" aria-label="Ver carrito de compras">
                         <span class="carrito-enlace__icono" aria-hidden="true">🛒</span>
                         <span class="carrito-enlace__texto">Mi carrito</span>
                         <span class="carrito-enlace__contador" id="carrito-badge-contador">0</span>
@@ -77,32 +64,32 @@
             </div>
         </div>
 
-        <!-- Menú de Categorías Conectado a los Filtros -->
+        <!-- Menú Principal Conectado a los Filtros -->
         <nav class="navegacion-principal" aria-label="Menú principal de categorías">
             <div class="cabecera__contenedor">
                 <ul class="navegacion-principal__lista">
                     <li class="navegacion-principal__item">
-                        <button type="button" class="navegacion-principal__enlace" onclick="filtrarDesdeEnlace('sextoys')">
+                        <button type="button" class="navegacion-principal__enlace" onclick="window.filtrarDesdeEnlace('sextoys')">
                             Sex Shop <span class="navegacion-principal__flecha" aria-hidden="true">▾</span>
                         </button>
                     </li>
                     <li class="navegacion-principal__item">
-                        <button type="button" class="navegacion-principal__enlace" onclick="filtrarDesdeEnlace('lenceria')">
+                        <button type="button" class="navegacion-principal__enlace" onclick="window.filtrarDesdeEnlace('lenceria')">
                             Lencería y ropa <span class="navegacion-principal__flecha" aria-hidden="true">▾</span>
                         </button>
                     </li>
                     <li class="navegacion-principal__item">
-                        <button type="button" class="navegacion-principal__enlace" onclick="filtrarDesdeEnlace('cosmetica')">
+                        <button type="button" class="navegacion-principal__enlace" onclick="window.filtrarDesdeEnlace('cosmetica')">
                             Cosmética y Geles <span class="navegacion-principal__flecha" aria-hidden="true">▾</span>
                         </button>
                     </li>
                     <li class="navegacion-principal__item">
-                        <button type="button" class="navegacion-principal__enlace" onclick="filtrarDesdeEnlace('fetiche')">
+                        <button type="button" class="navegacion-principal__enlace" onclick="window.filtrarDesdeEnlace('fetiche')">
                             Fetiche / Bondage <span class="navegacion-principal__flecha" aria-hidden="true">▾</span>
                         </button>
                     </li>
                     <li class="navegacion-principal__item">
-                        <button type="button" class="navegacion-principal__enlace" onclick="filtrarDesdeEnlace('bienestar')">
+                        <button type="button" class="navegacion-principal__enlace" onclick="window.filtrarDesdeEnlace('bienestar')">
                             ESI y Bienestar <span class="navegacion-principal__flecha" aria-hidden="true">▾</span>
                         </button>
                     </li>
@@ -119,18 +106,14 @@
             
             <div class="hero__contenido">
                 <span class="hero__subtitulo-superior">SEXUALIDAD CONSCIENTE &bull; BIENESTAR REAL</span>
-                
                 <h2 class="hero__titulo">Placer, bienestar e información en un espacio libre de prejuicios</h2>
-                
                 <p class="hero__descripcion">
                     Productos elegidos con cuidado, asesoramiento profesional y educación para vivir tu intimidad con libertad.
                 </p>
-                
                 <div class="hero__acciones">
                     <a href="#contenido-principal" class="hero__boton-primario">Explorar tienda</a>
                     <a href="#nuestra-mirada" class="hero__enlace-secundario">Conocé nuestra mirada &rarr;</a>
                 </div>
-
                 <div class="hero__garantias">
                     <div class="garantia-item">
                         <span class="garantia-item__icono" aria-hidden="true">&#x1F6E1;</span>
@@ -147,7 +130,6 @@
                 <div class="hero__imagen-marco">
                     <figure class="hero__figura">
                         <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80" alt="Estética cálida e inclusiva de Fórmula Íntima" class="hero__imagen" loading="eager">
-                        <figcaption class="sr-only">Imagen principal de Fórmula Íntima</figcaption>
                     </figure>
                 </div>
             </div>
@@ -161,67 +143,48 @@
     <section class="accesos-rapidos" aria-label="Accesos rápidos de navegación">
         <div class="accesos-rapidos__contenedor">
             <ul class="accesos-rapidos__lista">
-                
                 <li class="accesos-rapidos__item">
-                    <a href="#contenido-principal" onclick="limpiarFiltros()" class="accesos-rapidos__enlace">
-                        <div class="accesos-rapidos__icono-caja">
-                            <span class="accesos-rapidos__icono" aria-hidden="true">🛍️</span>
-                        </div>
+                    <button type="button" onclick="window.limpiarFiltros(); document.getElementById('contenido-principal').scrollIntoView({behavior:'smooth'});" class="accesos-rapidos__enlace">
+                        <div class="accesos-rapidos__icono-caja"><span class="accesos-rapidos__icono">🛍️</span></div>
                         <span class="accesos-rapidos__titulo">Productos</span>
                         <span class="accesos-rapidos__subtitulo">DESCUBRIR</span>
-                    </a>
+                    </button>
                 </li>
-
                 <li class="accesos-rapidos__item">
-                    <a href="#contenido-principal" onclick="event.preventDefault(); filtrarDesdeEnlace('lenceria');" class="accesos-rapidos__enlace">
-                        <div class="accesos-rapidos__icono-caja">
-                            <span class="accesos-rapidos__icono" aria-hidden="true">❤️</span>
-                        </div>
+                    <button type="button" onclick="window.filtrarDesdeEnlace('lenceria')" class="accesos-rapidos__enlace">
+                        <div class="accesos-rapidos__icono-caja"><span class="accesos-rapidos__icono">❤️</span></div>
                         <span class="accesos-rapidos__titulo">Lencería</span>
                         <span class="accesos-rapidos__subtitulo">DESCUBRIR</span>
-                    </a>
+                    </button>
                 </li>
-
                 <li class="accesos-rapidos__item">
-                    <a href="#contenido-principal" class="accesos-rapidos__enlace">
-                        <div class="accesos-rapidos__icono-caja">
-                            <span class="accesos-rapidos__icono" aria-hidden="true">🏷️</span>
-                        </div>
+                    <button type="button" onclick="window.limpiarFiltros(); document.getElementById('contenido-principal').scrollIntoView({behavior:'smooth'});" class="accesos-rapidos__enlace">
+                        <div class="accesos-rapidos__icono-caja"><span class="accesos-rapidos__icono">🏷️</span></div>
                         <span class="accesos-rapidos__titulo">Promos</span>
                         <span class="accesos-rapidos__subtitulo">DESCUBRIR</span>
-                    </a>
+                    </button>
                 </li>
-
                 <li class="accesos-rapidos__item">
-                    <a href="#nuestra-mirada" class="accesos-rapidos__enlace">
-                        <div class="accesos-rapidos__icono-caja">
-                            <span class="accesos-rapidos__icono" aria-hidden="true">📏</span>
-                        </div>
+                    <button type="button" onclick="window.abrirModalInfo('acerca')" class="accesos-rapidos__enlace">
+                        <div class="accesos-rapidos__icono-caja"><span class="accesos-rapidos__icono">📏</span></div>
                         <span class="accesos-rapidos__titulo">Talles</span>
                         <span class="accesos-rapidos__subtitulo">GUÍA INCLUSIVA</span>
-                    </a>
+                    </button>
                 </li>
-
                 <li class="accesos-rapidos__item">
-                    <a href="#envios" onclick="event.preventDefault(); abrirModalInfo('envios');" class="accesos-rapidos__enlace">
-                        <div class="accesos-rapidos__icono-caja">
-                            <span class="accesos-rapidos__icono" aria-hidden="true">📦</span>
-                        </div>
+                    <button type="button" onclick="window.abrirModalInfo('envios')" class="accesos-rapidos__enlace">
+                        <div class="accesos-rapidos__icono-caja"><span class="accesos-rapidos__icono">📦</span></div>
                         <span class="accesos-rapidos__titulo">Envíos</span>
                         <span class="accesos-rapidos__subtitulo">TODO EL PAÍS</span>
-                    </a>
+                    </button>
                 </li>
-
                 <li class="accesos-rapidos__item">
-                    <a href="#contenido-principal" onclick="event.preventDefault(); filtrarDesdeEnlace('bienestar');" class="accesos-rapidos__enlace">
-                        <div class="accesos-rapidos__icono-caja">
-                            <span class="accesos-rapidos__icono" aria-hidden="true">🩺</span>
-                        </div>
+                    <button type="button" onclick="window.filtrarDesdeEnlace('bienestar')" class="accesos-rapidos__enlace">
+                        <div class="accesos-rapidos__icono-caja"><span class="accesos-rapidos__icono">🩺</span></div>
                         <span class="accesos-rapidos__titulo">ESI</span>
                         <span class="accesos-rapidos__subtitulo">DESCUBRIR</span>
-                    </a>
+                    </button>
                 </li>
-
             </ul>
         </div>
     </section>
@@ -232,7 +195,6 @@
     <main class="catalogo" id="contenido-principal">
         <div class="catalogo__contenedor">
             
-            <!-- Migas de Pan -->
             <nav class="catalogo__migas" aria-label="Navegación de ruta">
                 <ol class="migas__lista">
                     <li class="migas__item"><a href="index.html" class="migas__enlace">Inicio</a></li>
@@ -241,16 +203,15 @@
                 </ol>
             </nav>
 
-            <!-- Cabecera del Catálogo -->
             <header class="catalogo__encabezado">
                 <div class="catalogo__info-principal">
                     <span class="catalogo__subtitulo-marca">SELECCIÓN FÓRMULA ÍNTIMA</span>
                     <h2 class="catalogo__titulo">Todo para disfrutar a tu manera</h2>
-                    <p class="catalogo__contador">Cargando productos...</p>
+                    <p class="catalogo__contador" id="contador-productos-texto">8 productos elegidos para vos</p>
                 </div>
                 <div class="catalogo__ordenar">
                     <label for="ordenar-catalogo" class="catalogo__ordenar-etiqueta">Ordenar por</label>
-                    <select id="ordenar-catalogo" name="ordenar" class="catalogo__ordenar-select" onchange="aplicarFiltros()">
+                    <select id="ordenar-catalogo" name="ordenar" class="catalogo__ordenar-select" onchange="window.aplicarFiltros()">
                         <option value="destacados">Destacados</option>
                         <option value="precio-menor">Precio: menor a mayor</option>
                         <option value="precio-mayor">Precio: mayor a menor</option>
@@ -260,45 +221,44 @@
                 </div>
             </header>
 
-            <!-- Cuerpo del Catálogo: Filtros y Grilla -->
             <div class="catalogo__cuerpo">
                 
                 <!-- Barra Lateral de Filtros ("Filtrar por") -->
                 <aside class="filtros" aria-label="Filtros de productos">
                     <div class="filtros__cabecera">
                         <h3 class="filtros__titulo">Filtrar por</h3>
-                        <button type="button" class="filtros__limpiar" id="boton-limpiar-filtros" onclick="limpiarFiltros()">Limpiar</button>
+                        <button type="button" class="filtros__limpiar" id="boton-limpiar-filtros" onclick="window.limpiarFiltros()">Limpiar</button>
                     </div>
 
-                    <form class="filtros__formulario" id="formulario-filtros" onsubmit="event.preventDefault(); aplicarFiltros();">
+                    <form class="filtros__formulario" id="formulario-filtros" onsubmit="event.preventDefault(); window.aplicarFiltros();">
                         
                         <!-- 1. Categorías -->
                         <fieldset class="filtro-grupo">
                             <legend class="filtro-grupo__leyenda">Categorías</legend>
-                            <div class="filtro-grupo__cabecera" onclick="toggleAcordeonFiltro(this)">
+                            <div class="filtro-grupo__cabecera" onclick="window.toggleAcordeonFiltro(this)">
                                 <span class="filtro-grupo__nombre">Categorías</span>
                                 <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
                             </div>
                             <div class="filtro-grupo__lista">
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="categoria" value="cosmetica" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <input type="checkbox" name="categoria" value="cosmetica" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
                                     <span class="filtro-opcion__texto">Cosmética y geles <span class="filtro-conteo" data-cat="cosmetica"></span></span>
                                 </label>
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="categoria" value="sextoys" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <input type="checkbox" name="categoria" value="sextoys" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
                                     <span class="filtro-opcion__texto">Sex Toys <span class="filtro-conteo" data-cat="sextoys"></span></span>
                                 </label>
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="categoria" value="lenceria" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <input type="checkbox" name="categoria" value="lenceria" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
                                     <span class="filtro-opcion__texto">Lencería <span class="filtro-conteo" data-cat="lenceria"></span></span>
                                 </label>
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="categoria" value="fetiche" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <input type="checkbox" name="categoria" value="fetiche" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
                                     <span class="filtro-opcion__texto">Fetiche / Bondage <span class="filtro-conteo" data-cat="fetiche"></span></span>
                                 </label>
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="categoria" value="bienestar" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
-                                    <span class="filtro-opcion__texto">Bienestar <span class="filtro-conteo" data-cat="bienestar"></span></span>
+                                    <input type="checkbox" name="categoria" value="bienestar" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
+                                    <span class="filtro-opcion__texto">Bienestar / ESI <span class="filtro-conteo" data-cat="bienestar"></span></span>
                                 </label>
                             </div>
                         </fieldset>
@@ -306,25 +266,25 @@
                         <!-- 2. Color -->
                         <fieldset class="filtro-grupo">
                             <legend class="filtro-grupo__leyenda">Color</legend>
-                            <div class="filtro-grupo__cabecera" onclick="toggleAcordeonFiltro(this)">
+                            <div class="filtro-grupo__cabecera" onclick="window.toggleAcordeonFiltro(this)">
                                 <span class="filtro-grupo__nombre">Color</span>
                                 <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
                             </div>
                             <div class="filtro-grupo__lista">
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="color" value="negro" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <input type="checkbox" name="color" value="negro" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
                                     <span class="filtro-opcion__texto">Negro</span>
                                 </label>
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="color" value="rojo" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <input type="checkbox" name="color" value="rojo" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
                                     <span class="filtro-opcion__texto">Rojo</span>
                                 </label>
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="color" value="piel" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <input type="checkbox" name="color" value="piel" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
                                     <span class="filtro-opcion__texto">Piel</span>
                                 </label>
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="color" value="rosa" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <input type="checkbox" name="color" value="rosa" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
                                     <span class="filtro-opcion__texto">Rosa</span>
                                 </label>
                             </div>
@@ -333,21 +293,21 @@
                         <!-- 3. Modelo -->
                         <fieldset class="filtro-grupo">
                             <legend class="filtro-grupo__leyenda">Modelo</legend>
-                            <div class="filtro-grupo__cabecera" onclick="toggleAcordeonFiltro(this)">
+                            <div class="filtro-grupo__cabecera" onclick="window.toggleAcordeonFiltro(this)">
                                 <span class="filtro-grupo__nombre">Modelo</span>
                                 <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
                             </div>
                             <div class="filtro-grupo__lista">
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="modelo" value="delfin" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <input type="checkbox" name="modelo" value="delfin" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
                                     <span class="filtro-opcion__texto">Delfín</span>
                                 </label>
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="modelo" value="liso" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <input type="checkbox" name="modelo" value="liso" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
                                     <span class="filtro-opcion__texto">Liso</span>
                                 </label>
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="modelo" value="ondas" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <input type="checkbox" name="modelo" value="ondas" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
                                     <span class="filtro-opcion__texto">Ondas</span>
                                 </label>
                             </div>
@@ -356,29 +316,29 @@
                         <!-- 4. Marca -->
                         <fieldset class="filtro-grupo">
                             <legend class="filtro-grupo__leyenda">Marca</legend>
-                            <div class="filtro-grupo__cabecera" onclick="toggleAcordeonFiltro(this)">
+                            <div class="filtro-grupo__cabecera" onclick="window.toggleAcordeonFiltro(this)">
                                 <span class="filtro-grupo__nombre">Marca</span>
                                 <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
                             </div>
                             <div class="filtro-grupo__lista">
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="marca" value="Sexitive" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <input type="checkbox" name="marca" value="Sexitive" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
                                     <span class="filtro-opcion__texto">Sexitive</span>
                                 </label>
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="marca" value="Pretty Love" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <input type="checkbox" name="marca" value="Pretty Love" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
                                     <span class="filtro-opcion__texto">Pretty Love</span>
                                 </label>
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="marca" value="Satisfyer" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <input type="checkbox" name="marca" value="Satisfyer" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
                                     <span class="filtro-opcion__texto">Satisfyer</span>
                                 </label>
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="marca" value="Lovense" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <input type="checkbox" name="marca" value="Lovense" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
                                     <span class="filtro-opcion__texto">Lovense</span>
                                 </label>
                                 <label class="filtro-opcion">
-                                    <input type="checkbox" name="marca" value="Svakom" class="filtro-opcion__checkbox" onchange="aplicarFiltros()">
+                                    <input type="checkbox" name="marca" value="Svakom" class="filtro-opcion__checkbox" onchange="window.aplicarFiltros()">
                                     <span class="filtro-opcion__texto">Svakom</span>
                                 </label>
                             </div>
@@ -387,7 +347,7 @@
                         <!-- 5. Precio -->
                         <fieldset class="filtro-grupo filtro-grupo--sin-borde">
                             <legend class="filtro-grupo__leyenda">Precio</legend>
-                            <div class="filtro-grupo__cabecera" onclick="toggleAcordeonFiltro(this)">
+                            <div class="filtro-grupo__cabecera" onclick="window.toggleAcordeonFiltro(this)">
                                 <span class="filtro-grupo__nombre">Precio</span>
                                 <span class="filtro-grupo__icono" aria-hidden="true">∧</span>
                             </div>
@@ -404,7 +364,7 @@
                 <!-- Sección de Productos -->
                 <section class="productos-seccion">
                     <div class="productos-grilla" id="grilla-productos" aria-label="Listado de productos">
-                        <!-- Los productos se cargan dinámicamente con main.js -->
+                        <!-- Se inyecta desde main.js -->
                     </div>
                 </section>
 
@@ -441,7 +401,7 @@
                         </p>
                     </div>
                     <div class="pilar-tarjeta__pie">
-                        <button type="button" class="pilar-tarjeta__enlace" onclick="abrirModalInfo('acerca')">CONOCER MÁS &rarr;</button>
+                        <button type="button" class="pilar-tarjeta__enlace" onclick="window.abrirModalInfo('acerca')">CONOCER MÁS &rarr;</button>
                     </div>
                 </article>
 
@@ -457,7 +417,7 @@
                         </p>
                     </div>
                     <div class="pilar-tarjeta__pie">
-                        <button type="button" class="pilar-tarjeta__enlace" onclick="abrirModalInfo('acerca')">CONOCER MÁS &rarr;</button>
+                        <button type="button" class="pilar-tarjeta__enlace" onclick="window.abrirModalInfo('acerca')">CONOCER MÁS &rarr;</button>
                     </div>
                 </article>
 
@@ -473,7 +433,7 @@
                         </p>
                     </div>
                     <div class="pilar-tarjeta__pie">
-                        <button type="button" class="pilar-tarjeta__enlace" onclick="abrirModalInfo('acerca')">CONOCER MÁS &rarr;</button>
+                        <button type="button" class="pilar-tarjeta__enlace" onclick="window.abrirModalInfo('acerca')">CONOCER MÁS &rarr;</button>
                     </div>
                 </article>
             </div>
@@ -525,28 +485,28 @@
                     </div>
                 </div>
 
-                <!-- Columna 2: Productos (Conectado a los filtros de "Filtrar por") -->
+                <!-- Columna 2: Productos (Conectado a "Filtrar por") -->
                 <div class="pie-pagina__columna">
                     <h4 class="pie-pagina__titulo">Productos</h4>
                     <ul class="pie-pagina__lista">
-                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="filtrarDesdeEnlace('sextoys')">Sex Toys</button></li>
-                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="filtrarDesdeEnlace('cosmetica')">Cosmética y Geles</button></li>
-                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="filtrarDesdeEnlace('lenceria')">Lencería</button></li>
-                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="filtrarDesdeEnlace('fetiche')">Fetiche / Bondage</button></li>
-                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="filtrarDesdeEnlace('bienestar')">Bienestar / ESI</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="window.filtrarDesdeEnlace('sextoys')">Sex Toys</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="window.filtrarDesdeEnlace('cosmetica')">Cosmética y Geles</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="window.filtrarDesdeEnlace('lenceria')">Lencería</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="window.filtrarDesdeEnlace('fetiche')">Fetiche / Bondage</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="window.filtrarDesdeEnlace('bienestar')">Bienestar / ESI</button></li>
                     </ul>
                 </div>
 
-                <!-- Columna 3: Información y Ayuda (Conectado a las Cards Flotantes) -->
+                <!-- Columna 3: Información y Ayuda (Abre Cards Flotantes) -->
                 <div class="pie-pagina__columna">
                     <h4 class="pie-pagina__titulo">Información y ayuda</h4>
                     <ul class="pie-pagina__lista">
-                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="abrirModalInfo('acerca')">Acerca de Fórmula Íntima</button></li>
-                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="abrirModalInfo('faq')">Preguntas frecuentes</button></li>
-                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="abrirModalInfo('envios')">Formas de envío</button></li>
-                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="abrirModalInfo('pagos')">Formas de pago</button></li>
-                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="abrirModalInfo('como-comprar')">Cómo comprar</button></li>
-                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="abrirModalInfo('devoluciones')">Políticas de devolución</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="window.abrirModalInfo('acerca')">Acerca de Fórmula Íntima</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="window.abrirModalInfo('faq')">Preguntas frecuentes</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="window.abrirModalInfo('envios')">Formas de envío</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="window.abrirModalInfo('pagos')">Formas de pago</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="window.abrirModalInfo('como-comprar')">Cómo comprar</button></li>
+                        <li><button type="button" class="pie-pagina__enlace-modal" onclick="window.abrirModalInfo('devoluciones')">Políticas de devolución</button></li>
                     </ul>
                 </div>
 
@@ -578,7 +538,7 @@
                     <p class="pie-pagina__copyright">&copy; 2026 Fórmula Íntima. Todos los derechos reservados.</p>
                     <div class="pie-pagina__enlaces-legales">
                         <a href="https://www.argentina.gob.ar/produccion/defensadelconsumidor/formulario" class="legales__enlace" target="_blank" rel="noopener">Defensa de las y los consumidores</a>
-                        <button type="button" class="legales__boton-arrepentimiento" onclick="abrirModalInfo('devoluciones')">Botón de arrepentimiento</button>
+                        <button type="button" class="legales__boton-arrepentimiento" onclick="window.abrirModalInfo('devoluciones')">Botón de arrepentimiento</button>
                     </div>
                 </div>
             </div>
@@ -590,7 +550,7 @@
          DRAWER LATERAL DEL CARRITO DE COMPRAS
          ========================================== -->
     <div id="carrito-drawer" class="carrito-drawer" aria-hidden="true">
-        <div class="carrito-drawer__overlay" onclick="cerrarDrawerCarrito()"></div>
+        <div class="carrito-drawer__overlay" onclick="window.cerrarDrawerCarrito()"></div>
         
         <aside class="carrito-drawer__panel" role="dialog" aria-modal="true" aria-label="Carrito de compras">
             
@@ -599,23 +559,23 @@
                     <span class="carrito-drawer__subtitulo">TU SELECCIÓN</span>
                     <h2 class="carrito-drawer__titulo">Carrito de compras</h2>
                 </div>
-                <button type="button" class="carrito-drawer__boton-cerrar" onclick="cerrarDrawerCarrito()" aria-label="Cerrar carrito">
+                <button type="button" class="carrito-drawer__boton-cerrar" onclick="window.cerrarDrawerCarrito()" aria-label="Cerrar carrito">
                     &times;
                 </button>
             </header>
 
             <div class="carrito-drawer__cuerpo" id="carrito-items-contenedor">
-                <!-- Productos del carrito -->
+                <!-- Se inyecta desde main.js -->
             </div>
 
             <div class="carrito-cupon">
-                <button type="button" class="carrito-cupon__toggle" onclick="toggleCuponCarrito()">
+                <button type="button" class="carrito-cupon__toggle" onclick="window.toggleCuponCarrito()">
                     <span>¿Tenés un cupón de descuento?</span>
                     <span class="carrito-cupon__icono">∨</span>
                 </button>
                 <div class="carrito-cupon__formulario" id="cupon-contenido">
                     <input type="text" id="cupon-input" class="carrito-cupon__input" placeholder="Ingresá tu código">
-                    <button type="button" class="carrito-cupon__boton" onclick="alert('Cupón verificado al iniciar la compra por WhatsApp.')">Aplicar</button>
+                    <button type="button" class="carrito-cupon__boton" onclick="alert('El cupón se incluirá en tu mensaje de WhatsApp al iniciar la compra.')">Aplicar</button>
                 </div>
             </div>
 
@@ -639,7 +599,7 @@
                     </div>
                 </div>
 
-                <button type="button" class="carrito-drawer__boton-comprar" id="boton-iniciar-compra" onclick="enviarPedidoAWhatsApp()">
+                <button type="button" class="carrito-drawer__boton-comprar" id="boton-iniciar-compra" onclick="window.enviarPedidoAWhatsApp()">
                     Iniciar compra
                 </button>
 
@@ -655,20 +615,20 @@
          CARD FLOTANTE / MODAL DE INFORMACIÓN
          ========================================== -->
     <div id="modal-info" class="modal-info" aria-hidden="true" role="dialog" aria-modal="true">
-        <div class="modal-info__overlay" onclick="cerrarModalInfo()"></div>
+        <div class="modal-info__overlay" onclick="window.cerrarModalInfo()"></div>
         <div class="modal-info__card">
             <header class="modal-info__cabecera">
                 <span class="modal-info__badge" id="modal-info-badge">INFORMACIÓN</span>
-                <button type="button" class="modal-info__cerrar" onclick="cerrarModalInfo()" aria-label="Cerrar ventana">&times;</button>
+                <button type="button" class="modal-info__cerrar" onclick="window.cerrarModalInfo()" aria-label="Cerrar ventana">&times;</button>
             </header>
             <div class="modal-info__cuerpo">
                 <h3 class="modal-info__titulo" id="modal-info-titulo">Título</h3>
                 <div class="modal-info__texto" id="modal-info-contenido">
-                    <!-- Contenido dinámico -->
+                    <!-- Se inyecta dinámicamente -->
                 </div>
             </div>
             <footer class="modal-info__pie">
-                <button type="button" class="modal-info__boton-entendido" onclick="cerrarModalInfo()">Entendido</button>
+                <button type="button" class="modal-info__boton-entendido" onclick="window.cerrarModalInfo()">Entendido</button>
             </footer>
         </div>
     </div>

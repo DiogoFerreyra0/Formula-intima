@@ -1,19 +1,19 @@
 /* ==========================================================================
-   FÓRMULA ÍNTIMA - MAIN.JS (CATÁLOGO + FILTROS + CARRITO WHATSAPP + MODALES)
+   FÓRMULA ÍNTIMA - MAIN.JS (SIN CONFLICTO DE VARIABLES GLOBALES)
    ========================================================================== */
 
 // NÚMERO DE WHATSAPP OFICIAL DEL LOCAL
 const WHATSAPP_NUMERO = "5491145678900"; 
 
-// SUPABASE CONFIG
+// SUPABASE CONFIG (Usamos clienteSupabase para no chocar con window.supabase)
 const SUPABASE_URL = "https://TU_PROYECTO.supabase.co";
 const SUPABASE_ANON_KEY = "TU_CLAVE_ANON_PUBLICA";
 
-const supabase = (typeof window.supabase !== 'undefined' && SUPABASE_URL !== "https://TU_PROYECTO.supabase.co")
+const clienteSupabase = (typeof window.supabase !== 'undefined' && SUPABASE_URL !== "https://TU_PROYECTO.supabase.co")
     ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
 
-// PRODUCTOS DE DEMOSTRACIÓN (Listos para probar filtros y carrito de inmediato)
+// PRODUCTOS DE DEMOSTRACIÓN
 const PRODUCTOS_LOCALES_DEMO = [
     {
         id: "1",
@@ -28,7 +28,7 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $9.333",
         badge_descuento: "20% OFF",
         envio_gratis: true,
-        imagen_url: "https://via.placeholder.com/350x350/F4E4D9/40171F?text=Dante+al+Infierno"
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Dante+al+Infierno"
     },
     {
         id: "2",
@@ -43,7 +43,7 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $7.866",
         badge_descuento: "20% OFF",
         envio_gratis: true,
-        imagen_url: "https://via.placeholder.com/350x350/F4E4D9/40171F?text=Heroe+Spray"
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Heroe+Spray"
     },
     {
         id: "3",
@@ -58,7 +58,7 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $10.996",
         badge_descuento: "15% OFF",
         envio_gratis: true,
-        imagen_url: "https://via.placeholder.com/350x350/F4E4D9/40171F?text=Her+Aphrodisiac"
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Her+Aphrodisiac"
     },
     {
         id: "4",
@@ -73,7 +73,7 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $23.973",
         badge_descuento: "20% OFF",
         envio_gratis: true,
-        imagen_url: "https://via.placeholder.com/350x350/F4E4D9/40171F?text=Succionador"
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Succionador+Satisfyer"
     },
     {
         id: "5",
@@ -88,7 +88,7 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $17.566",
         badge_descuento: "15% OFF",
         envio_gratis: true,
-        imagen_url: "https://via.placeholder.com/350x350/F4E4D9/40171F?text=Body+Encaje"
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Body+Encaje+Inclusivo"
     },
     {
         id: "6",
@@ -103,7 +103,7 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $7.253",
         badge_descuento: "15% OFF",
         envio_gratis: false,
-        imagen_url: "https://via.placeholder.com/350x350/F4E4D9/40171F?text=Aceite+Vainilla"
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Aceite+Vainilla"
     },
     {
         id: "7",
@@ -118,12 +118,12 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $3.733",
         badge_descuento: "20% OFF",
         envio_gratis: true,
-        imagen_url: "https://via.placeholder.com/350x350/F4E4D9/40171F?text=Vibrador+Delfin"
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Vibrador+Delfin"
     },
     {
         id: "8",
         titulo: "Arnés y Conjunto de Cuero Fetiche",
-        marca: "Fórmula Íntima",
+        marca: "Svakom",
         categoria: "fetiche",
         color: "negro",
         modelo: "ondas",
@@ -133,11 +133,26 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $12.666",
         badge_descuento: "15% OFF",
         envio_gratis: true,
-        imagen_url: "https://via.placeholder.com/350x350/F4E4D9/40171F?text=Arnes+Cuero"
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Arnes+Fetiche"
+    },
+    {
+        id: "9",
+        titulo: "Copa Menstrual y Gel Íntimo Uso Diario ESI",
+        marca: "Lovense",
+        categoria: "bienestar",
+        color: "rosa",
+        modelo: "liso",
+        precio_tachado: 22000,
+        precio_oferta: 18700,
+        precio_transferencia: 16830,
+        cuotas: "3 cuotas sin interés de $6.233",
+        badge_descuento: "15% OFF",
+        envio_gratis: true,
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Bienestar+y+ESI"
     }
 ];
 
-// CONTENIDO DE LAS CARDS FLOTANTES DEL FOOTER
+// TEXTOS DE LAS CARDS FLOTANTES DEL FOOTER
 const DATOS_MODALES_INFO = {
     "acerca": {
         badge: "NUESTRA IDENTIDAD",
@@ -212,94 +227,51 @@ const DATOS_MODALES_INFO = {
     }
 };
 
+const NOMBRES_CATEGORIAS = {
+    "cosmetica": "Cosmética y Geles",
+    "sextoys": "Sex Toys",
+    "lenceria": "Lencería",
+    "fetiche": "Fetiche / Bondage",
+    "bienestar": "Bienestar / ESI"
+};
+
 // ESTADO GLOBAL
-let todosLosProductos = [];
-let productosFiltrados = [];
-let carrito = JSON.parse(localStorage.getItem('fi_carrito_v2')) || [];
+let todosLosProductos = [...PRODUCTOS_LOCALES_DEMO];
+let productosFiltrados = [...PRODUCTOS_LOCALES_DEMO];
+let carrito = [];
 
-// ==========================================================================
-// 1. INICIALIZACIÓN
-// ==========================================================================
-function iniciarTienda() {
-    actualizarCarritoUI();
-    obtenerProductos();
-
-    // Buscador en vivo
-    const buscadorInput = document.getElementById('input-buscar');
-    if (buscadorInput) {
-        buscadorInput.addEventListener('input', aplicarFiltros);
-    }
-
-    // Cerrar modales con tecla Escape
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            cerrarModalInfo();
-            cerrarDrawerCarrito();
-        }
-    });
-}
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', iniciarTienda);
-} else {
-    iniciarTienda();
-}
-
-async function obtenerProductos() {
-    if (supabase) {
-        try {
-            const { data, error } = await supabase
-                .from('productos')
-                .select('*')
-                .order('created_at', { ascending: false });
-
-            if (error) throw error;
-            todosLosProductos = (data && data.length > 0) ? data : PRODUCTOS_LOCALES_DEMO;
-        } catch (err) {
-            todosLosProductos = PRODUCTOS_LOCALES_DEMO;
-        }
-    } else {
-        todosLosProductos = PRODUCTOS_LOCALES_DEMO;
-    }
-
-    actualizarContadoresCategorias();
-    aplicarFiltros();
-}
-
-function actualizarContadoresCategorias() {
-    const conteos = {};
-    todosLosProductos.forEach(p => {
-        const cat = (p.categoria || '').toLowerCase();
-        conteos[cat] = (conteos[cat] || 0) + 1;
-    });
-
-    document.querySelectorAll('.filtro-conteo').forEach(span => {
-        const cat = span.getAttribute('data-cat');
-        span.textContent = `(${conteos[cat] || 0})`;
-    });
+try {
+    carrito = JSON.parse(localStorage.getItem('fi_carrito_v2')) || [];
+} catch (e) {
+    carrito = [];
 }
 
 // ==========================================================================
-// 2. CONEXIÓN DEL FOOTER Y MENÚ CON "FILTRAR POR"
+// 1. FUNCIONES GLOBALES DE FILTROS Y CONEXIÓN CON EL FOOTER
 // ==========================================================================
 window.filtrarDesdeEnlace = function(categoriaClave) {
     const formFiltros = document.getElementById('formulario-filtros');
     const buscadorInput = document.getElementById('input-buscar');
     
-    // 1. Limpiar filtros anteriores
+    // Limpiar selecciones anteriores
     if (formFiltros) formFiltros.reset();
     if (buscadorInput) buscadorInput.value = '';
 
-    // 2. Marcar el checkbox correspondiente en "Filtrar por"
+    // Marcar el checkbox en "Filtrar por"
     const checkbox = document.querySelector(`input[name="categoria"][value="${categoriaClave}"]`);
     if (checkbox) {
         checkbox.checked = true;
     }
 
-    // 3. Ejecutar el filtrado
-    aplicarFiltros();
+    // Actualizar migas de pan
+    const migasActual = document.getElementById('migas-categoria-actual');
+    if (migasActual) {
+        migasActual.textContent = NOMBRES_CATEGORIAS[categoriaClave] || "Todos los productos";
+    }
 
-    // 4. Desplazar suavemente hacia el catálogo de productos
+    // Filtrar productos y bajar/subir hasta el catálogo
+    window.aplicarFiltros();
+
     const seccionCatalogo = document.getElementById('contenido-principal');
     if (seccionCatalogo) {
         seccionCatalogo.scrollIntoView({ behavior: 'smooth' });
@@ -316,9 +288,6 @@ window.toggleAcordeonFiltro = function(cabecera) {
     }
 };
 
-// ==========================================================================
-// 3. APLICAR FILTROS ("FILTRAR POR")
-// ==========================================================================
 window.aplicarFiltros = function() {
     const buscadorInput = document.getElementById('input-buscar');
     const inputPrecioDesde = document.getElementById('filtro-precio-desde');
@@ -327,7 +296,7 @@ window.aplicarFiltros = function() {
 
     let resultado = [...todosLosProductos];
 
-    // Buscador
+    // 1. Buscador
     const textoBuscador = buscadorInput ? buscadorInput.value.toLowerCase().trim() : '';
     if (textoBuscador !== '') {
         resultado = resultado.filter(p => 
@@ -336,35 +305,35 @@ window.aplicarFiltros = function() {
         );
     }
 
-    // Categorías
+    // 2. Categorías
     const categoriasSeleccionadas = Array.from(document.querySelectorAll('input[name="categoria"]:checked'))
         .map(input => input.value.toLowerCase());
     if (categoriasSeleccionadas.length > 0) {
         resultado = resultado.filter(p => p.categoria && categoriasSeleccionadas.includes(p.categoria.toLowerCase()));
     }
 
-    // Marcas
+    // 3. Marcas
     const marcasSeleccionadas = Array.from(document.querySelectorAll('input[name="marca"]:checked'))
         .map(input => input.value.toLowerCase());
     if (marcasSeleccionadas.length > 0) {
         resultado = resultado.filter(p => p.marca && marcasSeleccionadas.includes(p.marca.toLowerCase()));
     }
 
-    // Colores
+    // 4. Colores
     const coloresSeleccionados = Array.from(document.querySelectorAll('input[name="color"]:checked'))
         .map(input => input.value.toLowerCase());
     if (coloresSeleccionados.length > 0) {
         resultado = resultado.filter(p => p.color && coloresSeleccionados.includes(p.color.toLowerCase()));
     }
 
-    // Modelos
+    // 5. Modelos
     const modelosSeleccionados = Array.from(document.querySelectorAll('input[name="modelo"]:checked'))
         .map(input => input.value.toLowerCase());
     if (modelosSeleccionados.length > 0) {
         resultado = resultado.filter(p => p.modelo && modelosSeleccionados.includes(p.modelo.toLowerCase()));
     }
 
-    // Precio
+    // 6. Rango de Precio
     const precioDesde = inputPrecioDesde && inputPrecioDesde.value ? parseFloat(inputPrecioDesde.value) : 0;
     const precioHasta = inputPrecioHasta && inputPrecioHasta.value ? parseFloat(inputPrecioHasta.value) : Infinity;
 
@@ -373,7 +342,7 @@ window.aplicarFiltros = function() {
         return precio >= precioDesde && precio <= precioHasta;
     });
 
-    // Ordenamiento
+    // 7. Ordenamiento
     const orden = selectOrden ? selectOrden.value : 'destacados';
     switch (orden) {
         case 'precio-menor':
@@ -398,19 +367,21 @@ window.limpiarFiltros = function() {
     const formFiltros = document.getElementById('formulario-filtros');
     const buscadorInput = document.getElementById('input-buscar');
     const selectOrden = document.getElementById('ordenar-catalogo');
+    const migasActual = document.getElementById('migas-categoria-actual');
 
     if (formFiltros) formFiltros.reset();
     if (buscadorInput) buscadorInput.value = '';
     if (selectOrden) selectOrden.value = 'destacados';
-    aplicarFiltros();
+    if (migasActual) migasActual.textContent = 'Todos los productos';
+    window.aplicarFiltros();
 };
 
 // ==========================================================================
-// 4. RENDERIZAR PRODUCTOS
+// 2. RENDERIZADO DE PRODUCTOS
 // ==========================================================================
 function renderizarProductos(productos) {
-    const contenedorGrilla = document.getElementById('grilla-productos') || document.querySelector('.productos-grilla');
-    const contadorProductos = document.querySelector('.catalogo__contador');
+    const contenedorGrilla = document.getElementById('grilla-productos');
+    const contadorProductos = document.getElementById('contador-productos-texto');
     if (!contenedorGrilla) return;
 
     if (contadorProductos) {
@@ -421,7 +392,7 @@ function renderizarProductos(productos) {
         contenedorGrilla.innerHTML = `
             <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: #777;">
                 <p style="font-size: 1.15rem; margin-bottom: 1rem;">No encontramos productos con esos filtros seleccionados.</p>
-                <button type="button" onclick="limpiarFiltros()" class="catalogo__boton-ver-mas" style="padding: 0.6rem 1.5rem; cursor: pointer;">
+                <button type="button" onclick="window.limpiarFiltros()" class="catalogo__boton-ver-mas">
                     Ver todos los productos
                 </button>
             </div>
@@ -430,7 +401,7 @@ function renderizarProductos(productos) {
     }
 
     contenedorGrilla.innerHTML = productos.map(prod => {
-        const foto = prod.imagen_url || 'https://via.placeholder.com/350x350/F4E4D9/40171F?text=Fórmula+Íntima';
+        const foto = prod.imagen_url || 'https://placehold.co/400x400/F4E4D9/6D1D26?text=Formula+Intima';
         const precioOferta = Number(prod.precio_oferta).toLocaleString('es-AR');
         const precioTachado = prod.precio_tachado 
             ? `<div class="tarjeta-producto__precio-tachado">$${Number(prod.precio_tachado).toLocaleString('es-AR')}</div>` 
@@ -455,16 +426,16 @@ function renderizarProductos(productos) {
                     ${badgeEnvio}
                 </div>
                 
-                <button type="button" class="tarjeta-producto__favorito" onclick="toggleFavorito(this)" aria-label="Favorito">♡</button>
+                <button type="button" class="tarjeta-producto__favorito" onclick="window.toggleFavorito(this)" aria-label="Favorito">♡</button>
                 
-                <a href="#producto-${prod.id}" onclick="event.preventDefault(); verDetalleRapido('${prod.id}')" class="tarjeta-producto__imagen-contenedor">
+                <div onclick="window.verDetalleRapido('${prod.id}')" class="tarjeta-producto__imagen-contenedor">
                     <img src="${foto}" alt="${prod.titulo}" class="tarjeta-producto__imagen" itemprop="image" loading="lazy">
-                </a>
+                </div>
 
                 <div class="tarjeta-producto__cuerpo">
                     <span class="tarjeta-producto__marca" itemprop="brand">${prod.marca || 'Fórmula Íntima'}</span>
                     
-                    <a href="#producto-${prod.id}" onclick="event.preventDefault(); verDetalleRapido('${prod.id}')" class="tarjeta-producto__titulo-enlace">
+                    <a href="#producto-${prod.id}" onclick="event.preventDefault(); window.verDetalleRapido('${prod.id}')" class="tarjeta-producto__titulo-enlace">
                         <h3 class="tarjeta-producto__titulo" itemprop="name">${prod.titulo}</h3>
                     </a>
                     
@@ -480,10 +451,10 @@ function renderizarProductos(productos) {
                     </div>
 
                     <div class="tarjeta-producto__acciones">
-                        <button type="button" class="tarjeta-producto__boton tarjeta-producto__boton--comprar" onclick="agregarAlCarrito('${prod.id}')">
+                        <button type="button" class="tarjeta-producto__boton tarjeta-producto__boton--comprar" onclick="window.agregarAlCarrito('${prod.id}')">
                             Agregar al carrito
                         </button>
-                        <button type="button" class="tarjeta-producto__boton tarjeta-producto__boton--ver" onclick="verDetalleRapido('${prod.id}')">
+                        <button type="button" class="tarjeta-producto__boton tarjeta-producto__boton--ver" onclick="window.verDetalleRapido('${prod.id}')">
                             Ver
                         </button>
                     </div>
@@ -493,8 +464,21 @@ function renderizarProductos(productos) {
     }).join('');
 }
 
+function actualizarContadoresCategorias() {
+    const conteos = {};
+    todosLosProductos.forEach(p => {
+        const cat = (p.categoria || '').toLowerCase();
+        conteos[cat] = (conteos[cat] || 0) + 1;
+    });
+
+    document.querySelectorAll('.filtro-conteo').forEach(span => {
+        const cat = span.getAttribute('data-cat');
+        span.textContent = `(${conteos[cat] || 0})`;
+    });
+}
+
 // ==========================================================================
-// 5. CARRITO DE COMPRAS LATERAL Y WHATSAPP
+// 3. CARRITO DE COMPRAS LATERAL Y WHATSAPP
 // ==========================================================================
 window.abrirDrawerCarrito = function() {
     const carritoDrawer = document.getElementById('carrito-drawer');
@@ -522,10 +506,10 @@ window.toggleCuponCarrito = function() {
 };
 
 window.agregarAlCarrito = function(id) {
-    const prod = todosLosProductos.find(p => p.id === id);
+    const prod = todosLosProductos.find(p => String(p.id) === String(id));
     if (!prod) return;
 
-    const itemExistente = carrito.find(item => item.id === id);
+    const itemExistente = carrito.find(item => String(item.id) === String(id));
 
     if (itemExistente) {
         itemExistente.cantidad += 1;
@@ -535,23 +519,23 @@ window.agregarAlCarrito = function(id) {
             titulo: prod.titulo,
             marca: prod.marca || 'Fórmula Íntima',
             precio: parseFloat(prod.precio_oferta),
-            imagen_url: prod.imagen_url || 'https://via.placeholder.com/80x80/F4E4D9/40171F?text=Foto',
+            imagen_url: prod.imagen_url || 'https://placehold.co/100x100/F4E4D9/6D1D26?text=Foto',
             cantidad: 1
         });
     }
 
     guardarCarrito();
     actualizarCarritoUI();
-    abrirDrawerCarrito();
+    window.abrirDrawerCarrito();
 };
 
 window.cambiarCantidadItem = function(id, cambio) {
-    const item = carrito.find(p => p.id === id);
+    const item = carrito.find(p => String(p.id) === String(id));
     if (!item) return;
 
     item.cantidad += cambio;
     if (item.cantidad <= 0) {
-        carrito = carrito.filter(p => p.id !== id);
+        carrito = carrito.filter(p => String(p.id) !== String(id));
     }
 
     guardarCarrito();
@@ -559,17 +543,19 @@ window.cambiarCantidadItem = function(id, cambio) {
 };
 
 window.eliminarItemCarrito = function(id) {
-    carrito = carrito.filter(p => p.id !== id);
+    carrito = carrito.filter(p => String(p.id) !== String(id));
     guardarCarrito();
     actualizarCarritoUI();
 };
 
 function guardarCarrito() {
-    localStorage.setItem('fi_carrito_v2', JSON.stringify(carrito));
+    try {
+        localStorage.setItem('fi_carrito_v2', JSON.stringify(carrito));
+    } catch (e) {}
 }
 
 function actualizarCarritoUI() {
-    const contadorCarritoBadge = document.getElementById('carrito-badge-contador') || document.querySelector('.carrito-enlace__contador');
+    const contadorCarritoBadge = document.getElementById('carrito-badge-contador');
     const carritoItemsContenedor = document.getElementById('carrito-items-contenedor');
     const carritoSubtotalTexto = document.getElementById('carrito-subtotal');
     const carritoTotalTexto = document.getElementById('carrito-total');
@@ -611,14 +597,14 @@ function actualizarCarritoUI() {
                 <h4 class="carrito-item__titulo">${item.titulo}</h4>
                 
                 <div class="carrito-item__cantidad">
-                    <button type="button" class="carrito-item__btn-cant" onclick="cambiarCantidadItem('${item.id}', -1)">-</button>
+                    <button type="button" class="carrito-item__btn-cant" onclick="window.cambiarCantidadItem('${item.id}', -1)">-</button>
                     <span class="carrito-item__cant-numero">${item.cantidad}</span>
-                    <button type="button" class="carrito-item__btn-cant" onclick="cambiarCantidadItem('${item.id}', 1)">+</button>
+                    <button type="button" class="carrito-item__btn-cant" onclick="window.cambiarCantidadItem('${item.id}', 1)">+</button>
                 </div>
             </div>
 
             <div class="carrito-item__col-derecha">
-                <button type="button" class="carrito-item__btn-eliminar" onclick="eliminarItemCarrito('${item.id}')" aria-label="Eliminar">&times;</button>
+                <button type="button" class="carrito-item__btn-eliminar" onclick="window.eliminarItemCarrito('${item.id}')" aria-label="Eliminar">&times;</button>
                 <span class="carrito-item__precio">$ ${(item.precio * item.cantidad).toLocaleString('es-AR')}</span>
             </div>
         </div>
@@ -633,6 +619,8 @@ window.enviarPedidoAWhatsApp = function() {
     if (carrito.length === 0) return;
 
     const subtotal = carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
+    const inputCupon = document.getElementById('cupon-input');
+    const cuponTexto = (inputCupon && inputCupon.value.trim() !== '') ? `\nCupón ingresado: *${inputCupon.value.trim()}*` : '';
     
     let mensaje = `*¡Hola Fórmula Íntima!* 🌸\nQuiero realizar el siguiente pedido desde la tienda online:\n\n`;
 
@@ -644,7 +632,7 @@ window.enviarPedidoAWhatsApp = function() {
     });
 
     mensaje += `----------------------------\n`;
-    mensaje += `*Total del pedido: $${subtotal.toLocaleString('es-AR')}*\n`;
+    mensaje += `*Total del pedido: $${subtotal.toLocaleString('es-AR')}*${cuponTexto}\n`;
     mensaje += `Quedo a la espera para coordinar el pago y el envío discreto. ✨\n\n`;
     mensaje += `¡Muchas gracias!`;
 
@@ -653,7 +641,7 @@ window.enviarPedidoAWhatsApp = function() {
 };
 
 // ==========================================================================
-// 6. CARDS FLOTANTES DEL FOOTER (INFORMACIÓN Y AYUDA)
+// 4. CARDS FLOTANTES DEL FOOTER (MODALES)
 // ==========================================================================
 window.abrirModalInfo = function(clave) {
     const modalInfo = document.getElementById('modal-info');
@@ -692,12 +680,9 @@ window.toggleFavorito = function(btn) {
 };
 
 window.verDetalleRapido = function(id) {
-    const prod = todosLosProductos.find(p => p.id === id);
+    const prod = todosLosProductos.find(p => String(p.id) === String(id));
     if (!prod) return;
-    abrirModalInfoPersonalizado(prod);
-};
 
-function abrirModalInfoPersonalizado(prod) {
     const modalInfo = document.getElementById('modal-info');
     const modalInfoBadge = document.getElementById('modal-info-badge');
     const modalInfoTitulo = document.getElementById('modal-info-titulo');
@@ -715,7 +700,7 @@ function abrirModalInfoPersonalizado(prod) {
         </p>
         ${prod.cuotas ? `<p style="font-size:0.85rem; color:#666;">${prod.cuotas}</p>` : ''}
         ${prod.precio_transferencia ? `<div class="modal-info__destacado">$${Number(prod.precio_transferencia).toLocaleString('es-AR')} abonando por Transferencia Bancaria</div>` : ''}
-        <button type="button" onclick="cerrarModalInfo(); agregarAlCarrito('${prod.id}');" style="width:100%; padding:0.9rem; background:#40171F; color:#FFF8ED; border:none; border-radius:4px; font-weight:700; cursor:pointer; margin-top:0.5rem;">
+        <button type="button" onclick="window.cerrarModalInfo(); window.agregarAlCarrito('${prod.id}');" style="width:100%; padding:0.9rem; background:#40171F; color:#FFF8ED; border:none; border-radius:4px; font-weight:700; cursor:pointer; margin-top:0.5rem;">
             Agregar al carrito
         </button>
     `;
@@ -723,4 +708,43 @@ function abrirModalInfoPersonalizado(prod) {
     modalInfo.classList.add('modal-info--activo');
     modalInfo.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+};
+
+// ==========================================================================
+// 5. INICIALIZACIÓN AUTOMÁTICA
+// ==========================================================================
+async function iniciarTienda() {
+    actualizarCarritoUI();
+    actualizarContadoresCategorias();
+    window.aplicarFiltros();
+
+    if (clienteSupabase) {
+        try {
+            const { data, error } = await clienteSupabase
+                .from('productos')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (!error && data && data.length > 0) {
+                todosLosProductos = data;
+                actualizarContadoresCategorias();
+                window.aplicarFiltros();
+            }
+        } catch (err) {
+            console.warn("Usando catálogo local de demostración.");
+        }
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            window.cerrarModalInfo();
+            window.cerrarDrawerCarrito();
+        }
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', iniciarTienda);
+} else {
+    iniciarTienda();
 }
