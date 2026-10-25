@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración | Fórmula Íntima</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Supabase CDN (v2) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        /* ==========================================================================
+           RESET Y VARIABLES
+           ========================================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --color-fondo: #FFF8ED;
+            --color-fondo-caja: #F4E4D9;
+            --color-tarjeta: #FFFFFF;
+            --color-primario: #6D1D26;
+            --color-oscuro: #40171F;
+            --color-acento: #B9825B;
+            --color-borde: #E5D5C5;
+            --color-texto: #333333;
+            --color-texto-suave: #666666;
+            --color-peligro: #B02A37;
+            --color-exito: #28A745;
+            --fuente-titulos: 'Cormorant Garamond', serif;
+            --fuente-texto: 'Nunito Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            font-family: var(--fuente-texto);
+            color: var(--color-texto);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* ==========================================================================
+           BARRA SUPERIOR DE ADMINISTRACIÓN
+           ========================================================================== */
+        .barra-admin {
+            background-color: var(--color-oscuro);
+            color: var(--color-fondo);
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid var(--color-primario);
+        }
+
+        .barra-admin__contenedor {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .barra-admin__marca {
+            display: flex;
+            align-items: baseline;
+            gap: 0.8rem;
+        }
+
+        .barra-admin__logo {
+            font-family: var(--fuente-titulos);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-fondo);
+            text-decoration: none;
+        }
+
+        .barra-admin__badge {
+            background-color: var(--color-primario);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .barra-admin__usuario {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .barra-admin__enlace-tienda {
+            color: var(--color-fondo);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .barra-admin__enlace-tienda:hover {
+            color: var(--color-acento);
+        }
+
+        .barra-admin__boton-salir {
+            background-color: transparent;
+            color: var(--color-fondo);
+            border: 1px solid var(--color-fondo);
+            padding: 0.4rem 0.9rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .barra-admin__boton-salir:hover {
+            background-color: var(--color-peligro);
+            border-color: var(--color-peligro);
+        }
+
+        /* ==========================================================================
+           CONTENEDOR PRINCIPAL
+           ========================================================================== */
+        .admin-principal {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .admin-encabezado {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-borde);
+        }
+
+        .admin-encabezado__titulo {
+            font-family: var(--fuente-titulos);
+            font-size: 2.2rem;
+            color: var(--color-primario);
+        }
+
+        .admin-encabezado__acciones {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .boton-primario {
+            background-color: var(--color-primario);
+            color: var(--color-fondo);
+            border: none;
+            padding: 0.75rem 1.4rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .boton-primario:hover {
+            background-color: var(--color-oscuro);
+            transform: translateY(-2px);
+        }
+
+        .input-busqueda {
+            padding: 0.7rem 1rem;
+            border: 1px solid var(--color-borde);
+            border-radius: 4px;
+            background-color: var(--color-tarjeta);
+            font-size: 0.9rem;
+            outline: none;
+            width: 250px;
+        }
+
+        .input-busqueda:focus {
+            border-color: var(--color-primario);
+        }
+
+        /* Notificación flotante / Toast */
+        .toast {
+            display: none;
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .toast--exito {
+            background-color: #D4EDDA;
+            color: var(--color-exito);
+            border: 1px solid #C3E6CB;
+        }
+
+        .toast--error {
+            background-color: #F8D7DA;
+            color: var(--color-peligro);
+            border: 1px solid #F5C6CB;
+        }
+
+        /* ==========================================================================
+           TABLA DE PRODUCTOS
+           ========================================================================== */
+        .tabla-contenedor {
+            background-color: var(--color-tarjeta);
+            border: 1px solid var(--color-borde);
+            border-radius: 8px;
+            overflow-x: auto;
+            box-shadow: 0 4px 15px rgba(109, 29, 38, 0.04);
+        }
+
+        .tabla-productos {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .tabla-productos th {
+            background-color: var(--color-fondo-caja);
+            color: var(--color-oscuro);
+            font-weight: 700;
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-borde);
+            white-space: nowrap;
+        }
+
+        .tabla-productos td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-borde);
+            vertical-align: middle;
+        }
+
+        .tabla-productos tr:hover {
+            background-color: #FFFDF9;
+        }
+
+        .miniatura-foto {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+            background-color: var(--color-fondo-caja);
+            border: 1px solid var(--color-borde);
+            border-radius: 4px;
+        }
+
+        .badge-tabla {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 3px;
+            display: inline-block;
+            background-color: var(--color-fondo-caja);
+            color: var(--color-oscuro);
+            margin-top: 3px;
+        }
+
+        .acciones-fila {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .boton-accion {
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            border: 1px solid var(--color-borde);
+            background-color: var(--color-tarjeta);
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .boton-accion--editar:hover {
+            background-color: var(--color-fondo-caja);
+            border-color: var(--color-primario);
+            color: var(--color-primario);
+        }
+
+        .boton-accion--borrar:hover {
+            background-color: var(--color-peligro);
+            border-color: var(--color-peligro);
+            color: #FFFFFF;
+        }
+
+        .mensaje-vacio {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--color-texto-suave);
+            font-size: 1.1rem;
+        }
+
+        /* ==========================================================================
+           MODAL PARA CREAR / EDITAR PRODUCTO
+           ========================================================================== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(64, 23, 31, 0.6); /* Borgoña con opacidad */
+            backdrop-filter: blur(3px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .modal__caja {
+            background-color: var(--color-tarjeta);
+            border: 1px solid var(--color-borde);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 650px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal__cabecera {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--color-borde);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--color-fondo-caja);
+        }
+
+        .modal__titulo {
+            font-family: var(--fuente-titulos);
+            font-size: 1.6rem;
+            color: var(--color-primario);
+        }
+
+        .modal__cerrar {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: var(--color-oscuro);
+        }
+
+        .formulario-producto {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .formulario-fila {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .campo-grupo {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .campo-grupo label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--color-oscuro);
+        }
+
+        .campo-grupo input, .campo-grupo select, .campo-grupo textarea {
+            padding: 0.7rem;
+            border: 1px solid var(--color-borde);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            outline: none;
+            background-color: #FAFAFA;
+        }
+
+        .campo-grupo input:focus, .campo-grupo select:focus, .campo-grupo textarea:focus {
+            border-color: var(--color-primario);
+            background-color: #FFFFFF;
+        }
+
+        .campo-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .campo-checkbox input {
+            width: 17px;
+            height: 17px;
+            accent-color: var(--color-primario);
+        }
+
+        .vista-previa-contenedor {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .vista-previa-img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            border: 1px solid var(--color-borde);
+            border-radius: 4px;
+            background-color: var(--color-fondo-caja);
+            display: none;
+        }
+
+        .modal__pie {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--color-borde);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            background-color: #FAFAFA;
+        }
+
+        .boton-secundario {
+            background-color: transparent;
+            border: 1px solid var(--color-borde);
+            padding: 0.75rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .formulario-fila {
+                grid-template-columns: 1fr;
+            }
+            .admin-encabezado {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .input-busqueda {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA SUPERIOR -->
+    <header class="barra-admin">
+        <div class="barra-admin__contenedor">
+            <div class="barra-admin__marca">
+                <a href="admin.html" class="barra-admin__logo">Fórmula Íntima</a>
+                <span class="barra-admin__badge">Administración</span>
+            </div>
+            <div class="barra-admin__usuario">
+                <span id="usuario-email">Cargando usuario...</span>
+                <a href="index.html" class="barra-admin__enlace-tienda" target="_blank">&nearr; Ver tienda online</a>
+                <button id="boton-cerrar-sesion" class="barra-admin__boton-salir">Cerrar sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ÁREA PRINCIPAL -->
+    <main class="admin-principal">
+        
+        <div class="admin-encabezado">
+            <div>
+                <h1 class="admin-encabezado__titulo">Gestión de Catálogo</h1>
+                <p style="color: var(--color-texto-suave); font-size: 0.9rem;">Creá, modificá o eliminá los productos que se muestran en la web.</p>
+            </div>
+            <div class="admin-encabezado__acciones">
+                <input type="text" id="filtro-busqueda" class="input-busqueda" placeholder="Buscar por título o marca...">
+                <button id="boton-nuevo-producto" class="boton-primario">+ Nuevo Producto</button>
+            </div>
+        </div>
+
+        <!-- Notificaciones -->
+        <div id="toast-mensaje" class="toast"></div>
+
+        <!-- Tabla de Productos -->
+        <div class="tabla-contenedor">
+            <table class="tabla-productos">
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Título</th>
+                        <th>Marca</th>
+                        <th>Categoría</th>
+                        <th>Precio Oferta</th>
+                        <th>Transferencia</th>
+                        <th>Etiquetas</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo-tabla-productos">
+                    <tr>
+                        <td colspan="8" class="mensaje-vacio">Cargando productos de la base de datos...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- MODAL DE CREAR / EDITAR PRODUCTO -->
+    <div id="modal-producto" class="modal">
+        <div class="modal__caja">
+            <div class="modal__cabecera">
+                <h2 id="modal-titulo" class="modal__titulo">Nuevo Producto</h2>
+                <button id="modal-boton-cerrar" class="modal__cerrar">&times;</button>
+            </div>
+
+            <form id="formulario-producto" class="formulario-producto">
+                <input type="hidden" id="producto-id">
+
+                <!-- Título -->
+                <div class="campo-grupo">
+                    <label for="campo-titulo">Título del producto *</label>
+                    <input type="text" id="campo-titulo" required placeholder="Ej: Gel Lubricante Sexitive Dante al Infierno 500ml">
+                </div>
+
+                <!-- Marca y Categoría -->
+                <div class="formulario-fila">
+                    <div class="campo-grupo">
+                        <label for="campo-marca">Marca *</label>
+                        <select id="campo-marca" required>
+                            <option value="Sexitive">Sexitive</option>
+                            <option value="Pretty Love">Pretty Love</option>
+                            <option value="Satisfyer">Satisfyer</option>
+                            <option value="Lovense">Lovense</option>
+                            <option value="Svakom">Svakom</option>
+                            <option value="Fórmula Íntima">Fórmula Íntima</option>
+                            <option value="Otra">Otra</option>
+                        </select>
+                    </div>
+                    <div class="campo-grupo">
+                        <label for="campo-categoria">Categoría *</label>
+                        <select id="campo-categoria" required>
+                            <option value="cosmetica">Cosmética y geles</option>
+                            <option value="sextoys">Sex Toys</option>
+                            <option value="lenceria">Lencería</option>
+                            <option value="fetiche">Fetiche / Bondage</option>
+                            <option value="bienestar">Bienestar / ESI</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Precios -->
+                <div class="formulario-fila">
+                    <div class="campo-grupo">
+                        <label for="campo-precio-tachado">Precio original tachado ($)</label>
+                        <input type="number" id="campo-precio-tachado" placeholder="Ej: 34999" step="0.01">
+                    </div>
+                    <div class="campo-grupo">
+                        <label for="campo-precio-oferta">Precio final de venta ($) *</label>
+                        <input type="number" id="campo-precio-oferta" required placeholder="Ej: 27999" step="0.01">
+                    </div>
+                </div>
+
+                <!-- Transferencia y Cuotas -->
+                <div class="formulario-fila">
+                    <div class="campo-grupo">
+                        <label for="campo-precio-transferencia">Precio por transferencia ($)</label>
+                        <input type="number" id="campo-precio-transferencia" placeholder="Ej: 25199" step="0.01">
+                    </div>
+                    <div class="campo-grupo">
+                        <label for="campo-cuotas">Texto de cuotas</label>
+                        <input type="text" id="campo-cuotas" placeholder="Ej: 3 cuotas sin interés de $9.333">
+                    </div>
+                </div>
+
+                <!-- Badges y Opciones -->
+                <div class="formulario-fila">
+                    <div class="campo-grupo">
+                        <label for="campo-badge-descuento">Badge de descuento</label>
+                        <input type="text" id="campo-badge-descuento" placeholder="Ej: 20% OFF">
+                    </div>
+                    <div class="campo-grupo" style="justify-content: flex-end;">
+                        <label class="campo-checkbox">
+                            <input type="checkbox" id="campo-envio-gratis" checked>
+                            <span>Ofrece Envío Gratis</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Foto del Producto -->
+                <div class="campo-grupo">
+                    <label for="campo-foto-archivo">Subir Foto del producto (PNG o JPG)</label>
+                    <input type="file" id="campo-foto-archivo" accept="image/*">
+                    
+                    <label for="campo-foto-url" style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--color-texto-suave);">O pegar enlace directo de imagen (URL):</label>
+                    <input type="url" id="campo-foto-url" placeholder="https://ejemplo.com/foto.jpg">
+
+                    <div class="vista-previa-contenedor">
+                        <img id="img-vista-previa" class="vista-previa-img" alt="Vista previa">
+                        <span id="texto-vista-previa" style="font-size: 0.8rem; color: var(--color-texto-suave);">Sin foto seleccionada</span>
+                    </div>
+                </div>
+
+                <div class="modal__pie">
+                    <button type="button" id="modal-boton-cancelar" class="boton-secundario">Cancelar</button>
+                    <button type="submit" id="boton-guardar-producto" class="boton-primario">Guardar Producto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SCRIPT LOGICA Y SUPABASE -->
+    <script>
+        // ==========================================================================
+        // 1. CONFIGURACIÓN DE SUPABASE (Las mismas credenciales de login.html)
+        // ==========================================================================
+        const SUPABASE_URL = "https://TU_PROYECTO.supabase.co";
+        const SUPABASE_ANON_KEY = "TU_CLAVE_ANON_PUBLICA";
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Elementos DOM
+        const usuarioEmailSpan = document.getElementById('usuario-email');
+        const botonCerrarSesion = document.getElementById('boton-cerrar-sesion');
+        const cuerpoTabla = document.getElementById('cuerpo-tabla-productos');
+        const toastMensaje = document.getElementById('toast-mensaje');
+        const filtroBusqueda = document.getElementById('filtro-busqueda');
+
+        // Modal y Formulario
+        const modal = document.getElementById('modal-producto');
+        const modalTitulo = document.getElementById('modal-titulo');
+        const botonNuevo = document.getElementById('boton-nuevo-producto');
+        const botonCerrarModal = document.getElementById('modal-boton-cerrar');
+        const botonCancelarModal = document.getElementById('modal-boton-cancelar');
+        const formProducto = document.getElementById('formulario-producto');
+        const botonGuardar = document.getElementById('boton-guardar-producto');
+
+        // Campos Formulario
+        const inputId = document.getElementById('producto-id');
+        const inputTitulo = document.getElementById('campo-titulo');
+        const inputMarca = document.getElementById('campo-marca');
+        const inputCategoria = document.getElementById('campo-categoria');
+        const inputPrecioTachado = document.getElementById('campo-precio-tachado');
+        const inputPrecioOferta = document.getElementById('campo-precio-oferta');
+        const inputPrecioTransferencia = document.getElementById('campo-precio-transferencia');
+        const inputCuotas = document.getElementById('campo-cuotas');
+        const inputBadgeDescuento = document.getElementById('campo-badge-descuento');
+        const inputEnvioGratis = document.getElementById('campo-envio-gratis');
+        const inputFotoArchivo = document.getElementById('campo-foto-archivo');
+        const inputFotoUrl = document.getElementById('campo-foto-url');
+        const imgVistaPrevia = document.getElementById('img-vista-previa');
+        const textoVistaPrevia = document.getElementById('texto-vista-previa');
+
+        let productosLocales = [];
+
+        // ==========================================================================
+        // 2. SEGURIDAD: VERIFICAR SESIÓN ACTIVA
+        // ==========================================================================
+        async function protegerRuta() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                // Si no hay login, vuelve a login.html
+                window.location.href = 'login.html';
+                return;
+            }
+            usuarioEmailSpan.textContent = session.user.email;
+            cargarProductos();
+        }
+        protegerRuta();
+
+        // Cerrar Sesión
+        botonCerrarSesion.addEventListener('click', async () => {
+            await supabase.auth.signOut();
+            window.location.href = 'login.html';
+        });
+
+        // ==========================================================================
+        // 3. CARGAR PRODUCTOS (READ)
+        // ==========================================================================
+        async function cargarProductos() {
+            try {
+                const { data, error } = await supabase
+                    .from('productos')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+
+                productosLocales = data || [];
+                renderizarTabla(productosLocales);
+
+            } catch (err) {
+                mostrarNotificacion("Error al cargar productos: " + err.message, "error");
+                cuerpoTabla.innerHTML = `<tr><td colspan="8" class="mensaje-vacio">No se pudieron cargar los productos. Comprueba tu tabla en Supabase.</td></tr>`;
+            }
+        }
+
+        function renderizarTabla(lista) {
+            if (lista.length === 0) {
+                cuerpoTabla.innerHTML = `<tr><td colspan="8" class="mensaje-vacio">No hay productos registrados todavía. ¡Creá el primero!</td></tr>`;
+                return;
+            }
+
+            cuerpoTabla.innerHTML = lista.map(p => {
+                const foto = p.imagen_url || 'https://via.placeholder.com/60x60/F4E4D9/40171F?text=Foto';
+                const envioBadge = p.envio_gratis ? `<span class="badge-tabla" style="background:#D4EDDA; color:#155724;">Envío gratis</span>` : '';
+                const descBadge = p.badge_descuento ? `<span class="badge-tabla">${p.badge_descuento}</span>` : '';
+
+                return `
+                    <tr>
+                        <td>
+                            <img src="${foto}" alt="${p.titulo}" class="miniatura-foto">
+                        </td>
+                        <td>
+                            <strong>${p.titulo}</strong>
+                            ${p.cuotas ? `<div style="font-size:0.75rem; color:#777;">${p.cuotas}</div>` : ''}
+                        </td>
+                        <td>${p.marca || '-'}</td>
+                        <td><span class="badge-tabla">${p.categoria}</span></td>
+                        <td><strong>$${Number(p.precio_oferta).toLocaleString('es-AR')}</strong></td>
+                        <td>${p.precio_transferencia ? `$${Number(p.precio_transferencia).toLocaleString('es-AR')}` : '-'}</td>
+                        <td>${descBadge} ${envioBadge}</td>
+                        <td>
+                            <div class="acciones-fila">
+                                <button class="boton-accion boton-accion--editar" onclick="abrirModalEditar('${p.id}')">✏️ Editar</button>
+                                <button class="boton-accion boton-accion--borrar" onclick="borrarProducto('${p.id}', '${p.titulo}')">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Filtro de búsqueda en tiempo real
+        filtroBusqueda.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const filtrados = productosLocales.filter(p => 
+                p.titulo.toLowerCase().includes(query) || 
+                (p.marca && p.marca.toLowerCase().includes(query)) ||
+                (p.categoria && p.categoria.toLowerCase().includes(query))
+            );
+            renderizarTabla(filtrados);
+        });
+
+        // ==========================================================================
+        // 4. CREAR Y MODIFICAR PRODUCTO (CREATE / UPDATE)
+        // ==========================================================================
+        botonNuevo.addEventListener('click', () => {
+            formProducto.reset();
+            inputId.value = '';
+            modalTitulo.textContent = "Nuevo Producto";
+            imgVistaPrevia.style.display = 'none';
+            textoVistaPrevia.textContent = 'Sin foto seleccionada';
+            modal.style.display = 'flex';
+        });
+
+        function cerrarModal() {
+            modal.style.display = 'none';
+        }
+        botonCerrarModal.addEventListener('click', cerrarModal);
+        botonCancelarModal.addEventListener('click', cerrarModal);
+
+        // Previsualización de imagen (archivo local)
+        inputFotoArchivo.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                imgVistaPrevia.src = URL.createObjectURL(file);
+                imgVistaPrevia.style.display = 'block';
+                textoVistaPrevia.textContent = file.name;
+            }
+        });
+
+        // Previsualización de imagen (enlace URL)
+        inputFotoUrl.addEventListener('input', (e) => {
+            if (e.target.value.trim() !== '') {
+                imgVistaPrevia.src = e.target.value;
+                imgVistaPrevia.style.display = 'block';
+                textoVistaPrevia.textContent = 'Imagen por URL';
+            }
+        });
+
+        // Abrir Modal para Editar
+        window.abrirModalEditar = function(id) {
+            const prod = productosLocales.find(p => p.id === id);
+            if (!prod) return;
+
+            inputId.value = prod.id;
+            inputTitulo.value = prod.titulo;
+            inputMarca.value = prod.marca || 'Sexitive';
+            inputCategoria.value = prod.categoria || 'cosmetica';
+            inputPrecioTachado.value = prod.precio_tachado || '';
+            inputPrecioOferta.value = prod.precio_oferta;
+            inputPrecioTransferencia.value = prod.precio_transferencia || '';
+            inputCuotas.value = prod.cuotas || '';
+            inputBadgeDescuento.value = prod.badge_descuento || '';
+            inputEnvioGratis.checked = prod.envio_gratis ?? true;
+            inputFotoUrl.value = prod.imagen_url || '';
+
+            if (prod.imagen_url) {
+                imgVistaPrevia.src = prod.imagen_url;
+                imgVistaPrevia.style.display = 'block';
+                textoVistaPrevia.textContent = 'Foto actual';
+            } else {
+                imgVistaPrevia.style.display = 'none';
+                textoVistaPrevia.textContent = 'Sin foto';
+            }
+
+            modalTitulo.textContent = "Modificar Producto";
+            modal.style.display = 'flex';
+        };
+
+        // Guardar Formulario
+        formProducto.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            botonGuardar.disabled = true;
+            botonGuardar.textContent = "Guardando...";
+
+            try {
+                let urlImagenFinal = inputFotoUrl.value.trim();
+
+                // Si seleccionó un archivo nuevo, lo sube al bucket 'productos-fotos'
+                if (inputFotoArchivo.files.length > 0) {
+                    const archivo = inputFotoArchivo.files[0];
+                    const extension = archivo.name.split('.').pop();
+                    const nombreArchivo = `${Date.now()}_${Math.random().toString(36).substring(7)}.${extension}`;
+
+                    const { data: uploadData, error: uploadError } = await supabase.storage
+                        .from('productos-fotos')
+                        .upload(nombreArchivo, archivo);
+
+                    if (uploadError) throw uploadError;
+
+                    // Obtiene la URL pública directa
+                    const { data: publicUrlData } = supabase.storage
+                        .from('productos-fotos')
+                        .getPublicUrl(nombreArchivo);
+
+                    urlImagenFinal = publicUrlData.publicUrl;
+                }
+
+                const datosProducto = {
+                    titulo: inputTitulo.value.trim(),
+                    marca: inputMarca.value,
+                    categoria: inputCategoria.value,
+                    precio_tachado: inputPrecioTachado.value ? parseFloat(inputPrecioTachado.value) : null,
+                    precio_oferta: parseFloat(inputPrecioOferta.value),
+                    precio_transferencia: inputPrecioTransferencia.value ? parseFloat(inputPrecioTransferencia.value) : null,
+                    cuotas: inputCuotas.value.trim() || null,
+                    badge_descuento: inputBadgeDescuento.value.trim() || null,
+                    envio_gratis: inputEnvioGratis.checked,
+                    imagen_url: urlImagenFinal || null
+                };
+
+                const idExistente = inputId.value;
+
+                if (idExistente) {
+                    // MODIFICAR (UPDATE)
+                    const { error } = await supabase
+                        .from('productos')
+                        .update(datosProducto)
+                        .eq('id', idExistente);
+
+                    if (error) throw error;
+                    mostrarNotificacion("¡Producto modificado con éxito!", "exito");
+                } else {
+                    // CREAR (INSERT)
+                    const { error } = await supabase
+                        .from('productos')
+                        .insert([datosProducto]);
+
+                    if (error) throw error;
+                    mostrarNotificacion("¡Producto creado con éxito!", "exito");
+                }
+
+                cerrarModal();
+                cargarProductos();
+
+            } catch (err) {
+                mostrarNotificacion("Error al guardar: " + err.message, "error");
+            } finally {
+                botonGuardar.disabled = false;
+                botonGuardar.textContent = "Guardar Producto";
+            }
+        });
+
+        // ==========================================================================
+        // 5. BORRAR PRODUCTO (DELETE)
+        // ==========================================================================
+        window.borrarProducto = async function(id, titulo) {
+            const confirmar = confirm(`¿Estás segura de que querés borrar el producto:\n"${titulo}"?`);
+            if (!confirmar) return;
+
+            try {
+                const { error } = await supabase
+                    .from('productos')
+                    .delete()
+                    .eq('id', id);
+
+                if (error) throw error;
+
+                mostrarNotificacion(`Producto "${titulo}" eliminado.`, "exito");
+                cargarProductos();
+
+            } catch (err) {
+                mostrarNotificacion("Error al eliminar: " + err.message, "error");
+            }
+        };
+
+        // Utilidad Notificaciones
+        function mostrarNotificacion(texto, tipo = "exito") {
+            toastMensaje.textContent = texto;
+            toastMensaje.className = `toast toast--${tipo}`;
+            toastMensaje.style.display = 'block';
+            setTimeout(() => {
+                toastMensaje.style.display = 'none';
+            }, 4000);
+        }
+    </script>
+</body>
+</html>

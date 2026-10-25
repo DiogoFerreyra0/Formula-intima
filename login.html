@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Administración | Fórmula Íntima</title>
+    <meta name="robots" content="noindex, nofollow"> <!-- Privado para administración -->
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Supabase CDN (Versión 2 oficial) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        /* ==========================================================================
+           RESET Y VARIABLES DE COLOR
+           ========================================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --color-fondo: #FFF8ED;
+            --color-tarjeta: #FFFFFF;
+            --color-secundario-caja: #F4E4D9;
+            --color-primario: #6D1D26;
+            --color-oscuro: #40171F;
+            --color-acento: #B9825B;
+            --color-borde: #E5D5C5;
+            --color-texto: #333333;
+            --color-texto-suave: #666666;
+            --color-error: #B02A37;
+            --color-exito: #28A745;
+            --fuente-titulos: 'Cormorant Garamond', serif;
+            --fuente-texto: 'Nunito Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            font-family: var(--fuente-texto);
+            color: var(--color-texto);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        /* ==========================================================================
+           BEM: TARJETA DE ACCESO
+           ========================================================================== */
+        .acceso {
+            width: 100%;
+            max-width: 440px;
+            background-color: var(--color-tarjeta);
+            border: 1px solid var(--color-borde);
+            border-radius: 8px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 15px 35px rgba(109, 29, 38, 0.08);
+            position: relative;
+        }
+
+        .acceso__cabecera {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .acceso__marca {
+            font-family: var(--fuente-titulos);
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--color-primario);
+            line-height: 1.1;
+            margin-bottom: 0.3rem;
+        }
+
+        .acceso__subtitulo {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-texto-suave);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* Formulario y Campos */
+        .formulario-acceso {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .formulario-acceso__grupo {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .formulario-acceso__etiqueta {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--color-oscuro);
+        }
+
+        .formulario-acceso__input-contenedor {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .formulario-acceso__input {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--color-borde);
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: var(--color-texto);
+            background-color: #FAFAFA;
+            outline: none;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .formulario-acceso__input:focus {
+            border-color: var(--color-primario);
+            background-color: #FFFFFF;
+        }
+
+        /* Botón de envío */
+        .formulario-acceso__boton {
+            margin-top: 0.5rem;
+            padding: 0.95rem;
+            background-color: var(--color-oscuro);
+            color: var(--color-fondo);
+            border: none;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .formulario-acceso__boton:hover {
+            background-color: var(--color-primario);
+        }
+
+        .formulario-acceso__boton:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Mensajes de Alerta */
+        .alerta {
+            display: none;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin-bottom: 1.25rem;
+        }
+
+        .alerta--error {
+            background-color: #F8D7DA;
+            color: var(--color-error);
+            border: 1px solid #F5C6CB;
+        }
+
+        .alerta--exito {
+            background-color: #D4EDDA;
+            color: var(--color-exito);
+            border: 1px solid #C3E6CB;
+        }
+
+        /* Enlace para volver a la tienda */
+        .acceso__pie {
+            margin-top: 2rem;
+            text-align: center;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--color-secundario-caja);
+        }
+
+        .acceso__enlace-retorno {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-acento);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .acceso__enlace-retorno:hover {
+            color: var(--color-primario);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="acceso">
+        <header class="acceso__cabecera">
+            <h1 class="acceso__marca">Fórmula Íntima</h1>
+            <p class="acceso__subtitulo">Panel de Gestión de Productos</p>
+        </header>
+
+        <!-- Mensajes dinámicos -->
+        <div id="mensaje-alerta" class="alerta" role="alert"></div>
+
+        <form id="formulario-login" class="formulario-acceso">
+            <div class="formulario-acceso__grupo">
+                <label for="campo-email" class="formulario-acceso__etiqueta">Correo electrónico</label>
+                <div class="formulario-acceso__input-contenedor">
+                    <input type="email" id="campo-email" class="formulario-acceso__input" placeholder="dueña@formulaintima.com" required autocomplete="email">
+                </div>
+            </div>
+
+            <div class="formulario-acceso__grupo">
+                <label for="campo-clave" class="formulario-acceso__etiqueta">Contraseña</label>
+                <div class="formulario-acceso__input-contenedor">
+                    <input type="password" id="campo-clave" class="formulario-acceso__input" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+            </div>
+
+            <button type="submit" id="boton-ingresar" class="formulario-acceso__boton">
+                Ingresar al panel
+            </button>
+        </form>
+
+        <footer class="acceso__pie">
+            <a href="index.html" class="acceso__enlace-retorno">&larr; Volver a la tienda online</a>
+        </footer>
+    </main>
+
+    <script>
+        // ==========================================================================
+        // 1. CONFIGURACIÓN DE SUPABASE
+        // Sustituye estos 2 valores con los de tu proyecto en Supabase (Settings > API)
+        // ==========================================================================
+        const SUPABASE_URL = "https://TU_PROYECTO.supabase.co";
+        const SUPABASE_ANON_KEY = "TU_CLAVE_ANON_PUBLICA";
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        const formulario = document.getElementById('formulario-login');
+        const campoEmail = document.getElementById('campo-email');
+        const campoClave = document.getElementById('campo-clave');
+        const botonIngresar = document.getElementById('boton-ingresar');
+        const mensajeAlerta = document.getElementById('mensaje-alerta');
+
+        function mostrarAlerta(texto, tipo = 'error') {
+            mensajeAlerta.textContent = texto;
+            mensajeAlerta.className = `alerta alerta--${tipo}`;
+            mensajeAlerta.style.display = 'block';
+        }
+
+        function limpiarAlerta() {
+            mensajeAlerta.textContent = '';
+            mensajeAlerta.style.display = 'none';
+        }
+
+        // Si la dueña ya tiene una sesión activa abierta, entra directo al admin
+        async function comprobarSesionExistente() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
+                window.location.href = 'admin.html';
+            }
+        }
+        comprobarSesionExistente();
+
+        // Proceso de inicio de sesión
+        formulario.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            limpiarAlerta();
+
+            const email = campoEmail.value.trim();
+            const password = campoClave.value;
+
+            botonIngresar.disabled = true;
+            botonIngresar.textContent = "Verificando...";
+
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+
+                if (error) {
+                    mostrarAlerta("Credenciales incorrectas. Verificá tu correo y contraseña.", "error");
+                    botonIngresar.disabled = false;
+                    botonIngresar.textContent = "Ingresar al panel";
+                    return;
+                }
+
+                mostrarAlerta("¡Acceso correcto! Ingresando...", "exito");
+                setTimeout(() => {
+                    window.location.href = 'admin.html';
+                }, 800);
+
+            } catch (err) {
+                mostrarAlerta("Hubo un error de conexión. Inténtalo nuevamente.", "error");
+                botonIngresar.disabled = false;
+                botonIngresar.textContent = "Ingresar al panel";
+            }
+        });
+    </script>
+</body>
+</html>
