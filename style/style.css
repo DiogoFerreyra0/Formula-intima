@@ -1,19 +1,89 @@
 /* ==========================================================================
-   ESTILOS CSS: HEADER DE FÓRMULA ÍNTIMA
+   1. RESET GLOBAL Y VARIABLES (Elimina líneas blancas y desbordes)
    ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-/* 1. Barra Superior de Anuncios (Cinta Deslizante / Marquee) */
+:root {
+    --color-fondo-principal: #FFF8ED;
+    --color-fondo-secundario: #F4E4D9;
+    --color-primario: #6D1D26;
+    --color-secundario: #40171F;
+    --color-acento: #B9825B;
+    --color-blanco: #FFFFFF;
+    --color-texto-oscuro: #333333;
+    --color-texto-claro: #777777;
+    --color-borde: #E5D5C5;
+
+    --fuente-titulos: 'Cormorant Garamond', serif;
+    --fuente-interfaz: 'Nunito Sans', sans-serif;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden; /* Evita cualquier barra blanca lateral */
+    background-color: var(--color-fondo-principal);
+    color: var(--color-texto-oscuro);
+    font-family: var(--fuente-interfaz);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+button, input, select {
+    font-family: inherit;
+}
+
+/* Utilidad para accesibilidad (lectores de pantalla) */
+.sr-only, .filtro-grupo__leyenda {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ==========================================================================
+   2. HEADER Y NAVEGACIÓN
+   ========================================================================== */
+.cabecera {
+    width: 100%;
+    background-color: var(--color-fondo-principal);
+}
+
+/* Cinta de Anuncios Superior */
 .cabecera__anuncio {
-    background-color: #40171F; /* Borgoña oscuro */
-    color: #FFF8ED; /* Crema suave */
-    font-family: 'Nunito Sans', sans-serif;
+    background-color: var(--color-secundario);
+    color: var(--color-fondo-principal);
     font-size: 0.85rem;
     font-weight: 600;
     padding: 0.5rem 0;
     overflow: hidden;
     white-space: nowrap;
-    position: relative;
     width: 100%;
+    position: relative;
 }
 
 .cabecera__anuncio-texto {
@@ -24,22 +94,18 @@
 
 .cabecera__anuncio-separador {
     margin: 0 1.5rem;
-    color: #B9825B; /* Marrón cálido de acento */
+    color: var(--color-acento);
 }
 
 @keyframes desplazarCinta {
-    0% {
-        transform: translate3d(0, 0, 0);
-    }
-    100% {
-        transform: translate3d(-100%, 0, 0);
-    }
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
 }
 
-/* 2. Barra Principal (Logotipo, Buscador y Acciones) */
+/* Barra Principal */
 .cabecera__principal {
-    background-color: #FFF8ED; /* Fondo crema principal */
-    border-bottom: 1px solid #E5D5C5;
+    background-color: var(--color-fondo-principal);
+    border-bottom: 1px solid var(--color-borde);
     padding: 1.2rem 0;
 }
 
@@ -56,16 +122,14 @@
     gap: 2rem;
 }
 
-/* Logotipo */
 .cabecera__logo-texto {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--fuente-titulos);
     font-size: 2.2rem;
     font-weight: 700;
-    color: #6D1D26; /* Bordó principal */
+    color: var(--color-primario);
     letter-spacing: -0.5px;
 }
 
-/* Buscador Central */
 .cabecera__buscador {
     flex: 1;
     max-width: 550px;
@@ -81,18 +145,17 @@
     width: 100%;
     padding: 0.75rem 1rem;
     padding-right: 3rem;
-    border: 1px solid #E5D5C5;
+    border: 1px solid var(--color-borde);
     border-radius: 4px;
-    background-color: #FFFFFF;
-    font-family: 'Nunito Sans', sans-serif;
+    background-color: var(--color-blanco);
     font-size: 0.95rem;
-    color: #333333;
+    color: var(--color-texto-oscuro);
     outline: none;
     transition: border-color 0.3s ease;
 }
 
 .buscador__input:focus {
-    border-color: #6D1D26;
+    border-color: var(--color-primario);
 }
 
 .buscador__boton {
@@ -102,10 +165,9 @@
     border: none;
     cursor: pointer;
     font-size: 1rem;
-    color: #40171F;
+    color: var(--color-secundario);
 }
 
-/* Acciones de Usuario (Carrito) */
 .cabecera__acciones {
     display: flex;
     align-items: center;
@@ -115,11 +177,9 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: 'Nunito Sans', sans-serif;
     font-weight: 600;
-    color: #40171F;
+    color: var(--color-secundario);
     font-size: 0.95rem;
-    text-decoration: none;
     position: relative;
 }
 
@@ -128,42 +188,38 @@
 }
 
 .carrito-enlace__contador {
-    background-color: #40171F;
-    color: #FFF8ED;
+    background-color: var(--color-secundario);
+    color: var(--color-fondo-principal);
     font-size: 0.75rem;
     padding: 2px 6px;
     border-radius: 50%;
     font-weight: 700;
 }
 
-/* 3. Menú de Navegación (Mega-Menú inferior) */
+/* Mega Menú */
 .navegacion-principal {
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #E5D5C5;
+    background-color: var(--color-blanco);
+    border-bottom: 1px solid var(--color-borde);
 }
 
 .navegacion-principal__lista {
     display: flex;
     justify-content: center;
-    gap: 3rem;
-    list-style: none;
+    gap: 2.5rem;
     padding: 0.9rem 0;
-    margin: 0;
 }
 
 .navegacion-principal__enlace {
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 700;
-    color: #40171F;
+    color: var(--color-secundario);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .navegacion-principal__enlace:hover {
-    color: #B9825B; /* Acento marrón cálido */
+    color: var(--color-acento);
 }
 
 .navegacion-principal__flecha {
@@ -171,27 +227,13 @@
     margin-left: 2px;
 }
 
-/* Utilidad para accesibilidad */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
 /* ==========================================================================
-   ESTILOS CSS: SECCIÓN HERO (FÓRMULA ÍNTIMA)
+   3. SECCIÓN HERO
    ========================================================================== */
-
 .hero {
-    background-color: #FFF8ED; /* Fondo crema principal */
+    background-color: var(--color-fondo-principal);
     padding: 4rem 0;
-    border-bottom: 1px solid #E5D5C5;
+    border-bottom: 1px solid var(--color-borde);
 }
 
 .hero__contenedor {
@@ -204,29 +246,26 @@
     align-items: center;
 }
 
-/* Columna de Texto */
 .hero__subtitulo-superior {
     display: block;
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.75rem;
     font-weight: 700;
-    color: #777777;
+    color: var(--color-texto-claro);
     letter-spacing: 1.5px;
     margin-bottom: 1rem;
     text-transform: uppercase;
 }
 
 .hero__titulo {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--fuente-titulos);
     font-size: 3.2rem;
     font-weight: 700;
-    color: #6D1D26; /* Bordó de identidad */
+    color: var(--color-primario);
     line-height: 1.15;
     margin-bottom: 1.5rem;
 }
 
 .hero__descripcion {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 1.05rem;
     color: #555555;
     line-height: 1.6;
@@ -234,7 +273,6 @@
     max-width: 500px;
 }
 
-/* Acciones y Botones */
 .hero__acciones {
     display: flex;
     align-items: center;
@@ -243,66 +281,57 @@
 }
 
 .hero__boton-primario {
-    background-color: #6D1D26;
-    color: #FFF8ED;
-    font-family: 'Nunito Sans', sans-serif;
+    background-color: var(--color-primario);
+    color: var(--color-fondo-principal);
     font-size: 0.95rem;
     font-weight: 700;
     padding: 0.9rem 2rem;
     border-radius: 4px;
-    text-decoration: none;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .hero__boton-primario:hover {
-    background-color: #40171F;
+    background-color: var(--color-secundario);
     transform: translateY(-2px);
 }
 
 .hero__enlace-secundario {
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 0.95rem;
     font-weight: 600;
-    color: #40171F;
-    text-decoration: none;
+    color: var(--color-secundario);
     transition: color 0.3s ease;
 }
 
 .hero__enlace-secundario:hover {
-    color: #B9825B; /* Marrón cálido de acento */
+    color: var(--color-acento);
 }
 
-/* Garantías Inferiores del Hero */
 .hero__garantias {
     display: flex;
     gap: 2rem;
     padding-top: 1.5rem;
-    border-top: 1px solid #E5D5C5;
+    border-top: 1px solid var(--color-borde);
 }
 
 .garantia-item {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.85rem;
     font-weight: 600;
     color: #555555;
 }
 
 .garantia-item__icono {
-    font-size: 1rem;
-    color: #6D1D26;
+    color: var(--color-primario);
 }
 
-/* Columna de Multimedia / Imagen Principal */
 .hero__multimedia {
     width: 100%;
 }
 
 .hero__imagen-marco {
-    background-color: #F4E4D9; /* Beige cálido secundario */
-    border: 2px solid #6D1D26;
+    background-color: var(--color-fondo-secundario);
+    border: 2px solid var(--color-primario);
     border-radius: 6px;
     padding: 1rem;
     box-shadow: 0 15px 30px rgba(109, 29, 38, 0.1);
@@ -310,10 +339,9 @@
 
 .hero__figura {
     margin: 0;
-    position: relative;
     aspect-ratio: 4 / 3;
     overflow: hidden;
-    background-color: #E5D5C5;
+    background-color: var(--color-borde);
 }
 
 .hero__imagen {
@@ -322,25 +350,13 @@
     object-fit: cover;
 }
 
-/* Responsive para pantallas medianas y móviles */
-@media (max-width: 900px) {
-    .hero__contenedor {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-    }
-    .hero__titulo {
-        font-size: 2.5rem;
-    }
-}
-
 /* ==========================================================================
-   ESTILOS CSS: ACCESOS RÁPIDOS CON ICONOS (FÓRMULA ÍNTIMA)
+   4. ACCESOS RÁPIDOS
    ========================================================================== */
-
 .accesos-rapidos {
-    background-color: #FFF8ED; /* Fondo crema principal */
+    background-color: var(--color-fondo-principal);
     padding: 2.5rem 0;
-    border-bottom: 1px solid #E5D5C5;
+    border-bottom: 1px solid var(--color-borde);
 }
 
 .accesos-rapidos__contenedor {
@@ -352,9 +368,6 @@
 .accesos-rapidos__lista {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    list-style: none;
-    padding: 0;
-    margin: 0;
     align-items: center;
 }
 
@@ -364,7 +377,6 @@
     padding: 0 1rem;
 }
 
-/* Línea separadora vertical entre los items (excepto el último) */
 .accesos-rapidos__item:not(:last-child)::after {
     content: '';
     position: absolute;
@@ -373,11 +385,10 @@
     transform: translateY(-50%);
     width: 1px;
     height: 40px;
-    background-color: #E5D5C5;
+    background-color: var(--color-borde);
 }
 
 .accesos-rapidos__enlace {
-    text-decoration: none;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -391,8 +402,8 @@
 .accesos-rapidos__icono-caja {
     width: 60px;
     height: 60px;
-    background-color: #F4E4D9; /* Beige cálido secundario */
-    border: 1px solid #E5D5C5;
+    background-color: var(--color-fondo-secundario);
+    border: 1px solid var(--color-borde);
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -405,45 +416,26 @@
 }
 
 .accesos-rapidos__titulo {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--fuente-titulos);
     font-size: 1.15rem;
     font-weight: 700;
-    color: #40171F; /* Borgoña oscuro */
+    color: var(--color-secundario);
     margin-bottom: 0.2rem;
 }
 
 .accesos-rapidos__subtitulo {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.65rem;
     font-weight: 700;
-    color: #777777;
+    color: var(--color-texto-claro);
     letter-spacing: 0.8px;
     text-transform: uppercase;
 }
 
-/* Responsive para tablets y móviles */
-@media (max-width: 900px) {
-    .accesos-rapidos__lista {
-        grid-template-columns: repeat(3, 1fr);
-        row-gap: 2rem;
-    }
-    .accesos-rapidos__item:not(:last-child)::after {
-        display: none; /* Quitamos los separadores verticales en grillas múltiples */
-    }
-}
-
-@media (max-width: 600px) {
-    .accesos-rapidos__lista {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
 /* ==========================================================================
-   ESTILOS CSS: SECCIÓN CATÁLOGO Y GRILLA DE PRODUCTOS (FÓRMULA ÍNTIMA)
+   5. CATÁLOGO, FILTROS Y TARJETA DE PRODUCTO
    ========================================================================== */
-
 .catalogo {
-    background-color: #FFF8ED;
+    background-color: var(--color-fondo-principal);
     padding: 3rem 0 5rem 0;
 }
 
@@ -453,67 +445,55 @@
     padding: 0 1rem;
 }
 
-/* Migas de Pan (Breadcrumbs) */
 .catalogo__migas {
     margin-bottom: 1.5rem;
 }
 
 .migas__lista {
-    list-style: none;
     display: flex;
     gap: 0.5rem;
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.85rem;
-    color: #777777;
-}
-
-.migas__enlace {
-    color: #777777;
-    text-decoration: none;
-    transition: color 0.2s ease;
+    color: var(--color-texto-claro);
 }
 
 .migas__enlace:hover {
-    color: #6D1D26;
+    color: var(--color-primario);
 }
 
 .migas__actual {
-    color: #333333;
+    color: var(--color-texto-oscuro);
     font-weight: 600;
 }
 
-/* Cabecera del Catálogo */
 .catalogo__encabezado {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 2.5rem;
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid #E5D5C5;
+    border-bottom: 1px solid var(--color-borde);
 }
 
 .catalogo__subtitulo-marca {
     display: block;
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.7rem;
     font-weight: 700;
-    color: #777777;
+    color: var(--color-texto-claro);
     letter-spacing: 1.5px;
     text-transform: uppercase;
     margin-bottom: 0.4rem;
 }
 
 .catalogo__titulo {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--fuente-titulos);
     font-size: 2.5rem;
     font-weight: 700;
-    color: #6D1D26;
+    color: var(--color-primario);
     line-height: 1.1;
     margin-bottom: 0.4rem;
 }
 
 .catalogo__contador {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.85rem;
     color: #555555;
 }
@@ -525,24 +505,21 @@
 }
 
 .catalogo__ordenar-etiqueta {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.85rem;
     color: #555555;
 }
 
 .catalogo__ordenar-select {
     padding: 0.5rem 1rem;
-    border: 1px solid #E5D5C5;
+    border: 1px solid var(--color-borde);
     border-radius: 4px;
-    background-color: #FFFFFF;
-    font-family: 'Nunito Sans', sans-serif;
+    background-color: var(--color-blanco);
     font-size: 0.85rem;
-    color: #333333;
+    color: var(--color-texto-oscuro);
     outline: none;
     cursor: pointer;
 }
 
-/* Estructura Principal: Sidebar + Grilla */
 .catalogo__cuerpo {
     display: grid;
     grid-template-columns: 260px 1fr;
@@ -550,42 +527,34 @@
     align-items: start;
 }
 
-/* ==========================================================================
-   BARRA LATERAL DE FILTROS ("Filtrar por")
-   ========================================================================== */
-.filtros {
-    background-color: transparent;
-}
-
+/* Sidebar Filtros */
 .filtros__cabecera {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     padding-bottom: 0.8rem;
     margin-bottom: 1.2rem;
-    border-bottom: 1px solid #333333;
+    border-bottom: 1px solid var(--color-texto-oscuro);
 }
 
 .filtros__titulo {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 1.2rem;
     font-weight: 700;
-    color: #333333;
+    color: var(--color-texto-oscuro);
 }
 
 .filtros__limpiar {
     background: none;
     border: none;
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.8rem;
-    color: #333333;
+    color: var(--color-texto-oscuro);
     text-decoration: underline;
     cursor: pointer;
 }
 
 .filtro-grupo {
     border: none;
-    border-bottom: 1px solid #E5D5C5;
+    border-bottom: 1px solid var(--color-borde);
     padding-bottom: 1.2rem;
     margin-bottom: 1.2rem;
 }
@@ -594,19 +563,14 @@
     border-bottom: none;
 }
 
-.filtro-grupo-leyenda {
-    display: none;
-}
-
 .filtro-grupo__cabecera {
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.9rem;
     font-weight: 700;
-    color: #333333;
+    color: var(--color-texto-oscuro);
     margin-bottom: 0.8rem;
 }
 
@@ -631,17 +595,15 @@
 .filtro-opcion__checkbox {
     width: 15px;
     height: 15px;
-    accent-color: #6D1D26;
+    accent-color: var(--color-primario);
     cursor: pointer;
 }
 
 .filtro-opcion__texto {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.85rem;
     color: #555555;
 }
 
-/* Campos de Precio */
 .filtro-precio {
     display: flex;
     align-items: center;
@@ -652,39 +614,35 @@
 .filtro-precio__input {
     width: 100%;
     padding: 0.5rem;
-    border: 1px solid #E5D5C5;
+    border: 1px solid var(--color-borde);
     border-radius: 4px;
-    background-color: #FFFFFF;
-    font-family: 'Nunito Sans', sans-serif;
+    background-color: var(--color-blanco);
     font-size: 0.8rem;
 }
 
 .filtro-precio__separador {
-    color: #777777;
+    color: var(--color-texto-claro);
 }
 
 .filtro-precio__boton {
     width: 100%;
     margin-top: 0.8rem;
     padding: 0.6rem;
-    background-color: #FFFFFF;
-    border: 1px solid #333333;
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-texto-oscuro);
     border-radius: 4px;
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.85rem;
     font-weight: 700;
-    color: #333333;
+    color: var(--color-texto-oscuro);
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
 .filtro-precio__boton:hover {
-    background-color: #F4E4D9;
+    background-color: var(--color-fondo-secundario);
 }
 
-/* ==========================================================================
-   GRILLA Y TARJETAS DE PRODUCTO
-   ========================================================================== */
+/* Grilla de Productos y Tarjeta */
 .productos-grilla {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -693,8 +651,8 @@
 }
 
 .tarjeta-producto {
-    background-color: #FFFFFF;
-    border: 1px solid #E5D5C5;
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde);
     border-radius: 4px;
     display: flex;
     flex-direction: column;
@@ -716,13 +674,12 @@
 }
 
 .tarjeta-producto__etiqueta {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.65rem;
     font-weight: 700;
     padding: 3px 6px;
-    background-color: #FFFFFF;
-    border: 1px solid #E5D5C5;
-    color: #333333;
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde);
+    color: var(--color-texto-oscuro);
     text-transform: uppercase;
 }
 
@@ -730,8 +687,8 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: #FFFFFF;
-    border: 1px solid #E5D5C5;
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde);
     width: 28px;
     height: 28px;
     border-radius: 50%;
@@ -745,7 +702,7 @@
 }
 
 .tarjeta-producto__imagen-contenedor {
-    background-color: #F4E4D9;
+    background-color: var(--color-fondo-secundario);
     aspect-ratio: 1 / 1;
     display: flex;
     align-items: center;
@@ -767,24 +724,18 @@
 }
 
 .tarjeta-producto__marca {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.7rem;
     font-weight: 700;
-    color: #777777;
+    color: var(--color-texto-claro);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 0.3rem;
 }
 
-.tarjeta-producto__titulo-enlace {
-    text-decoration: none;
-}
-
 .tarjeta-producto__titulo {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.95rem;
     font-weight: 600;
-    color: #333333;
+    color: var(--color-texto-oscuro);
     line-height: 1.3;
     margin-bottom: 1rem;
     display: -webkit-box;
@@ -797,37 +748,33 @@
     margin-top: auto;
     margin-bottom: 1rem;
     padding-top: 0.8rem;
-    border-top: 1px solid #F4E4D9;
+    border-top: 1px solid var(--color-fondo-secundario);
 }
 
 .tarjeta-producto__precio-tachado {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.8rem;
     color: #999999;
     text-decoration: line-through;
 }
 
 .tarjeta-producto__precio-oferta {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 1.2rem;
     font-weight: 700;
-    color: #333333;
+    color: var(--color-texto-oscuro);
     margin-bottom: 0.2rem;
 }
 
 .tarjeta-producto__cuotas {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.75rem;
-    color: #777777;
+    color: var(--color-texto-claro);
     margin-bottom: 0.4rem;
 }
 
 .tarjeta-producto__transferencia {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.75rem;
     font-weight: 600;
-    color: #6D1D26;
-    background-color: #F4E4D9;
+    color: var(--color-primario);
+    background-color: var(--color-fondo-secundario);
     padding: 4px 8px;
     border-radius: 3px;
     margin-top: 0.5rem;
@@ -840,39 +787,36 @@
 }
 
 .tarjeta-producto__boton {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.85rem;
     font-weight: 700;
     padding: 0.7rem;
     border-radius: 4px;
     text-align: center;
     cursor: pointer;
-    text-decoration: none;
     transition: background-color 0.2s ease;
 }
 
 .tarjeta-producto__boton--comprar {
-    background-color: #40171F;
-    color: #FFF8ED;
+    background-color: var(--color-secundario);
+    color: var(--color-fondo-principal);
     border: none;
 }
 
 .tarjeta-producto__boton--comprar:hover {
-    background-color: #6D1D26;
+    background-color: var(--color-primario);
 }
 
 .tarjeta-producto__boton--ver {
-    background-color: #FFFFFF;
-    color: #333333;
-    border: 1px solid #E5D5C5;
+    background-color: var(--color-blanco);
+    color: var(--color-texto-oscuro);
+    border: 1px solid var(--color-borde);
     padding: 0.7rem 1rem;
 }
 
 .tarjeta-producto__boton--ver:hover {
-    background-color: #F4E4D9;
+    background-color: var(--color-fondo-secundario);
 }
 
-/* Paginación / Ver más productos */
 .catalogo__paginacion {
     display: flex;
     justify-content: center;
@@ -880,12 +824,11 @@
 }
 
 .catalogo__boton-ver-mas {
-    background-color: #FFFFFF;
-    color: #333333;
-    border: 1px solid #333333;
+    background-color: var(--color-blanco);
+    color: var(--color-texto-oscuro);
+    border: 1px solid var(--color-texto-oscuro);
     border-radius: 4px;
     padding: 0.8rem 2.5rem;
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.9rem;
     font-weight: 700;
     cursor: pointer;
@@ -893,38 +836,16 @@
 }
 
 .catalogo__boton-ver-mas:hover {
-    background-color: #F4E4D9;
-}
-
-/* Responsive para dispositivos móviles y tablets */
-@media (max-width: 1024px) {
-    .productos-grilla {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .catalogo__cuerpo {
-        grid-template-columns: 1fr;
-    }
-    .catalogo__encabezado {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-    .productos-grilla {
-        grid-template-columns: 1fr;
-    }
+    background-color: var(--color-fondo-secundario);
 }
 
 /* ==========================================================================
-   ESTILOS CSS: SECCIÓN PILARES INSTITUCIONALES (FÓRMULA ÍNTIMA)
+   6. PILARES DE LA MARCA
    ========================================================================== */
-
 .pilares {
-    background-color: #FFF8ED; /* Fondo crema principal */
+    background-color: var(--color-fondo-principal);
     padding: 5rem 0;
-    border-bottom: 1px solid #E5D5C5;
+    border-bottom: 1px solid var(--color-borde);
 }
 
 .pilares__contenedor {
@@ -933,7 +854,6 @@
     padding: 0 1rem;
 }
 
-/* Cabecera de la Sección */
 .pilares__encabezado {
     display: flex;
     justify-content: space-between;
@@ -943,32 +863,29 @@
 
 .pilares__subtitulo {
     display: block;
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.75rem;
     font-weight: 700;
-    color: #777777;
+    color: var(--color-texto-claro);
     letter-spacing: 1.5px;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
 }
 
 .pilares__titulo {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--fuente-titulos);
     font-size: 2.8rem;
     font-weight: 700;
-    color: #6D1D26; /* Bordó de marca */
+    color: var(--color-primario);
     line-height: 1.1;
 }
 
 .pilares__descripcion-principal {
     max-width: 400px;
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.95rem;
     color: #555555;
     line-height: 1.5;
 }
 
-/* Grilla de Tarjetas */
 .pilares__grilla {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -976,8 +893,8 @@
 }
 
 .pilar-tarjeta {
-    background-color: #FFFFFF;
-    border: 1px solid #E5D5C5;
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde);
     border-radius: 6px;
     padding: 2.5rem 2rem;
     display: flex;
@@ -999,7 +916,6 @@
 }
 
 .pilar-tarjeta__numero {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.85rem;
     font-weight: 700;
     color: #999999;
@@ -1014,15 +930,14 @@
 }
 
 .pilar-tarjeta__titulo {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--fuente-titulos);
     font-size: 1.8rem;
     font-weight: 700;
-    color: #40171F; /* Borgoña oscuro */
+    color: var(--color-secundario);
     margin-bottom: 1rem;
 }
 
 .pilar-tarjeta__texto {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.95rem;
     color: #555555;
     line-height: 1.6;
@@ -1030,43 +945,28 @@
 
 .pilar-tarjeta__pie {
     padding-top: 1rem;
-    border-top: 1px solid #F4E4D9;
+    border-top: 1px solid var(--color-fondo-secundario);
 }
 
 .pilar-tarjeta__enlace {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.85rem;
     font-weight: 700;
-    color: #6D1D26;
-    text-decoration: none;
+    color: var(--color-primario);
     letter-spacing: 0.5px;
     transition: color 0.2s ease;
 }
 
 .pilar-tarjeta__enlace:hover {
-    color: #B9825B; /* Marrón cálido */
-}
-
-/* Responsive para tablets y móviles */
-@media (max-width: 900px) {
-    .pilares__encabezado {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.5rem;
-    }
-    .pilares__grilla {
-        grid-template-columns: 1fr;
-    }
+    color: var(--color-acento);
 }
 
 /* ==========================================================================
-   ESTILOS CSS: SECCIÓN NEWSLETTER (FÓRMULA ÍNTIMA)
+   7. NEWSLETTER
    ========================================================================== */
-
 .newsletter {
-    background-color: #F4E4D9; /* Beige cálido secundario para diferenciar la sección */
+    background-color: var(--color-fondo-secundario);
     padding: 4rem 0;
-    border-bottom: 1px solid #E5D5C5;
+    border-bottom: 1px solid var(--color-borde);
 }
 
 .newsletter__contenedor {
@@ -1081,40 +981,37 @@
 
 .newsletter__subtitulo {
     display: block;
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.75rem;
     font-weight: 700;
-    color: #777777;
+    color: var(--color-texto-claro);
     letter-spacing: 1.5px;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
 }
 
 .newsletter__titulo {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--fuente-titulos);
     font-size: 2.5rem;
     font-weight: 700;
-    color: #6D1D26; /* Bordó de marca */
+    color: var(--color-primario);
     line-height: 1.15;
     margin-bottom: 0.5rem;
 }
 
 .newsletter__descripcion {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.9rem;
     color: #555555;
     line-height: 1.5;
 }
 
-/* Formulario */
 .newsletter__formulario-contenedor {
     width: 100%;
 }
 
 .newsletter__formulario {
     display: flex;
-    background-color: #FFFFFF;
-    border: 1px solid #E5D5C5;
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde);
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(109, 29, 38, 0.05);
@@ -1125,9 +1022,8 @@
     padding: 0.9rem 1.2rem;
     border: none;
     background-color: transparent;
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.95rem;
-    color: #333333;
+    color: var(--color-texto-oscuro);
     outline: none;
 }
 
@@ -1136,11 +1032,10 @@
 }
 
 .newsletter__boton {
-    background-color: #40171F; /* Borgoña oscuro */
-    color: #FFF8ED;
+    background-color: var(--color-secundario);
+    color: var(--color-fondo-principal);
     border: none;
     padding: 0.9rem 1.8rem;
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.9rem;
     font-weight: 700;
     cursor: pointer;
@@ -1149,27 +1044,17 @@
 }
 
 .newsletter__boton:hover {
-    background-color: #6D1D26;
-}
-
-/* Responsive para tablets y móviles */
-@media (max-width: 900px) {
-    .newsletter__contenedor {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
+    background-color: var(--color-primario);
 }
 
 /* ==========================================================================
-   ESTILOS CSS: PIE DE PÁGINA / FOOTER (FÓRMULA ÍNTIMA)
+   8. FOOTER
    ========================================================================== */
-
 .pie-pagina {
-    background-color: #FFF8ED; /* Fondo crema principal */
-    color: #333333;
-    font-family: 'Nunito Sans', sans-serif;
+    background-color: var(--color-fondo-principal);
+    color: var(--color-texto-oscuro);
     padding: 4rem 0 2rem 0;
-    border-top: 1px solid #E5D5C5;
+    border-top: 1px solid var(--color-borde);
 }
 
 .pie-pagina__contenedor {
@@ -1178,7 +1063,6 @@
     padding: 0 1rem;
 }
 
-/* Columnas Superiores */
 .pie-pagina__columnas {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
@@ -1187,10 +1071,10 @@
 }
 
 .pie-pagina__logo {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--fuente-titulos);
     font-size: 1.8rem;
     font-weight: 700;
-    color: #6D1D26; /* Bordó de marca */
+    color: var(--color-primario);
     margin-bottom: 0.8rem;
 }
 
@@ -1201,7 +1085,6 @@
     margin-bottom: 1.5rem;
 }
 
-/* Redes Sociales */
 .pie-pagina__redes {
     display: flex;
     gap: 1rem;
@@ -1210,37 +1093,31 @@
 .redes__enlace {
     width: 36px;
     height: 36px;
-    background-color: #FFFFFF;
-    border: 1px solid #E5D5C5;
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1rem;
-    text-decoration: none;
     transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .redes__enlace:hover {
-    background-color: #F4E4D9;
-    border-color: #6D1D26;
+    background-color: var(--color-fondo-secundario);
+    border-color: var(--color-primario);
 }
 
-/* Títulos de Columnas */
 .pie-pagina__titulo {
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.85rem;
     font-weight: 700;
-    color: #333333;
+    color: var(--color-texto-oscuro);
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 1.2rem;
 }
 
 .pie-pagina__lista {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
@@ -1249,12 +1126,11 @@
 .pie-pagina__enlace {
     font-size: 0.85rem;
     color: #555555;
-    text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .pie-pagina__enlace:hover {
-    color: #6D1D26;
+    color: var(--color-primario);
 }
 
 .pie-pagina__lista--contacto {
@@ -1263,14 +1139,12 @@
     line-height: 1.5;
 }
 
-/* Divisor */
 .pie-pagina__divisor {
     border: none;
-    border-top: 1px solid #E5D5C5;
+    border-top: 1px solid var(--color-borde);
     margin-bottom: 2rem;
 }
 
-/* Sección Inferior */
 .pie-pagina__inferior {
     display: flex;
     justify-content: space-between;
@@ -1278,7 +1152,7 @@
     flex-wrap: wrap;
     gap: 1.5rem;
     font-size: 0.8rem;
-    color: #777777;
+    color: var(--color-texto-claro);
 }
 
 .pie-pagina__pagos-envios {
@@ -1288,7 +1162,7 @@
 }
 
 .pie-pagina__pagos-etiqueta {
-    color: #6D1D26;
+    color: var(--color-primario);
     font-weight: 600;
 }
 
@@ -1298,13 +1172,13 @@
 }
 
 .badge-pago, .badge-envio {
-    background-color: #FFFFFF;
-    border: 1px solid #E5D5C5;
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde);
     padding: 3px 8px;
     border-radius: 3px;
     font-size: 0.75rem;
     font-weight: 600;
-    color: #333333;
+    color: var(--color-texto-oscuro);
 }
 
 .pie-pagina__legales {
@@ -1328,29 +1202,100 @@
 }
 
 .legales__enlace:hover, .legales__boton-arrepentimiento:hover {
-    color: #6D1D26;
+    color: var(--color-primario);
 }
 
 .legales__boton-arrepentimiento {
-    background-color: #FFFFFF;
-    border: 1px solid #E5D5C5;
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde);
     padding: 3px 8px;
     border-radius: 3px;
     text-decoration: none;
     font-weight: 600;
 }
 
-/* Responsive para tablets y móviles */
+/* ==========================================================================
+   9. UNIFICACIÓN DE RESPONSIVE (MEDIA QUERIES)
+   ========================================================================== */
+
+/* Tablets y Pantallas Medianas (<= 1024px) */
 @media (max-width: 1024px) {
+    .navegacion-principal__lista {
+        gap: 1.5rem;
+    }
+    .productos-grilla {
+        grid-template-columns: repeat(2, 1fr);
+    }
     .pie-pagina__columnas {
         grid-template-columns: repeat(2, 1fr);
         gap: 2.5rem;
     }
 }
 
+/* Dispositivos Móviles (<= 768px) */
 @media (max-width: 768px) {
+    .cabecera__contenedor--flex {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .cabecera__buscador {
+        max-width: 100%;
+        width: 100%;
+    }
+    .navegacion-principal__lista {
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 0.8rem 0;
+    }
+
+    .hero {
+        padding: 2.5rem 0;
+    }
+    .hero__contenedor {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    .hero__titulo {
+        font-size: 2.4rem;
+    }
+
+    .accesos-rapidos__lista {
+        grid-template-columns: repeat(3, 1fr);
+        row-gap: 2rem;
+    }
+    .accesos-rapidos__item:not(:last-child)::after {
+        display: none;
+    }
+
+    .catalogo__encabezado {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .catalogo__cuerpo {
+        grid-template-columns: 1fr;
+    }
+    .productos-grilla {
+        grid-template-columns: 1fr;
+    }
+
+    .pilares__encabezado {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .pilares__grilla {
+        grid-template-columns: 1fr;
+    }
+
+    .newsletter__contenedor {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
     .pie-pagina__columnas {
         grid-template-columns: 1fr;
+        gap: 2rem;
     }
     .pie-pagina__inferior {
         flex-direction: column;
@@ -1358,5 +1303,31 @@
     }
     .pie-pagina__legales {
         align-items: flex-start;
+    }
+}
+
+/* Pantallas Pequeñas (<= 480px) */
+@media (max-width: 480px) {
+    .hero__acciones {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    .hero__boton-primario {
+        text-align: center;
+    }
+    .hero__garantias {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    .accesos-rapidos__lista {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .newsletter__formulario {
+        flex-direction: column;
+    }
+    .newsletter__boton {
+        width: 100%;
+        padding: 0.8rem;
     }
 }
