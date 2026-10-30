@@ -1844,3 +1844,108 @@ button, input, select {
         height: 50px;
     }
 }
+
+/* ==========================================================================
+   ESTILOS: PANTALLA DE CARGA (PRELOADER)
+   ========================================================================== */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-fondo-principal); /* #FFF8ED */
+    z-index: 99999; /* Por encima de todo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+                visibility 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Estado cuando la página ya cargó */
+.preloader--oculto {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.preloader__contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.2rem;
+    padding: 1.5rem;
+}
+
+/* Efecto suave de pulso/respiración sobre el logo */
+.preloader__logo-marco {
+    animation: pulsoSuave 2.2s infinite ease-in-out;
+}
+
+.preloader__logo-img {
+    height: 65px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(109, 29, 38, 0.1));
+}
+
+.preloader__lema {
+    font-family: var(--fuente-interfaz);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-primario);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
+/* Línea de carga minimalista en color bordó */
+.preloader__barra-contenedor {
+    width: 160px;
+    height: 2px;
+    background-color: var(--color-fondo-secundario); /* #F4E4D9 */
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 0.4rem;
+}
+
+.preloader__barra-linea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--color-primario); /* #6D1D26 */
+    border-radius: 4px;
+    transform: translateX(-100%);
+    animation: animarBarraCarga 1.6s infinite cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Keyframes de animación */
+@keyframes pulsoSuave {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.95;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+}
+
+@keyframes animarBarraCarga {
+    0% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}

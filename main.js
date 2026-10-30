@@ -826,3 +826,30 @@ if (document.readyState === 'loading') {
 } else {
     iniciarTienda();
 }
+
+// ==========================================================================
+// CONTROLADOR DE PANTALLA DE CARGA (PRELOADER)
+// ==========================================================================
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    if (!preloader) return;
+
+    // Pequeña pausa estética de 400ms para asegurar fluidez visual
+    setTimeout(() => {
+        preloader.classList.add('preloader--oculto');
+        
+        // Retira el preloader del flujo luego del desvanecimiento
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 600);
+    }, 400);
+});
+
+// Respaldo de seguridad: si alguna imagen externa demora, se oculta a los 3 segundos
+setTimeout(() => {
+    const preloader = document.getElementById('preloader');
+    if (preloader && !preloader.classList.contains('preloader--oculto')) {
+        preloader.classList.add('preloader--oculto');
+        setTimeout(() => { preloader.style.display = 'none'; }, 600);
+    }
+}, 3000);
