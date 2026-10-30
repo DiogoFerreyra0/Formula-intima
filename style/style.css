@@ -1791,3 +1791,56 @@ button, input, select {
     color: #721C24;
     border: 1px solid #F5C6CB;
 }
+
+/* ==========================================================================
+   AJUSTES EXACTOS PARA LOS LOGOTIPOS EN SVG
+   ========================================================================== */
+
+/* 1. Logo de la Cabecera */
+.cabecera__logo-contenedor {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; /* Evita que el buscador lo achique */
+}
+
+.cabecera__logo-enlace {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.cabecera__logo-img {
+    height: 44px; /* Altura fija calibrada para no romper la barra */
+    width: auto;  /* Mantiene la proporción horizontal exacta */
+    display: block;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.cabecera__logo-enlace:hover .cabecera__logo-img {
+    transform: scale(1.02);
+}
+
+/* 2. Logo del Pie de Página */
+.pie-pagina__logo-enlace {
+    display: inline-block;
+    margin-bottom: 0.8rem;
+}
+
+.pie-pagina__logo-img {
+    height: 58px; /* Tamaño armónico para la columna del footer */
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* 3. Adaptación Responsive en pantallas móviles (<= 768px) */
+@media (max-width: 768px) {
+    .cabecera__logo-img {
+        height: 36px; /* Se compacta sutilmente en celulares */
+    }
+    
+    .pie-pagina__logo-img {
+        height: 50px;
+    }
+}

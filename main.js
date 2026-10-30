@@ -1,5 +1,5 @@
 /* ==========================================================================
-   FÓRMULA ÍNTIMA - MAIN.JS (CON GALERÍA MULTI-IMAGEN Y DESCRIPCIÓN)
+   FÓRMULA ÍNTIMA - MAIN.JS (CON SELECCIÓN DE COLORES Y TALLES + WHATSAPP)
    ========================================================================== */
 
 const WHATSAPP_NUMERO = "5491145678900"; 
@@ -10,90 +10,8 @@ const clienteSupabase = (typeof window.supabase !== 'undefined' && SUPABASE_URL 
     ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
 
-// PRODUCTOS BASE DE DEMOSTRACIÓN (Con descripciones y galerías multi-imagen)
+// PRODUCTOS BASE DE DEMOSTRACIÓN (Con talles y colores)
 const PRODUCTOS_LOCALES_DEMO = [
-    {
-        id: "1",
-        titulo: "Gel Lubricante Sexitive Dante al Infierno 500ml",
-        descripcion: "Gel íntimo lubricante ultra deslizante. Formato de 500ml ideal para masajes y prácticas intensas. Fórmula al agua compatible con preservativos y juguetes sexuales de silicona o látex.",
-        marca: "Sexitive",
-        categoria: "cosmetica",
-        color: "rojo",
-        modelo: "liso",
-        precio_tachado: 34999,
-        precio_oferta: 27999,
-        precio_transferencia: 25199,
-        cuotas: "3 cuotas sin interés de $9.333",
-        badge_descuento: "20% OFF",
-        envio_gratis: true,
-        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Dante+al+Infierno",
-        imagenes: [
-            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Dante+Frente",
-            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Dante+Envase",
-            "https://placehold.co/400x400/F4E4D9/40171F?text=Dante+Textura"
-        ]
-    },
-    {
-        id: "2",
-        titulo: "Spray Retardante Sexitive Héroe Extra Time 20ml",
-        descripcion: "Spray desensibilizante suave diseñado para prolongar los encuentros íntimos. Textura liviana, rápida absorción, sin aroma invasivo y sin dejar sensación pegajosa.",
-        marca: "Sexitive",
-        categoria: "cosmetica",
-        color: "negro",
-        modelo: "liso",
-        precio_tachado: 29500,
-        precio_oferta: 23600,
-        precio_transferencia: 21240,
-        cuotas: "3 cuotas sin interés de $7.866",
-        badge_descuento: "20% OFF",
-        envio_gratis: true,
-        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Heroe+Spray",
-        imagenes: [
-            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Heroe+Frasco",
-            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Heroe+Caja"
-        ]
-    },
-    {
-        id: "3",
-        titulo: "Perfume con Feromonas Her Aphrodisiac Roll-on",
-        descripcion: "Fragancia con concentrado de feromonas naturales en formato roll-on para llevar con vos. Diseñado para potenciar el magnetismo y la sensualidad.",
-        marca: "Sexitive",
-        categoria: "cosmetica",
-        color: "rosa",
-        modelo: "liso",
-        precio_tachado: 38800,
-        precio_oferta: 32990,
-        precio_transferencia: 29691,
-        cuotas: "3 cuotas sin interés de $10.996",
-        badge_descuento: "15% OFF",
-        envio_gratis: true,
-        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Her+Aphrodisiac",
-        imagenes: [
-            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Her+RollOn",
-            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Her+Packaging"
-        ]
-    },
-    {
-        id: "4",
-        titulo: "Succionador de Clítoris — 10 funciones de pulso",
-        descripcion: "Tecnología de ondas de aire pulsantes sin contacto directo. Silicona médica ultra suave de grado clínico, recargable mediante USB y sumergible para disfrutar en la ducha.",
-        marca: "Satisfyer",
-        categoria: "sextoys",
-        color: "rosa",
-        modelo: "ondas",
-        precio_tachado: 89900,
-        precio_oferta: 71920,
-        precio_transferencia: 64728,
-        cuotas: "3 cuotas sin interés de $23.973",
-        badge_descuento: "20% OFF",
-        envio_gratis: true,
-        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Succionador+Satisfyer",
-        imagenes: [
-            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Succionador+Frente",
-            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Boquilla+Silicona",
-            "https://placehold.co/400x400/F4E4D9/40171F?text=Cable+USB+Carga"
-        ]
-    },
     {
         id: "5",
         titulo: "Body de Encaje Línea Inclusiva Real",
@@ -108,85 +26,91 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $17.566",
         badge_descuento: "15% OFF",
         envio_gratis: true,
+        colores_disponibles: ["Negro", "Rojo", "Blanco"],
+        talles_disponibles: ["S", "M", "L", "XL", "2XL", "3XL"],
         imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Body+Encaje+Inclusivo",
         imagenes: [
             "https://placehold.co/400x400/F4E4D9/6D1D26?text=Body+Frente",
-            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Body+Espalda",
-            "https://placehold.co/400x400/F4E4D9/40171F?text=Detalle+Encaje"
+            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Body+Espalda"
         ]
     },
     {
-        id: "6",
-        titulo: "Aceite de Masajes Sensual Vainilla 200ml",
-        descripcion: "Aceite corporal deslizante con efecto calor al soplar suavemente. Aroma dulce a vainilla, no mancha la ropa de cama y deja la piel hidratada y sedosa.",
-        marca: "Pretty Love",
+        id: "1",
+        titulo: "Gel Lubricante Sexitive Dante al Infierno 500ml",
+        descripcion: "Gel íntimo lubricante ultra deslizante. Formato generoso de 500ml ideal para masajes y prácticas intensas. Fórmula al agua compatible con preservativos y juguetes.",
+        marca: "Sexitive",
         categoria: "cosmetica",
-        color: "piel",
-        modelo: "liso",
-        precio_tachado: 25600,
-        precio_oferta: 21760,
-        precio_transferencia: 19584,
-        cuotas: "3 cuotas sin interés de $7.253",
-        badge_descuento: "15% OFF",
-        envio_gratis: false,
-        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Aceite+Vainilla",
-        imagenes: [
-            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Aceite+Envase",
-            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Aceite+Detalle"
-        ]
-    },
-    {
-        id: "7",
-        titulo: "Mini Vibrador Punto G Qamra Delfín",
-        descripcion: "Diseño curvado anatómico para estimulación focalizada del Punto G y clítoris. Motor potente con múltiples frecuencias de vibración silenciosa. Batería recargable.",
-        marca: "Pretty Love",
-        categoria: "sextoys",
         color: "rojo",
-        modelo: "delfin",
-        precio_tachado: 14000,
-        precio_oferta: 11200,
-        precio_transferencia: 10080,
-        cuotas: "3 cuotas sin interés de $3.733",
+        modelo: "liso",
+        precio_tachado: 34999,
+        precio_oferta: 27999,
+        precio_transferencia: 25199,
+        cuotas: "3 cuotas sin interés de $9.333",
         badge_descuento: "20% OFF",
         envio_gratis: true,
-        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Vibrador+Delfin",
+        colores_disponibles: ["Rojo"],
+        talles_disponibles: [],
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Dante+al+Infierno",
         imagenes: [
-            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Vibrador+Curva",
-            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Botones+Control"
+            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Dante+Frente",
+            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Dante+Envase"
         ]
     },
     {
-        id: "8",
-        titulo: "Arnés y Conjunto de Cuero Fetiche",
-        descripcion: "Conjunto estilo bondage confeccionado en cuero vegano con herrajes niquelados reforzados. Correas totalmente ajustables para adaptarse a distintas medidas corporales.",
-        marca: "Svakom",
-        categoria: "fetiche",
+        id: "2",
+        titulo: "Spray Retardante Sexitive Héroe Extra Time 20ml",
+        descripcion: "Spray desensibilizante suave diseñado para prolongar el placer y el rendimiento. Textura liviana, rápida absorción y sin dejar residuos grasos.",
+        marca: "Sexitive",
+        categoria: "cosmetica",
         color: "negro",
-        modelo: "ondas",
-        precio_tachado: 45000,
-        precio_oferta: 38000,
-        precio_transferencia: 34200,
-        cuotas: "3 cuotas sin interés de $12.666",
-        badge_descuento: "15% OFF",
+        modelo: "liso",
+        precio_tachado: 29500,
+        precio_oferta: 23600,
+        precio_transferencia: 21240,
+        cuotas: "3 cuotas sin interés de $7.866",
+        badge_descuento: "20% OFF",
         envio_gratis: true,
-        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Arnes+Fetiche",
+        colores_disponibles: ["Negro"],
+        talles_disponibles: [],
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Heroe+Spray",
         imagenes: [
-            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Arnes+Completo",
-            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Detalle+Hebillas"
+            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Heroe+Spray+1",
+            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Heroe+Caja+2"
+        ]
+    },
+    {
+        id: "4",
+        titulo: "Succionador de Clítoris — 10 funciones de pulso",
+        descripcion: "Estimulación por ondas de presión de aire sin contacto directo. Silicona médica ultra suave de grado alimenticio, recargable mediante USB y sumergible.",
+        marca: "Satisfyer",
+        categoria: "sextoys",
+        color: "rosa",
+        modelo: "ondas",
+        precio_tachado: 89900,
+        precio_oferta: 71920,
+        precio_transferencia: 64728,
+        cuotas: "3 cuotas sin interés de $23.973",
+        badge_descuento: "20% OFF",
+        envio_gratis: true,
+        colores_disponibles: ["Rosa", "Negro"],
+        talles_disponibles: [],
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Succionador+Satisfyer",
+        imagenes: [
+            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Succionador+Frente",
+            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Boquilla+Silicona"
         ]
     }
 ];
 
-// TEXTOS DE LAS CARDS FLOTANTES DEL FOOTER
 const DATOS_MODALES_INFO = {
     "acerca": {
         badge: "NUESTRA IDENTIDAD",
         titulo: "Acerca de Fórmula Íntima",
         contenido: `
-            <p>Fórmula Íntima nace con el propósito de abordar la sexualidad desde una mirada amplia, natural y consciente[cite: 37].</p>
-            <p>Más que ofrecer productos, buscamos crear un espacio donde el placer, el bienestar y la salud sexual convivan con información, acompañamiento y respeto, derribando prejuicios y mitos[cite: 37].</p>
+            <p>Fórmula Íntima nace con el propósito de abordar la sexualidad desde una mirada amplia, natural y consciente.</p>
+            <p>Más que ofrecer productos, buscamos crear un espacio donde el placer, el bienestar y la salud sexual convivan con información, acompañamiento y respeto, derribando prejuicios y mitos.</p>
             <div class="modal-info__destacado">
-                Celebramos la diversidad de cuerpos, identidades y talles. El placer es para todes[cite: 37].
+                Celebrar la diversidad de cuerpos, identidades y talles. El placer es para todes.
             </div>
         `
     },
@@ -197,9 +121,9 @@ const DATOS_MODALES_INFO = {
             <p><strong>¿El envío es realmente discreto?</strong><br>
             Totalmente. Los paquetes no tienen logos, nombres del rubro ni alusión a sex shop. Llegan en cajas o bolsas neutras y cerradas.</p>
             <p><strong>¿Cómo coordino el pago y la entrega?</strong><br>
-            Al presionar "Iniciar compra" en el carrito, se genera un mensaje automático con tus productos y precios y te deriva directo a nuestro WhatsApp oficial para coordinar todo de forma personalizada.</p>
+            Al presionar "Iniciar compra" en el carrito, se genera un mensaje automático con tus productos, talles y colores y te deriva directo a nuestro WhatsApp oficial para coordinar todo de forma personalizada.</p>
             <p><strong>¿Tienen atención confidencial?</strong><br>
-            Sí, te asesoramos de manera 100% privada, cálida y sin prejuicios[cite: 37].</p>
+            Sí, te asesoramos de manera 100% privada, cálida y sin prejuicios.</p>
         `
     },
     "envios": {
@@ -235,10 +159,10 @@ const DATOS_MODALES_INFO = {
         contenido: `
             <p>El modo de compra es directo, personalizado y sin vueltas a través de WhatsApp:</p>
             <ol>
-                <li><strong>Elegí tus productos:</strong> Navegá el catálogo y presioná <em>"Agregar al carrito"</em> en lo que te guste.</li>
+                <li><strong>Elegí tus productos:</strong> Navegá el catálogo y presioná <em>"Ver"</em> o <em>"Agregar al carrito"</em> seleccionando tu talle y color preferido.</li>
                 <li><strong>Revisá tu selección:</strong> En el carrito lateral podés sumar cantidades y ver el total calculado automáticamente.</li>
                 <li><strong>Iniciá la compra:</strong> Tocá el botón <em>"Iniciar compra"</em>.</li>
-                <li><strong>Mensaje automático a WhatsApp:</strong> El sistema arma el mensaje con tu lista de productos y el total, y te abre nuestro WhatsApp para finalizar el pago y el envío discreto.</li>
+                <li><strong>Mensaje automático a WhatsApp:</strong> El sistema arma el mensaje con tu lista de productos detallando talles y colores, y te abre nuestro WhatsApp para finalizar el pago y el envío discreto.</li>
             </ol>
         `
     },
@@ -271,9 +195,7 @@ try {
     carrito = [];
 }
 
-// ==========================================================================
 // 1. FILTROS Y NAVEGACIÓN
-// ==========================================================================
 window.filtrarDesdeEnlace = function(categoriaClave) {
     const formFiltros = document.getElementById('formulario-filtros');
     const buscadorInput = document.getElementById('input-buscar');
@@ -282,21 +204,15 @@ window.filtrarDesdeEnlace = function(categoriaClave) {
     if (buscadorInput) buscadorInput.value = '';
 
     const checkbox = document.querySelector(`input[name="categoria"][value="${categoriaClave}"]`);
-    if (checkbox) {
-        checkbox.checked = true;
-    }
+    if (checkbox) checkbox.checked = true;
 
     const migasActual = document.getElementById('migas-categoria-actual');
-    if (migasActual) {
-        migasActual.textContent = NOMBRES_CATEGORIAS[categoriaClave] || "Todos los productos";
-    }
+    if (migasActual) migasActual.textContent = NOMBRES_CATEGORIAS[categoriaClave] || "Todos los productos";
 
     window.aplicarFiltros();
 
     const seccionCatalogo = document.getElementById('contenido-principal');
-    if (seccionCatalogo) {
-        seccionCatalogo.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (seccionCatalogo) seccionCatalogo.scrollIntoView({ behavior: 'smooth' });
 };
 
 window.toggleAcordeonFiltro = function(cabecera) {
@@ -326,26 +242,27 @@ window.aplicarFiltros = function() {
         );
     }
 
-    const categoriasSeleccionadas = Array.from(document.querySelectorAll('input[name="categoria"]:checked'))
-        .map(input => input.value.toLowerCase());
+    const categoriasSeleccionadas = Array.from(document.querySelectorAll('input[name="categoria"]:checked')).map(i => i.value.toLowerCase());
     if (categoriasSeleccionadas.length > 0) {
         resultado = resultado.filter(p => p.categoria && categoriasSeleccionadas.includes(p.categoria.toLowerCase()));
     }
 
-    const marcasSeleccionadas = Array.from(document.querySelectorAll('input[name="marca"]:checked'))
-        .map(input => input.value.toLowerCase());
+    const marcasSeleccionadas = Array.from(document.querySelectorAll('input[name="marca"]:checked')).map(i => i.value.toLowerCase());
     if (marcasSeleccionadas.length > 0) {
         resultado = resultado.filter(p => p.marca && marcasSeleccionadas.includes(p.marca.toLowerCase()));
     }
 
-    const coloresSeleccionados = Array.from(document.querySelectorAll('input[name="color"]:checked'))
-        .map(input => input.value.toLowerCase());
+    const coloresSeleccionados = Array.from(document.querySelectorAll('input[name="color"]:checked')).map(i => i.value.toLowerCase());
     if (coloresSeleccionados.length > 0) {
-        resultado = resultado.filter(p => p.color && coloresSeleccionados.includes(p.color.toLowerCase()));
+        resultado = resultado.filter(p => {
+            if (p.colores_disponibles && p.colores_disponibles.length) {
+                return p.colores_disponibles.some(c => coloresSeleccionados.includes(c.toLowerCase()));
+            }
+            return p.color && coloresSeleccionados.includes(p.color.toLowerCase());
+        });
     }
 
-    const modelosSeleccionados = Array.from(document.querySelectorAll('input[name="modelo"]:checked'))
-        .map(input => input.value.toLowerCase());
+    const modelosSeleccionados = Array.from(document.querySelectorAll('input[name="modelo"]:checked')).map(i => i.value.toLowerCase());
     if (modelosSeleccionados.length > 0) {
         resultado = resultado.filter(p => p.modelo && modelosSeleccionados.includes(p.modelo.toLowerCase()));
     }
@@ -360,18 +277,10 @@ window.aplicarFiltros = function() {
 
     const orden = selectOrden ? selectOrden.value : 'destacados';
     switch (orden) {
-        case 'precio-menor':
-            resultado.sort((a, b) => a.precio_oferta - b.precio_oferta);
-            break;
-        case 'precio-mayor':
-            resultado.sort((a, b) => b.precio_oferta - a.precio_oferta);
-            break;
-        case 'alfabetico-az':
-            resultado.sort((a, b) => a.titulo.localeCompare(b.titulo));
-            break;
-        case 'alfabetico-za':
-            resultado.sort((a, b) => b.titulo.localeCompare(a.titulo));
-            break;
+        case 'precio-menor': resultado.sort((a, b) => a.precio_oferta - b.precio_oferta); break;
+        case 'precio-mayor': resultado.sort((a, b) => b.precio_oferta - a.precio_oferta); break;
+        case 'alfabetico-az': resultado.sort((a, b) => a.titulo.localeCompare(b.titulo)); break;
+        case 'alfabetico-za': resultado.sort((a, b) => b.titulo.localeCompare(a.titulo)); break;
     }
 
     productosFiltrados = resultado;
@@ -391,9 +300,7 @@ window.limpiarFiltros = function() {
     window.aplicarFiltros();
 };
 
-// ==========================================================================
-// 2. RENDERIZADO DE PRODUCTOS EN LA GRILLA
-// ==========================================================================
+// 2. RENDERIZAR PRODUCTOS
 function renderizarProductos(productos) {
     const contenedorGrilla = document.getElementById('grilla-productos');
     const contadorProductos = document.getElementById('contador-productos-texto');
@@ -407,9 +314,7 @@ function renderizarProductos(productos) {
         contenedorGrilla.innerHTML = `
             <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: #777;">
                 <p style="font-size: 1.15rem; margin-bottom: 1rem;">No encontramos productos con esos filtros seleccionados.</p>
-                <button type="button" onclick="window.limpiarFiltros()" class="catalogo__boton-ver-mas">
-                    Ver todos los productos
-                </button>
+                <button type="button" onclick="window.limpiarFiltros()" class="catalogo__boton-ver-mas">Ver todos los productos</button>
             </div>
         `;
         return;
@@ -418,21 +323,19 @@ function renderizarProductos(productos) {
     contenedorGrilla.innerHTML = productos.map(prod => {
         const foto = prod.imagen_url || (prod.imagenes && prod.imagenes[0]) || 'https://placehold.co/400x400/F4E4D9/6D1D26?text=Formula+Intima';
         const precioOferta = Number(prod.precio_oferta).toLocaleString('es-AR');
-        const precioTachado = prod.precio_tachado 
-            ? `<div class="tarjeta-producto__precio-tachado">$${Number(prod.precio_tachado).toLocaleString('es-AR')}</div>` 
-            : '';
-        const transferencia = prod.precio_transferencia 
-            ? `<div class="tarjeta-producto__transferencia">$${Number(prod.precio_transferencia).toLocaleString('es-AR')} con Transferencia o depósito</div>` 
-            : '';
-        const cuotas = prod.cuotas 
-            ? `<div class="tarjeta-producto__cuotas">${prod.cuotas}</div>` 
-            : '';
-        const badgeDesc = prod.badge_descuento 
-            ? `<span class="tarjeta-producto__etiqueta tarjeta-producto__etiqueta--descuento">${prod.badge_descuento}</span>` 
-            : '';
-        const badgeEnvio = prod.envio_gratis 
-            ? `<span class="tarjeta-producto__etiqueta tarjeta-producto__etiqueta--envio">Envío gratis</span>` 
-            : '';
+        const precioTachado = prod.precio_tachado ? `<div class="tarjeta-producto__precio-tachado">$${Number(prod.precio_tachado).toLocaleString('es-AR')}</div>` : '';
+        const transferencia = prod.precio_transferencia ? `<div class="tarjeta-producto__transferencia">$${Number(prod.precio_transferencia).toLocaleString('es-AR')} con Transferencia o depósito</div>` : '';
+        const cuotas = prod.cuotas ? `<div class="tarjeta-producto__cuotas">${prod.cuotas}</div>` : '';
+        const badgeDesc = prod.badge_descuento ? `<span class="tarjeta-producto__etiqueta tarjeta-producto__etiqueta--descuento">${prod.badge_descuento}</span>` : '';
+        const badgeEnvio = prod.envio_gratis ? `<span class="tarjeta-producto__etiqueta tarjeta-producto__etiqueta--envio">Envío gratis</span>` : '';
+
+        // Badges visuales de talles disponibles
+        const tieneTalles = (prod.talles_disponibles && prod.talles_disponibles.length);
+        const tallesHTML = tieneTalles ? `
+            <div style="font-size: 0.72rem; color: #6D1D26; font-weight: 700; margin-bottom: 0.3rem;">
+                Talles: ${prod.talles_disponibles.join(', ')}
+            </div>
+        ` : '';
 
         return `
             <article class="tarjeta-producto" itemscope itemtype="https://schema.org/Product">
@@ -453,6 +356,8 @@ function renderizarProductos(productos) {
                     <a href="#producto-${prod.id}" onclick="event.preventDefault(); window.verDetalleRapido('${prod.id}')" class="tarjeta-producto__titulo-enlace">
                         <h3 class="tarjeta-producto__titulo" itemprop="name">${prod.titulo}</h3>
                     </a>
+
+                    ${tallesHTML}
                     
                     <div class="tarjeta-producto__precios" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                         <meta itemprop="priceCurrency" content="ARS">
@@ -466,8 +371,8 @@ function renderizarProductos(productos) {
                     </div>
 
                     <div class="tarjeta-producto__acciones">
-                        <button type="button" class="tarjeta-producto__boton tarjeta-producto__boton--comprar" onclick="window.agregarAlCarrito('${prod.id}')">
-                            Agregar al carrito
+                        <button type="button" class="tarjeta-producto__boton tarjeta-producto__boton--comprar" onclick="window.verDetalleRapido('${prod.id}')">
+                            ${tieneTalles ? 'Elegir talle' : 'Agregar al carrito'}
                         </button>
                         <button type="button" class="tarjeta-producto__boton tarjeta-producto__boton--ver" onclick="window.verDetalleRapido('${prod.id}')">
                             Ver
@@ -492,9 +397,7 @@ function actualizarContadoresCategorias() {
     });
 }
 
-// ==========================================================================
 // 3. CARRITO DE COMPRAS Y WHATSAPP
-// ==========================================================================
 window.abrirDrawerCarrito = function() {
     const carritoDrawer = document.getElementById('carrito-drawer');
     if (carritoDrawer) {
@@ -515,16 +418,21 @@ window.cerrarDrawerCarrito = function() {
 
 window.toggleCuponCarrito = function() {
     const cuponContenido = document.getElementById('cupon-contenido');
-    if (cuponContenido) {
-        cuponContenido.classList.toggle('carrito-cupon__formulario--activo');
-    }
+    if (cuponContenido) cuponContenido.classList.toggle('carrito-cupon__formulario--activo');
 };
 
-window.agregarAlCarrito = function(id) {
+// Agregar al carrito con variante de Color y Talle
+window.agregarAlCarrito = function(id, colorElegido = null, talleElegido = null) {
     const prod = todosLosProductos.find(p => String(p.id) === String(id));
     if (!prod) return;
 
-    const itemExistente = carrito.find(item => String(item.id) === String(id));
+    // Si no se pasaron, se toma la primera opción disponible
+    const colorFinal = colorElegido || (prod.colores_disponibles && prod.colores_disponibles[0]) || prod.color || 'Único';
+    const talleFinal = talleElegido || (prod.talles_disponibles && prod.talles_disponibles[0]) || 'Único';
+
+    // Clave única por variante para poder agregar el mismo producto en talles distintos
+    const keyVariante = `${prod.id}_${colorFinal}_${talleFinal}`;
+    const itemExistente = carrito.find(item => item.keyVariante === keyVariante);
     const foto = prod.imagen_url || (prod.imagenes && prod.imagenes[0]) || 'https://placehold.co/100x100/F4E4D9/6D1D26?text=Foto';
 
     if (itemExistente) {
@@ -532,8 +440,11 @@ window.agregarAlCarrito = function(id) {
     } else {
         carrito.push({
             id: prod.id,
+            keyVariante: keyVariante,
             titulo: prod.titulo,
             marca: prod.marca || 'Fórmula Íntima',
+            color: colorFinal,
+            talle: talleFinal,
             precio: parseFloat(prod.precio_oferta),
             imagen_url: foto,
             cantidad: 1
@@ -545,21 +456,21 @@ window.agregarAlCarrito = function(id) {
     window.abrirDrawerCarrito();
 };
 
-window.cambiarCantidadItem = function(id, cambio) {
-    const item = carrito.find(p => String(p.id) === String(id));
+window.cambiarCantidadItem = function(keyVariante, cambio) {
+    const item = carrito.find(p => p.keyVariante === keyVariante || String(p.id) === String(keyVariante));
     if (!item) return;
 
     item.cantidad += cambio;
     if (item.cantidad <= 0) {
-        carrito = carrito.filter(p => String(p.id) !== String(id));
+        carrito = carrito.filter(p => p !== item);
     }
 
     guardarCarrito();
     actualizarCarritoUI();
 };
 
-window.eliminarItemCarrito = function(id) {
-    carrito = carrito.filter(p => String(p.id) !== String(id));
+window.eliminarItemCarrito = function(keyVariante) {
+    carrito = carrito.filter(p => p.keyVariante !== keyVariante && String(p.id) !== String(keyVariante));
     guardarCarrito();
     actualizarCarritoUI();
 };
@@ -602,29 +513,36 @@ function actualizarCarritoUI() {
     const subtotal = carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
     const cuota3 = Math.round(subtotal / 3);
 
-    carritoItemsContenedor.innerHTML = carrito.map(item => `
-        <div class="carrito-item">
-            <div class="carrito-item__imagen-caja">
-                <img src="${item.imagen_url}" alt="${item.titulo}" class="carrito-item__imagen">
-            </div>
+    carritoItemsContenedor.innerHTML = carrito.map(item => {
+        const detalleVariante = (item.talle && item.talle !== 'Único') ? `Talle: ${item.talle}` : '';
+        const detalleColor = (item.color && item.color !== 'Único') ? `Color: ${item.color}` : '';
+        const subDetalle = [detalleVariante, detalleColor].filter(Boolean).join(' | ');
 
-            <div class="carrito-item__info">
-                <span class="carrito-item__marca">${item.marca}</span>
-                <h4 class="carrito-item__titulo">${item.titulo}</h4>
-                
-                <div class="carrito-item__cantidad">
-                    <button type="button" class="carrito-item__btn-cant" onclick="window.cambiarCantidadItem('${item.id}', -1)">-</button>
-                    <span class="carrito-item__cant-numero">${item.cantidad}</span>
-                    <button type="button" class="carrito-item__btn-cant" onclick="window.cambiarCantidadItem('${item.id}', 1)">+</button>
+        return `
+            <div class="carrito-item">
+                <div class="carrito-item__imagen-caja">
+                    <img src="${item.imagen_url}" alt="${item.titulo}" class="carrito-item__imagen">
+                </div>
+
+                <div class="carrito-item__info">
+                    <span class="carrito-item__marca">${item.marca}</span>
+                    <h4 class="carrito-item__titulo">${item.titulo}</h4>
+                    ${subDetalle ? `<div style="font-size:0.75rem; color:#6D1D26; font-weight:700;">${subDetalle}</div>` : ''}
+                    
+                    <div class="carrito-item__cantidad">
+                        <button type="button" class="carrito-item__btn-cant" onclick="window.cambiarCantidadItem('${item.keyVariante || item.id}', -1)">-</button>
+                        <span class="carrito-item__cant-numero">${item.cantidad}</span>
+                        <button type="button" class="carrito-item__btn-cant" onclick="window.cambiarCantidadItem('${item.keyVariante || item.id}', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="carrito-item__col-derecha">
+                    <button type="button" class="carrito-item__btn-eliminar" onclick="window.eliminarItemCarrito('${item.keyVariante || item.id}')" aria-label="Eliminar">&times;</button>
+                    <span class="carrito-item__precio">$ ${(item.precio * item.cantidad).toLocaleString('es-AR')}</span>
                 </div>
             </div>
-
-            <div class="carrito-item__col-derecha">
-                <button type="button" class="carrito-item__btn-eliminar" onclick="window.eliminarItemCarrito('${item.id}')" aria-label="Eliminar">&times;</button>
-                <span class="carrito-item__precio">$ ${(item.precio * item.cantidad).toLocaleString('es-AR')}</span>
-            </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 
     if (carritoSubtotalTexto) carritoSubtotalTexto.textContent = `$ ${subtotal.toLocaleString('es-AR')}`;
     if (carritoTotalTexto) carritoTotalTexto.textContent = `$ ${subtotal.toLocaleString('es-AR')}`;
@@ -642,7 +560,10 @@ window.enviarPedidoAWhatsApp = function() {
 
     carrito.forEach((item, index) => {
         const totalPorItem = (item.precio * item.cantidad).toLocaleString('es-AR');
-        mensaje += `*${index + 1}.* ${item.titulo}\n`;
+        const detalleVariante = (item.talle && item.talle !== 'Único') ? ` (Talle: ${item.talle})` : '';
+        const detalleColor = (item.color && item.color !== 'Único') ? ` (Color: ${item.color})` : '';
+
+        mensaje += `*${index + 1}.* ${item.titulo}${detalleVariante}${detalleColor}\n`;
         mensaje += `   • Cantidad: ${item.cantidad}\n`;
         mensaje += `   • Subtotal: $${totalPorItem}\n\n`;
     });
@@ -656,9 +577,7 @@ window.enviarPedidoAWhatsApp = function() {
     window.open(urlWhatsApp, '_blank');
 };
 
-// ==========================================================================
 // 4. SUSCRIPCIÓN NEWSLETTER
-// ==========================================================================
 window.suscribirNewsletter = async function(event) {
     event.preventDefault();
     const inputEmail = document.getElementById('input-email-newsletter');
@@ -687,9 +606,7 @@ window.suscribirNewsletter = async function(event) {
         let suscriptoresLocales = [];
         try {
             suscriptoresLocales = JSON.parse(localStorage.getItem('fi_suscriptores_newsletter')) || [];
-        } catch (e) {
-            suscriptoresLocales = [];
-        }
+        } catch (e) { suscriptoresLocales = []; }
 
         const yaExiste = suscriptoresLocales.some(s => s.email === email);
         if (!yaExiste) {
@@ -701,7 +618,6 @@ window.suscribirNewsletter = async function(event) {
         mensajeAlerta.className = "newsletter__alerta newsletter__alerta--exito";
         mensajeAlerta.style.display = "block";
         inputEmail.value = "";
-
     } catch (err) {
         mensajeAlerta.textContent = "Hubo un inconveniente al registrar tu correo. Inténtalo nuevamente.";
         mensajeAlerta.className = "newsletter__alerta newsletter__alerta--error";
@@ -709,15 +625,11 @@ window.suscribirNewsletter = async function(event) {
     } finally {
         boton.disabled = false;
         boton.textContent = "Quiero sumarme";
-        setTimeout(() => {
-            mensajeAlerta.style.display = "none";
-        }, 5000);
+        setTimeout(() => { mensajeAlerta.style.display = "none"; }, 5000);
     }
 };
 
-// ==========================================================================
 // 5. CARDS FLOTANTES DEL FOOTER
-// ==========================================================================
 window.abrirModalInfo = function(clave) {
     const modalInfo = document.getElementById('modal-info');
     const modalInfoBadge = document.getElementById('modal-info-badge');
@@ -754,14 +666,10 @@ window.toggleFavorito = function(btn) {
     }
 };
 
-// ==========================================================================
-// 6. CARD MODAL DETALLADA: MULTI-IMAGEN Y DESCRIPCIÓN
-// ==========================================================================
+// 6. CARD MODAL DETALLADA CON SELECTOR DE TALLE, COLOR Y FOTOS
 window.cambiarImagenPrincipalModal = function(urlNueva) {
     const imgPrincipal = document.getElementById('modal-producto-img-principal');
-    if (imgPrincipal) {
-        imgPrincipal.src = urlNueva;
-    }
+    if (imgPrincipal) imgPrincipal.src = urlNueva;
 };
 
 window.verDetalleRapido = function(id) {
@@ -780,31 +688,57 @@ window.verDetalleRapido = function(id) {
 
     const fotoInicial = listaFotos[0];
 
-    // Miniaturas interactivas (solo si hay más de 1 imagen)
+    // Miniaturas de galería
     const tiraMiniaturasHTML = listaFotos.length > 1 ? `
         <div style="display:flex; gap:0.5rem; justify-content:center; margin-top:0.6rem; overflow-x:auto; padding-bottom:4px;">
             ${listaFotos.map((url, i) => `
                 <img src="${url}" 
                      onclick="window.cambiarImagenPrincipalModal('${url}')" 
                      onmouseover="window.cambiarImagenPrincipalModal('${url}')"
-                     style="width:50px; height:50px; object-fit:contain; border:2px solid #E5D5C5; border-radius:4px; cursor:pointer; background:#fff; transition:border-color 0.2s;"
-                     onmouseenter="this.style.borderColor='#6D1D26'"
-                     onmouseleave="this.style.borderColor='#E5D5C5'"
+                     style="width:50px; height:50px; object-fit:contain; border:2px solid #E5D5C5; border-radius:4px; cursor:pointer; background:#fff;"
                      alt="Miniatura ${i+1}">
             `).join('')}
+        </div>
+    ` : '';
+
+    // Selector de Colores si tiene
+    const colores = (prod.colores_disponibles && prod.colores_disponibles.length) ? prod.colores_disponibles : (prod.color ? [prod.color] : []);
+    const selectorColoresHTML = colores.length > 1 ? `
+        <div style="margin-bottom:0.9rem;">
+            <label style="font-size:0.85rem; font-weight:700; color:#40171F; display:block; margin-bottom:0.3rem;">Elegí el color:</label>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                ${colores.map((c, i) => `
+                    <label style="display:inline-flex; align-items:center; gap:0.3rem; font-size:0.85rem; background:#FFF8ED; border:1px solid #E5D5C5; padding:4px 8px; border-radius:4px; cursor:pointer;">
+                        <input type="radio" name="modal_radio_color" value="${c}" ${i === 0 ? 'checked' : ''}> ${c}
+                    </label>
+                `).join('')}
+            </div>
+        </div>
+    ` : '';
+
+    // Selector de Talles si tiene
+    const talles = (prod.talles_disponibles && prod.talles_disponibles.length) ? prod.talles_disponibles : [];
+    const selectorTallesHTML = talles.length > 0 ? `
+        <div style="margin-bottom:1.1rem; background:#FFF8ED; border:1px dashed #E5D5C5; padding:0.8rem; border-radius:6px;">
+            <label style="font-size:0.85rem; font-weight:700; color:#6D1D26; display:block; margin-bottom:0.4rem;">📏 Seleccioná tu talle:</label>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                ${talles.map((t, i) => `
+                    <label style="display:inline-flex; align-items:center; gap:0.3rem; font-size:0.85rem; font-weight:700; background:#fff; border:1px solid #6D1D26; padding:5px 10px; border-radius:4px; cursor:pointer;">
+                        <input type="radio" name="modal_radio_talle" value="${t}" ${i === 0 ? 'checked' : ''}> ${t}
+                    </label>
+                `).join('')}
+            </div>
         </div>
     ` : '';
 
     modalInfoBadge.textContent = prod.marca || 'FÓRMULA ÍNTIMA';
     modalInfoTitulo.textContent = prod.titulo;
     modalInfoContenido.innerHTML = `
-        <!-- Galería Principal -->
         <div style="text-align:center; margin-bottom:1.2rem; background:#F4E4D9; padding:1.2rem; border-radius:6px;">
             <img id="modal-producto-img-principal" src="${fotoInicial}" alt="${prod.titulo}" style="max-height:220px; width:auto; margin:0 auto; object-fit:contain; border-radius:4px;">
             ${tiraMiniaturasHTML}
         </div>
 
-        <!-- Precios -->
         <div style="margin-bottom:1rem; border-bottom:1px solid #E5D5C5; padding-bottom:0.8rem;">
             <div style="font-size:1.8rem; font-weight:800; color:#6D1D26; line-height:1.1;">
                 $${Number(prod.precio_oferta).toLocaleString('es-AR')}
@@ -814,16 +748,19 @@ window.verDetalleRapido = function(id) {
             ${prod.precio_transferencia ? `<div class="modal-info__destacado" style="margin-top:0.5rem;">$${Number(prod.precio_transferencia).toLocaleString('es-AR')} con Transferencia o depósito bancario</div>` : ''}
         </div>
 
-        <!-- Descripción Completa -->
+        <!-- SELECTORES DE COLOR Y TALLE -->
+        ${selectorColoresHTML}
+        ${selectorTallesHTML}
+
+        <!-- Descripción -->
         ${prod.descripcion ? `
             <div style="margin-bottom:1.5rem;">
-                <h4 style="font-size:0.9rem; font-weight:700; color:#40171F; margin-bottom:0.4rem; text-transform:uppercase; letter-spacing:0.5px;">Descripción del producto:</h4>
+                <h4 style="font-size:0.9rem; font-weight:700; color:#40171F; margin-bottom:0.4rem; text-transform:uppercase; letter-spacing:0.5px;">Descripción:</h4>
                 <p style="font-size:0.92rem; color:#444; line-height:1.6; white-space:pre-line;">${prod.descripcion}</p>
             </div>
         ` : ''}
 
-        <!-- Botón de Compra -->
-        <button type="button" onclick="window.cerrarModalInfo(); window.agregarAlCarrito('${prod.id}');" style="width:100%; padding:1rem; background:#40171F; color:#FFF8ED; border:none; border-radius:4px; font-weight:700; font-size:1rem; cursor:pointer; transition:background-color 0.2s;" onmouseenter="this.style.backgroundColor='#6D1D26'" onmouseleave="this.style.backgroundColor='#40171F'">
+        <button type="button" onclick="window.confirmarAgregarDesdeModal('${prod.id}')" style="width:100%; padding:1rem; background:#40171F; color:#FFF8ED; border:none; border-radius:4px; font-weight:700; font-size:1rem; cursor:pointer;">
             Agregar al carrito
         </button>
     `;
@@ -833,9 +770,19 @@ window.verDetalleRapido = function(id) {
     document.body.style.overflow = 'hidden';
 };
 
-// ==========================================================================
-// 7. INICIALIZACIÓN AUTOMÁTICA
-// ==========================================================================
+// Confirmar y agregar al carrito leyendo las opciones seleccionadas en la modal
+window.confirmarAgregarDesdeModal = function(id) {
+    const radioColor = document.querySelector('input[name="modal_radio_color"]:checked');
+    const radioTalle = document.querySelector('input[name="modal_radio_talle"]:checked');
+
+    const colorElegido = radioColor ? radioColor.value : null;
+    const talleElegido = radioTalle ? radioTalle.value : null;
+
+    window.cerrarModalInfo();
+    window.agregarAlCarrito(id, colorElegido, talleElegido);
+};
+
+// 7. INICIALIZACIÓN
 async function iniciarTienda() {
     const guardadosEnAdmin = localStorage.getItem('fi_catalogo_admin');
     if (guardadosEnAdmin) {

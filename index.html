@@ -45,11 +45,13 @@
         <div class="cabecera__principal">
             <div class="cabecera__contenedor cabecera__contenedor--flex">
                 
-                <div class="cabecera__logo-contenedor">
-                    <a href="index.html" class="cabecera__logo-enlace" aria-label="Fórmula Íntima - Inicio">
-                        <h1 class="cabecera__logo-texto">Fórmula Íntima</h1>
-                    </a>
-                </div>
+                <!-- POR ESTO (Logo horizontal con etiqueta h1 accesible): -->
+        <div class="cabecera__logo-contenedor">
+                 <a href="index.html" class="cabecera__logo-enlace" aria-label="Fórmula Íntima - Inicio">
+                      <h1 class="sr-only">Fórmula Íntima</h1>
+                    <img src="./img/logo/Logo principal.svg" alt="Fórmula Íntima" class="cabecera__logo-img">
+                   </a>
+          </div>
 
                 <div class="cabecera__buscador">
                     <form class="buscador" onsubmit="event.preventDefault(); window.aplicarFiltros();" role="search">
@@ -482,12 +484,15 @@
             <div class="pie-pagina__columnas">
                 
                 <!-- Columna 1: Marca y Redes -->
-                <div class="pie-pagina__columna pie-pagina__columna--marca">
-                    <h3 class="pie-pagina__logo">Fórmula Íntima</h3>
-                    <p class="pie-pagina__descripcion">
-                        Placer, bienestar e información en un espacio libre de prejuicios.
-                    </p>
-                    <div class="pie-pagina__redes">
+                <!-- POR ESTO (Logo secundario apilado): -->
+            <div class="pie-pagina__columna pie-pagina__columna--marca">
+                    <a href="index.html" class="pie-pagina__logo-enlace" aria-label="Fórmula Íntima">
+                     <img src="./img/logo/Logo secundario.svg" alt="Fórmula Íntima" class="pie-pagina__logo-img">
+                            </a>
+                     <p class="pie-pagina__descripcion">
+                          Placer, bienestar e información en un espacio libre de prejuicios.
+                        </p>
+                        <div class="pie-pagina__redes">
                         <a href="https://instagram.com" class="redes__enlace" aria-label="Instagram" target="_blank" rel="noopener">📷</a>
                         <a href="https://facebook.com" class="redes__enlace" aria-label="Facebook" target="_blank" rel="noopener">📘</a>
                         <a href="https://tiktok.com" class="redes__enlace" aria-label="TikTok" target="_blank" rel="noopener">🎵</a>
