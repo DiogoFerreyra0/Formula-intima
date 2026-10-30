@@ -1949,3 +1949,140 @@ button, input, select {
         transform: translateX(100%);
     }
 }
+
+/* ==========================================================================
+   ESTILOS: ADVERTENCIA DE MAYORÍA DE EDAD (+18)
+   ========================================================================== */
+.modal-edad {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100000; /* Por encima de la tienda */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-edad--activo {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-edad__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(64, 23, 31, 0.75); /* Borgoña oscuro translúcido */
+    backdrop-filter: blur(6px);
+}
+
+.modal-edad__tarjeta {
+    position: relative;
+    z-index: 2;
+    background-color: var(--color-fondo-principal); /* #FFF8ED */
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 460px;
+    padding: 2.2rem 2rem;
+    text-align: center;
+    box-shadow: 0 20px 45px rgba(64, 23, 31, 0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: scale(0.94);
+    transition: transform 0.3s ease;
+}
+
+.modal-edad--activo .modal-edad__tarjeta {
+    transform: scale(1);
+}
+
+.modal-edad__icono-circulo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--color-fondo-secundario); /* #F4E4D9 */
+    border: 2px solid var(--color-primario); /* #6D1D26 */
+    color: var(--color-primario);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: 1.2rem;
+}
+
+.modal-edad__titulo {
+    font-family: var(--fuente-titulos);
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--color-primario);
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+}
+
+.modal-edad__texto {
+    font-size: 0.92rem;
+    color: #555555;
+    line-height: 1.55;
+    margin-bottom: 0.6rem;
+}
+
+.modal-edad__subtexto {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--color-oscuro);
+    margin-bottom: 1.6rem;
+}
+
+.modal-edad__acciones {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+}
+
+.modal-edad__btn-confirmar {
+    width: 100%;
+    padding: 0.95rem;
+    background-color: var(--color-oscuro); /* #40171F */
+    color: var(--color-fondo-principal);
+    border: none;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.modal-edad__btn-confirmar:hover {
+    background-color: var(--color-primario); /* #6D1D26 */
+    transform: translateY(-1px);
+}
+
+.modal-edad__btn-salir {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: transparent;
+    color: #777777;
+    border: 1px solid var(--color-borde);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.modal-edad__btn-salir:hover {
+    background-color: var(--color-fondo-secundario);
+    color: var(--color-oscuro);
+}

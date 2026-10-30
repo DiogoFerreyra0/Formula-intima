@@ -31,6 +31,31 @@
 <body>
 
     <!-- ==========================================
+     MODAL DE ADVERTENCIA DE EDAD (+18 AÑOS)
+     ========================================== -->
+<div id="modal-edad" class="modal-edad" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-edad__overlay"></div>
+    <div class="modal-edad__tarjeta">
+        <div class="modal-edad__icono-circulo">
+            <span>+18</span>
+        </div>
+        <h2 class="modal-edad__titulo">Contenido para mayores de edad</h2>
+        <p class="modal-edad__texto">
+            Este sitio contiene productos de bienestar sexual, lencería y salud íntima destinados exclusivamente a personas mayores de 18 años.
+        </p>
+        <p class="modal-edad__subtexto">¿Confirmás que tenés al menos 18 años para ingresar?</p>
+        <div class="modal-edad__acciones">
+            <button type="button" class="modal-edad__btn-confirmar" onclick="window.confirmarMayoriaEdad()">
+                Soy mayor de 18 años
+            </button>
+            <button type="button" class="modal-edad__btn-salir" onclick="window.salirPorMenorEdad()">
+                Soy menor de edad
+            </button>
+        </div>
+    </div>
+</div>
+
+    <!-- ==========================================
      PANTALLA DE CARGA / PRELOADER INICIAL
      ========================================== -->
 <div id="preloader" class="preloader" aria-hidden="false">

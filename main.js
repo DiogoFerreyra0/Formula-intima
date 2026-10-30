@@ -853,3 +853,34 @@ setTimeout(() => {
         setTimeout(() => { preloader.style.display = 'none'; }, 600);
     }
 }, 3000);
+
+// ==========================================================================
+// CONTROLADOR DE VERIFICACIÓN DE EDAD (+18)
+// ==========================================================================
+function verificarMayoriaEdadInicial() {
+    const yaConfirmo = localStorage.getItem('fi_adulto_confirmado');
+    const modalEdad = document.getElementById('modal-edad');
+
+    if (!yaConfirmo && modalEdad) {
+        modalEdad.classList.add('modal-edad--activo');
+        modalEdad.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+window.confirmarMayoriaEdad = function() {
+    localStorage.setItem('fi_adulto_confirmado', 'true');
+    const modalEdad = document.getElementById('modal-edad');
+    if (modalEdad) {
+        modalEdad.classList.remove('modal-edad--activo');
+        modalEdad.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+};
+
+window.salirPorMenorEdad = function() {
+    window.location.href = 'https://www.google.com';
+};
+
+// Se ejecuta al cargar la página
+document.addEventListener('DOMContentLoaded', verificarMayoriaEdadInicial);
