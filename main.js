@@ -1,11 +1,8 @@
 /* ==========================================================================
-   FÓRMULA ÍNTIMA - MAIN.JS (CATÁLOGO + FILTROS + CARRITO + NEWSLETTER)
+   FÓRMULA ÍNTIMA - MAIN.JS (CON GALERÍA MULTI-IMAGEN Y DESCRIPCIÓN)
    ========================================================================== */
 
-// NÚMERO DE WHATSAPP OFICIAL DEL LOCAL
 const WHATSAPP_NUMERO = "5491145678900"; 
-
-// SUPABASE CONFIG
 const SUPABASE_URL = "https://TU_PROYECTO.supabase.co";
 const SUPABASE_ANON_KEY = "TU_CLAVE_ANON_PUBLICA";
 
@@ -13,11 +10,12 @@ const clienteSupabase = (typeof window.supabase !== 'undefined' && SUPABASE_URL 
     ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
 
-// PRODUCTOS DE DEMOSTRACIÓN
+// PRODUCTOS BASE DE DEMOSTRACIÓN (Con descripciones y galerías multi-imagen)
 const PRODUCTOS_LOCALES_DEMO = [
     {
         id: "1",
         titulo: "Gel Lubricante Sexitive Dante al Infierno 500ml",
+        descripcion: "Gel íntimo lubricante ultra deslizante. Formato de 500ml ideal para masajes y prácticas intensas. Fórmula al agua compatible con preservativos y juguetes sexuales de silicona o látex.",
         marca: "Sexitive",
         categoria: "cosmetica",
         color: "rojo",
@@ -28,11 +26,17 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $9.333",
         badge_descuento: "20% OFF",
         envio_gratis: true,
-        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Dante+al+Infierno"
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Dante+al+Infierno",
+        imagenes: [
+            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Dante+Frente",
+            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Dante+Envase",
+            "https://placehold.co/400x400/F4E4D9/40171F?text=Dante+Textura"
+        ]
     },
     {
         id: "2",
         titulo: "Spray Retardante Sexitive Héroe Extra Time 20ml",
+        descripcion: "Spray desensibilizante suave diseñado para prolongar los encuentros íntimos. Textura liviana, rápida absorción, sin aroma invasivo y sin dejar sensación pegajosa.",
         marca: "Sexitive",
         categoria: "cosmetica",
         color: "negro",
@@ -43,11 +47,16 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $7.866",
         badge_descuento: "20% OFF",
         envio_gratis: true,
-        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Heroe+Spray"
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Heroe+Spray",
+        imagenes: [
+            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Heroe+Frasco",
+            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Heroe+Caja"
+        ]
     },
     {
         id: "3",
         titulo: "Perfume con Feromonas Her Aphrodisiac Roll-on",
+        descripcion: "Fragancia con concentrado de feromonas naturales en formato roll-on para llevar con vos. Diseñado para potenciar el magnetismo y la sensualidad.",
         marca: "Sexitive",
         categoria: "cosmetica",
         color: "rosa",
@@ -58,11 +67,16 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $10.996",
         badge_descuento: "15% OFF",
         envio_gratis: true,
-        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Her+Aphrodisiac"
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Her+Aphrodisiac",
+        imagenes: [
+            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Her+RollOn",
+            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Her+Packaging"
+        ]
     },
     {
         id: "4",
         titulo: "Succionador de Clítoris — 10 funciones de pulso",
+        descripcion: "Tecnología de ondas de aire pulsantes sin contacto directo. Silicona médica ultra suave de grado clínico, recargable mediante USB y sumergible para disfrutar en la ducha.",
         marca: "Satisfyer",
         categoria: "sextoys",
         color: "rosa",
@@ -73,11 +87,17 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $23.973",
         badge_descuento: "20% OFF",
         envio_gratis: true,
-        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Succionador+Satisfyer"
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Succionador+Satisfyer",
+        imagenes: [
+            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Succionador+Frente",
+            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Boquilla+Silicona",
+            "https://placehold.co/400x400/F4E4D9/40171F?text=Cable+USB+Carga"
+        ]
     },
     {
         id: "5",
         titulo: "Body de Encaje Línea Inclusiva Real",
+        descripcion: "Confeccionado en encaje elastizado suave y resistente con detalles en satén. Breteles regulables y calce ergonómico pensado para celebrar la diversidad de cuerpos y talles.",
         marca: "Fórmula Íntima",
         categoria: "lenceria",
         color: "negro",
@@ -88,11 +108,17 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $17.566",
         badge_descuento: "15% OFF",
         envio_gratis: true,
-        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Body+Encaje+Inclusivo"
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Body+Encaje+Inclusivo",
+        imagenes: [
+            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Body+Frente",
+            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Body+Espalda",
+            "https://placehold.co/400x400/F4E4D9/40171F?text=Detalle+Encaje"
+        ]
     },
     {
         id: "6",
         titulo: "Aceite de Masajes Sensual Vainilla 200ml",
+        descripcion: "Aceite corporal deslizante con efecto calor al soplar suavemente. Aroma dulce a vainilla, no mancha la ropa de cama y deja la piel hidratada y sedosa.",
         marca: "Pretty Love",
         categoria: "cosmetica",
         color: "piel",
@@ -103,11 +129,16 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $7.253",
         badge_descuento: "15% OFF",
         envio_gratis: false,
-        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Aceite+Vainilla"
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Aceite+Vainilla",
+        imagenes: [
+            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Aceite+Envase",
+            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Aceite+Detalle"
+        ]
     },
     {
         id: "7",
         titulo: "Mini Vibrador Punto G Qamra Delfín",
+        descripcion: "Diseño curvado anatómico para estimulación focalizada del Punto G y clítoris. Motor potente con múltiples frecuencias de vibración silenciosa. Batería recargable.",
         marca: "Pretty Love",
         categoria: "sextoys",
         color: "rojo",
@@ -118,11 +149,16 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $3.733",
         badge_descuento: "20% OFF",
         envio_gratis: true,
-        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Vibrador+Delfin"
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Vibrador+Delfin",
+        imagenes: [
+            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Vibrador+Curva",
+            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Botones+Control"
+        ]
     },
     {
         id: "8",
         titulo: "Arnés y Conjunto de Cuero Fetiche",
+        descripcion: "Conjunto estilo bondage confeccionado en cuero vegano con herrajes niquelados reforzados. Correas totalmente ajustables para adaptarse a distintas medidas corporales.",
         marca: "Svakom",
         categoria: "fetiche",
         color: "negro",
@@ -133,22 +169,11 @@ const PRODUCTOS_LOCALES_DEMO = [
         cuotas: "3 cuotas sin interés de $12.666",
         badge_descuento: "15% OFF",
         envio_gratis: true,
-        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Arnes+Fetiche"
-    },
-    {
-        id: "9",
-        titulo: "Copa Menstrual y Gel Íntimo Uso Diario ESI",
-        marca: "Lovense",
-        categoria: "bienestar",
-        color: "rosa",
-        modelo: "liso",
-        precio_tachado: 22000,
-        precio_oferta: 18700,
-        precio_transferencia: 16830,
-        cuotas: "3 cuotas sin interés de $6.233",
-        badge_descuento: "15% OFF",
-        envio_gratis: true,
-        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Bienestar+y+ESI"
+        imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Arnes+Fetiche",
+        imagenes: [
+            "https://placehold.co/400x400/F4E4D9/6D1D26?text=Arnes+Completo",
+            "https://placehold.co/400x400/6D1D26/FFF8ED?text=Detalle+Hebillas"
+        ]
     }
 ];
 
@@ -158,10 +183,10 @@ const DATOS_MODALES_INFO = {
         badge: "NUESTRA IDENTIDAD",
         titulo: "Acerca de Fórmula Íntima",
         contenido: `
-            <p>Fórmula Íntima nace con el propósito de abordar la sexualidad desde una mirada amplia, natural y consciente[cite: 46].</p>
-            <p>Más que ofrecer productos, buscamos crear un espacio donde el placer, el bienestar y la salud sexual convivan con información, acompañamiento y respeto, derribando prejuicios y mitos[cite: 46].</p>
+            <p>Fórmula Íntima nace con el propósito de abordar la sexualidad desde una mirada amplia, natural y consciente[cite: 37].</p>
+            <p>Más que ofrecer productos, buscamos crear un espacio donde el placer, el bienestar y la salud sexual convivan con información, acompañamiento y respeto, derribando prejuicios y mitos[cite: 37].</p>
             <div class="modal-info__destacado">
-                Celebramos la diversidad de cuerpos, identidades y talles. El placer es para todes[cite: 46].
+                Celebramos la diversidad de cuerpos, identidades y talles. El placer es para todes[cite: 37].
             </div>
         `
     },
@@ -174,7 +199,7 @@ const DATOS_MODALES_INFO = {
             <p><strong>¿Cómo coordino el pago y la entrega?</strong><br>
             Al presionar "Iniciar compra" en el carrito, se genera un mensaje automático con tus productos y precios y te deriva directo a nuestro WhatsApp oficial para coordinar todo de forma personalizada.</p>
             <p><strong>¿Tienen atención confidencial?</strong><br>
-            Sí, te asesoramos de manera 100% privada, cálida y sin prejuicios[cite: 46].</p>
+            Sí, te asesoramos de manera 100% privada, cálida y sin prejuicios[cite: 37].</p>
         `
     },
     "envios": {
@@ -296,7 +321,8 @@ window.aplicarFiltros = function() {
     if (textoBuscador !== '') {
         resultado = resultado.filter(p => 
             p.titulo.toLowerCase().includes(textoBuscador) || 
-            (p.marca && p.marca.toLowerCase().includes(textoBuscador))
+            (p.marca && p.marca.toLowerCase().includes(textoBuscador)) ||
+            (p.descripcion && p.descripcion.toLowerCase().includes(textoBuscador))
         );
     }
 
@@ -366,7 +392,7 @@ window.limpiarFiltros = function() {
 };
 
 // ==========================================================================
-// 2. RENDERIZADO DE PRODUCTOS
+// 2. RENDERIZADO DE PRODUCTOS EN LA GRILLA
 // ==========================================================================
 function renderizarProductos(productos) {
     const contenedorGrilla = document.getElementById('grilla-productos');
@@ -390,7 +416,7 @@ function renderizarProductos(productos) {
     }
 
     contenedorGrilla.innerHTML = productos.map(prod => {
-        const foto = prod.imagen_url || 'https://placehold.co/400x400/F4E4D9/6D1D26?text=Formula+Intima';
+        const foto = prod.imagen_url || (prod.imagenes && prod.imagenes[0]) || 'https://placehold.co/400x400/F4E4D9/6D1D26?text=Formula+Intima';
         const precioOferta = Number(prod.precio_oferta).toLocaleString('es-AR');
         const precioTachado = prod.precio_tachado 
             ? `<div class="tarjeta-producto__precio-tachado">$${Number(prod.precio_tachado).toLocaleString('es-AR')}</div>` 
@@ -499,6 +525,7 @@ window.agregarAlCarrito = function(id) {
     if (!prod) return;
 
     const itemExistente = carrito.find(item => String(item.id) === String(id));
+    const foto = prod.imagen_url || (prod.imagenes && prod.imagenes[0]) || 'https://placehold.co/100x100/F4E4D9/6D1D26?text=Foto';
 
     if (itemExistente) {
         itemExistente.cantidad += 1;
@@ -508,7 +535,7 @@ window.agregarAlCarrito = function(id) {
             titulo: prod.titulo,
             marca: prod.marca || 'Fórmula Íntima',
             precio: parseFloat(prod.precio_oferta),
-            imagen_url: prod.imagen_url || 'https://placehold.co/100x100/F4E4D9/6D1D26?text=Foto',
+            imagen_url: foto,
             cantidad: 1
         });
     }
@@ -630,7 +657,7 @@ window.enviarPedidoAWhatsApp = function() {
 };
 
 // ==========================================================================
-// 4. SUSCRIPCIÓN NEWSLETTER (GUARDADO EN BD Y LOCALSTORAGE)
+// 4. SUSCRIPCIÓN NEWSLETTER
 // ==========================================================================
 window.suscribirNewsletter = async function(event) {
     event.preventDefault();
@@ -653,12 +680,10 @@ window.suscribirNewsletter = async function(event) {
             })
         };
 
-        // 1. Guardar en Supabase (si está configurado)
         if (clienteSupabase) {
             await clienteSupabase.from('suscriptores').insert([{ email: email }]);
         }
 
-        // 2. Guardar en memoria local compartida con admin.html
         let suscriptoresLocales = [];
         try {
             suscriptoresLocales = JSON.parse(localStorage.getItem('fi_suscriptores_newsletter')) || [];
@@ -691,7 +716,7 @@ window.suscribirNewsletter = async function(event) {
 };
 
 // ==========================================================================
-// 5. CARDS FLOTANTES DEL FOOTER (MODALES)
+// 5. CARDS FLOTANTES DEL FOOTER
 // ==========================================================================
 window.abrirModalInfo = function(clave) {
     const modalInfo = document.getElementById('modal-info');
@@ -729,6 +754,16 @@ window.toggleFavorito = function(btn) {
     }
 };
 
+// ==========================================================================
+// 6. CARD MODAL DETALLADA: MULTI-IMAGEN Y DESCRIPCIÓN
+// ==========================================================================
+window.cambiarImagenPrincipalModal = function(urlNueva) {
+    const imgPrincipal = document.getElementById('modal-producto-img-principal');
+    if (imgPrincipal) {
+        imgPrincipal.src = urlNueva;
+    }
+};
+
 window.verDetalleRapido = function(id) {
     const prod = todosLosProductos.find(p => String(p.id) === String(id));
     if (!prod) return;
@@ -739,18 +774,56 @@ window.verDetalleRapido = function(id) {
     const modalInfoContenido = document.getElementById('modal-info-contenido');
     if (!modalInfo) return;
 
+    const listaFotos = (prod.imagenes && Array.isArray(prod.imagenes) && prod.imagenes.length)
+        ? prod.imagenes
+        : [prod.imagen_url || 'https://placehold.co/400x400/F4E4D9/6D1D26?text=Foto'];
+
+    const fotoInicial = listaFotos[0];
+
+    // Miniaturas interactivas (solo si hay más de 1 imagen)
+    const tiraMiniaturasHTML = listaFotos.length > 1 ? `
+        <div style="display:flex; gap:0.5rem; justify-content:center; margin-top:0.6rem; overflow-x:auto; padding-bottom:4px;">
+            ${listaFotos.map((url, i) => `
+                <img src="${url}" 
+                     onclick="window.cambiarImagenPrincipalModal('${url}')" 
+                     onmouseover="window.cambiarImagenPrincipalModal('${url}')"
+                     style="width:50px; height:50px; object-fit:contain; border:2px solid #E5D5C5; border-radius:4px; cursor:pointer; background:#fff; transition:border-color 0.2s;"
+                     onmouseenter="this.style.borderColor='#6D1D26'"
+                     onmouseleave="this.style.borderColor='#E5D5C5'"
+                     alt="Miniatura ${i+1}">
+            `).join('')}
+        </div>
+    ` : '';
+
     modalInfoBadge.textContent = prod.marca || 'FÓRMULA ÍNTIMA';
     modalInfoTitulo.textContent = prod.titulo;
     modalInfoContenido.innerHTML = `
-        <div style="text-align:center; margin-bottom:1rem; background:#F4E4D9; padding:1rem; border-radius:6px;">
-            <img src="${prod.imagen_url}" alt="${prod.titulo}" style="max-height:200px; margin:0 auto; object-fit:contain;">
+        <!-- Galería Principal -->
+        <div style="text-align:center; margin-bottom:1.2rem; background:#F4E4D9; padding:1.2rem; border-radius:6px;">
+            <img id="modal-producto-img-principal" src="${fotoInicial}" alt="${prod.titulo}" style="max-height:220px; width:auto; margin:0 auto; object-fit:contain; border-radius:4px;">
+            ${tiraMiniaturasHTML}
         </div>
-        <p style="font-size:1.4rem; font-weight:800; color:#6D1D26; margin-bottom:0.3rem;">
-            $${Number(prod.precio_oferta).toLocaleString('es-AR')}
-        </p>
-        ${prod.cuotas ? `<p style="font-size:0.85rem; color:#666;">${prod.cuotas}</p>` : ''}
-        ${prod.precio_transferencia ? `<div class="modal-info__destacado">$${Number(prod.precio_transferencia).toLocaleString('es-AR')} abonando por Transferencia Bancaria</div>` : ''}
-        <button type="button" onclick="window.cerrarModalInfo(); window.agregarAlCarrito('${prod.id}');" style="width:100%; padding:0.9rem; background:#40171F; color:#FFF8ED; border:none; border-radius:4px; font-weight:700; cursor:pointer; margin-top:0.5rem;">
+
+        <!-- Precios -->
+        <div style="margin-bottom:1rem; border-bottom:1px solid #E5D5C5; padding-bottom:0.8rem;">
+            <div style="font-size:1.8rem; font-weight:800; color:#6D1D26; line-height:1.1;">
+                $${Number(prod.precio_oferta).toLocaleString('es-AR')}
+                ${prod.precio_tachado ? `<span style="font-size:1rem; color:#999; text-decoration:line-through; margin-left:0.5rem; font-weight:normal;">$${Number(prod.precio_tachado).toLocaleString('es-AR')}</span>` : ''}
+            </div>
+            ${prod.cuotas ? `<p style="font-size:0.85rem; color:#666; margin-top:0.2rem;">${prod.cuotas}</p>` : ''}
+            ${prod.precio_transferencia ? `<div class="modal-info__destacado" style="margin-top:0.5rem;">$${Number(prod.precio_transferencia).toLocaleString('es-AR')} con Transferencia o depósito bancario</div>` : ''}
+        </div>
+
+        <!-- Descripción Completa -->
+        ${prod.descripcion ? `
+            <div style="margin-bottom:1.5rem;">
+                <h4 style="font-size:0.9rem; font-weight:700; color:#40171F; margin-bottom:0.4rem; text-transform:uppercase; letter-spacing:0.5px;">Descripción del producto:</h4>
+                <p style="font-size:0.92rem; color:#444; line-height:1.6; white-space:pre-line;">${prod.descripcion}</p>
+            </div>
+        ` : ''}
+
+        <!-- Botón de Compra -->
+        <button type="button" onclick="window.cerrarModalInfo(); window.agregarAlCarrito('${prod.id}');" style="width:100%; padding:1rem; background:#40171F; color:#FFF8ED; border:none; border-radius:4px; font-weight:700; font-size:1rem; cursor:pointer; transition:background-color 0.2s;" onmouseenter="this.style.backgroundColor='#6D1D26'" onmouseleave="this.style.backgroundColor='#40171F'">
             Agregar al carrito
         </button>
     `;
@@ -761,7 +834,7 @@ window.verDetalleRapido = function(id) {
 };
 
 // ==========================================================================
-// 6. INICIALIZACIÓN AUTOMÁTICA
+// 7. INICIALIZACIÓN AUTOMÁTICA
 // ==========================================================================
 async function iniciarTienda() {
     const guardadosEnAdmin = localStorage.getItem('fi_catalogo_admin');

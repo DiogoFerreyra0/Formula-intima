@@ -331,7 +331,7 @@
             border: 1px solid var(--color-borde);
             border-radius: 8px;
             width: 100%;
-            max-width: 650px;
+            max-width: 700px;
             max-height: 90vh;
             overflow-y: auto;
             display: flex;
@@ -385,11 +385,17 @@
             color: var(--color-oscuro);
         }
 
-        .campo-grupo input, .campo-grupo select {
+        .campo-grupo input, .campo-grupo select, .campo-grupo textarea {
             padding: 0.7rem;
             border: 1px solid var(--color-borde);
             border-radius: 4px;
             font-size: 0.9rem;
+            font-family: inherit;
+        }
+
+        .campo-grupo textarea {
+            resize: vertical;
+            min-height: 85px;
         }
 
         .campo-checkbox {
@@ -402,21 +408,46 @@
             font-size: 0.9rem;
         }
 
-        .vista-previa-contenedor {
+        /* Tira de Previsualizaciones de Galería */
+        .galeria-previa {
             display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 0.5rem;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.6rem;
         }
 
-        .vista-previa-img {
+        .galeria-previa__item {
+            position: relative;
             width: 70px;
             height: 70px;
-            object-fit: contain;
             border: 1px solid var(--color-borde);
             border-radius: 4px;
+            overflow: hidden;
             background-color: var(--color-fondo-caja);
-            display: none;
+        }
+
+        .galeria-previa__img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .galeria-previa__eliminar {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: var(--color-peligro);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
         }
 
         .modal__pie {
@@ -463,7 +494,7 @@
             <div class="admin-encabezado">
                 <div>
                     <h1 class="admin-encabezado__titulo">Gestión de Catálogo</h1>
-                    <p style="color: var(--color-texto-suave); font-size: 0.9rem;">Creá, modificá o eliminá los productos que se muestran en la tienda.</p>
+                    <p style="color: var(--color-texto-suave); font-size: 0.9rem;">Creá, modificá o eliminá productos, descripciones y galerías de fotos.</p>
                 </div>
                 <div class="admin-encabezado__acciones">
                     <input type="text" id="filtro-busqueda" class="input-busqueda" placeholder="Buscar por título o marca...">
@@ -481,7 +512,7 @@
                             <th>Categoría</th>
                             <th>Precio Oferta</th>
                             <th>Transferencia</th>
-                            <th>Etiquetas</th>
+                            <th>Fotos</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -514,9 +545,7 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="cuerpo-tabla-newsletter">
-                        <!-- Suscriptores inyectados dinámicamente -->
-                    </tbody>
+                    <tbody id="cuerpo-tabla-newsletter"></tbody>
                 </table>
             </div>
         </section>
@@ -537,6 +566,12 @@
                 <div class="campo-grupo">
                     <label for="campo-titulo">Título del producto *</label>
                     <input type="text" id="campo-titulo" required placeholder="Ej: Gel Lubricante Sexitive Dante al Infierno 500ml">
+                </div>
+
+                <!-- NUEVO CAMPO: DESCRIPCIÓN DEL PRODUCTO -->
+                <div class="campo-grupo">
+                    <label for="campo-descripcion">Descripción detallada del producto</label>
+                    <textarea id="campo-descripcion" placeholder="Describí los beneficios, modo de uso, textura, compatibilidad con preservativos o juguetes, cuidados, etc."></textarea>
                 </div>
 
                 <div class="formulario-fila">
@@ -618,16 +653,16 @@
                     </div>
                 </div>
 
+                <!-- CARGA DE MÚLTIPLES IMÁGENES -->
                 <div class="campo-grupo">
-                    <label for="campo-foto-archivo">Subir Foto desde tu computadora</label>
-                    <input type="file" id="campo-foto-archivo" accept="image/*">
-                    <label for="campo-foto-url" style="margin-top:0.4rem; font-size:0.8rem; color:#666;">O pegar enlace de imagen (URL):</label>
-                    <input type="url" id="campo-foto-url" placeholder="https://...">
+                    <label for="campo-foto-archivo">Subir Fotos desde tu computadora (Podés seleccionar varias)</label>
+                    <input type="file" id="campo-foto-archivo" accept="image/*" multiple>
+                    
+                    <label for="campo-foto-url" style="margin-top:0.4rem; font-size:0.8rem; color:#666;">O pegar enlaces URL (separados por coma o salto de línea):</label>
+                    <textarea id="campo-foto-url" style="min-height:50px;" placeholder="https://ejemplo.com/foto1.jpg, https://ejemplo.com/foto2.jpg"></textarea>
 
-                    <div class="vista-previa-contenedor">
-                        <img id="img-vista-previa" class="vista-previa-img" alt="Vista previa">
-                        <span id="texto-vista-previa" style="font-size: 0.8rem; color: #666;">Sin foto seleccionada</span>
-                    </div>
+                    <div style="font-size:0.8rem; font-weight:700; color:var(--color-primario); margin-top:0.5rem;">Galería de imágenes a guardar (la primera será la foto principal):</div>
+                    <div id="contenedor-galeria-previa" class="galeria-previa"></div>
                 </div>
 
                 <div class="modal__pie">
@@ -650,6 +685,7 @@
             {
                 id: "1",
                 titulo: "Gel Lubricante Sexitive Dante al Infierno 500ml",
+                descripcion: "Gel íntimo lubricante ultra deslizante. Formato generoso de 500ml ideal para masajes y prácticas intensas. Fórmula al agua compatible con preservativos y juguetes de silicona.",
                 marca: "Sexitive",
                 categoria: "cosmetica",
                 color: "rojo",
@@ -660,11 +696,17 @@
                 cuotas: "3 cuotas sin interés de $9.333",
                 badge_descuento: "20% OFF",
                 envio_gratis: true,
-                imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Dante+al+Infierno"
+                imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Dante+al+Infierno",
+                imagenes: [
+                    "https://placehold.co/400x400/F4E4D9/6D1D26?text=Dante+al+Infierno+1",
+                    "https://placehold.co/400x400/6D1D26/FFF8ED?text=Dante+Detalle+2",
+                    "https://placehold.co/400x400/F4E4D9/40171F?text=Dante+Uso+3"
+                ]
             },
             {
                 id: "2",
                 titulo: "Spray Retardante Sexitive Héroe Extra Time 20ml",
+                descripcion: "Spray desensibilizante suave diseñado para prolongar el placer y el rendimiento. Textura liviana, rápida absorción y sin dejar residuos grasos.",
                 marca: "Sexitive",
                 categoria: "cosmetica",
                 color: "negro",
@@ -675,11 +717,16 @@
                 cuotas: "3 cuotas sin interés de $7.866",
                 badge_descuento: "20% OFF",
                 envio_gratis: true,
-                imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Heroe+Spray"
+                imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Heroe+Spray",
+                imagenes: [
+                    "https://placehold.co/400x400/F4E4D9/6D1D26?text=Heroe+Spray+1",
+                    "https://placehold.co/400x400/6D1D26/FFF8ED?text=Heroe+Caja+2"
+                ]
             },
             {
                 id: "4",
                 titulo: "Succionador de Clítoris — 10 funciones de pulso",
+                descripcion: "Estimulación por ondas de presión de aire sin contacto directo. Silicona médica ultra suave de grado alimenticio, recargable mediante USB y totalmente sumergible.",
                 marca: "Satisfyer",
                 categoria: "sextoys",
                 color: "rosa",
@@ -690,11 +737,16 @@
                 cuotas: "3 cuotas sin interés de $23.973",
                 badge_descuento: "20% OFF",
                 envio_gratis: true,
-                imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Succionador+Satisfyer"
+                imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Succionador+Satisfyer",
+                imagenes: [
+                    "https://placehold.co/400x400/F4E4D9/6D1D26?text=Succionador+Satisfyer+1",
+                    "https://placehold.co/400x400/6D1D26/FFF8ED?text=Succionador+Boquilla+2"
+                ]
             },
             {
                 id: "5",
                 titulo: "Body de Encaje Línea Inclusiva Real",
+                descripcion: "Lencería diseñada para abrazar todos los cuerpos. Encaje elastizado con detalles de satén y breteles regulables. Confección premium con refuerzo en busto.",
                 marca: "Fórmula Íntima",
                 categoria: "lenceria",
                 color: "negro",
@@ -705,13 +757,17 @@
                 cuotas: "3 cuotas sin interés de $17.566",
                 badge_descuento: "15% OFF",
                 envio_gratis: true,
-                imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Body+Encaje+Inclusivo"
+                imagen_url: "https://placehold.co/400x400/F4E4D9/6D1D26?text=Body+Encaje+Inclusivo",
+                imagenes: [
+                    "https://placehold.co/400x400/F4E4D9/6D1D26?text=Body+Encaje+Inclusivo+1",
+                    "https://placehold.co/400x400/6D1D26/FFF8ED?text=Body+Espalda+2"
+                ]
             }
         ];
 
         let productosLocales = [];
         let suscriptoresLocales = [];
-        let imagenBase64Temporal = "";
+        let listaImagenesActuales = [];
 
         const usuarioEmailSpan = document.getElementById('usuario-email');
         const cuerpoTabla = document.getElementById('cuerpo-tabla-productos');
@@ -719,10 +775,9 @@
         const toastMensaje = document.getElementById('toast-mensaje');
         const modal = document.getElementById('modal-producto');
         const formProducto = document.getElementById('formulario-producto');
+        const contenedorGaleriaPrevia = document.getElementById('contenedor-galeria-previa');
 
-        // ==========================================
-        // 1. SEGURIDAD Y ACCESO
-        // ==========================================
+        // 1. Acceso y sesión
         async function verificarAcceso() {
             if (clienteSupabase) {
                 const { data: { session } } = await clienteSupabase.auth.getSession();
@@ -744,9 +799,7 @@
             window.location.href = 'login.html';
         });
 
-        // ==========================================
-        // 2. GESTIÓN DE PRODUCTOS
-        // ==========================================
+        // 2. Cargar productos
         async function cargarProductos() {
             if (clienteSupabase) {
                 const { data } = await clienteSupabase.from('productos').select('*').order('created_at', { ascending: false });
@@ -769,26 +822,29 @@
                 return;
             }
 
-            cuerpoTabla.innerHTML = lista.map(p => `
-                <tr>
-                    <td><img src="${p.imagen_url || 'https://placehold.co/60x60/F4E4D9/6D1D26?text=Foto'}" class="miniatura-foto"></td>
-                    <td><strong>${p.titulo}</strong></td>
-                    <td>${p.marca}</td>
-                    <td><span class="badge-tabla">${p.categoria}</span></td>
-                    <td><strong>$${Number(p.precio_oferta).toLocaleString('es-AR')}</strong></td>
-                    <td>${p.precio_transferencia ? `$${Number(p.precio_transferencia).toLocaleString('es-AR')}` : '-'}</td>
-                    <td>
-                        ${p.badge_descuento ? `<span class="badge-tabla">${p.badge_descuento}</span>` : ''}
-                        ${p.envio_gratis ? `<span class="badge-tabla" style="background:#D4EDDA;color:#155724;">Envío gratis</span>` : ''}
-                    </td>
-                    <td>
-                        <div class="acciones-fila">
-                            <button type="button" class="boton-accion boton-accion--editar" onclick="window.abrirModalEditar('${p.id}')">✏️ Editar</button>
-                            <button type="button" class="boton-accion boton-accion--borrar" onclick="window.borrarProducto('${p.id}')">🗑️</button>
-                        </div>
-                    </td>
-                </tr>
-            `).join('');
+            cuerpoTabla.innerHTML = lista.map(p => {
+                const cantFotos = (p.imagenes && p.imagenes.length) ? p.imagenes.length : 1;
+                return `
+                    <tr>
+                        <td><img src="${p.imagen_url || (p.imagenes && p.imagenes[0]) || 'https://placehold.co/60x60/F4E4D9/6D1D26?text=Foto'}" class="miniatura-foto"></td>
+                        <td>
+                            <strong>${p.titulo}</strong>
+                            ${p.descripcion ? `<div style="font-size:0.75rem; color:#777; max-width:280px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${p.descripcion}</div>` : ''}
+                        </td>
+                        <td>${p.marca}</td>
+                        <td><span class="badge-tabla">${p.categoria}</span></td>
+                        <td><strong>$${Number(p.precio_oferta).toLocaleString('es-AR')}</strong></td>
+                        <td>${p.precio_transferencia ? `$${Number(p.precio_transferencia).toLocaleString('es-AR')}` : '-'}</td>
+                        <td><span class="badge-tabla" style="background:#FFF8ED; border:1px solid #E5D5C5;">📸 ${cantFotos} foto${cantFotos > 1 ? 's' : ''}</span></td>
+                        <td>
+                            <div class="acciones-fila">
+                                <button type="button" class="boton-accion boton-accion--editar" onclick="window.abrirModalEditar('${p.id}')">✏️ Editar</button>
+                                <button type="button" class="boton-accion boton-accion--borrar" onclick="window.borrarProducto('${p.id}')">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
         }
 
         document.getElementById('filtro-busqueda').addEventListener('input', (e) => {
@@ -797,25 +853,58 @@
             renderizarTabla(filtrados);
         });
 
+        // 3. Manejo de Galería de Imágenes (Múltiples fotos por archivo y URL)
+        function actualizarGaleriaPreviaUI() {
+            contenedorGaleriaPrevia.innerHTML = listaImagenesActuales.map((url, i) => `
+                <div class="galeria-previa__item">
+                    <img src="${url}" class="galeria-previa__img">
+                    <button type="button" class="galeria-previa__eliminar" onclick="window.quitarFotoGaleria(${i})" title="Quitar foto">&times;</button>
+                </div>
+            `).join('');
+        }
+
+        window.quitarFotoGaleria = function(indice) {
+            listaImagenesActuales.splice(indice, 1);
+            actualizarGaleriaPreviaUI();
+        };
+
+        // Subida de múltiples archivos desde PC
         document.getElementById('campo-foto-archivo').addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(evt) {
-                imagenBase64Temporal = evt.target.result;
-                const img = document.getElementById('img-vista-previa');
-                img.src = imagenBase64Temporal;
-                img.style.display = 'block';
-                document.getElementById('texto-vista-previa').textContent = file.name;
-            };
-            reader.readAsDataURL(file);
+            const files = Array.from(e.target.files);
+            if (!files.length) return;
+
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    listaImagenesActuales.push(evt.target.result);
+                    actualizarGaleriaPreviaUI();
+                };
+                reader.readAsDataURL(file);
+            });
+            e.target.value = '';
         });
 
+        // Procesar URLs agregadas en el textarea
+        document.getElementById('campo-foto-url').addEventListener('change', (e) => {
+            const texto = e.target.value.trim();
+            if (!texto) return;
+            const urls = texto.split(/[\n,]+/).map(u => u.trim()).filter(u => u.startsWith('http'));
+            urls.forEach(u => {
+                if (!listaImagenesActuales.includes(u)) {
+                    listaImagenesActuales.push(u);
+                }
+            });
+            actualizarGaleriaPreviaUI();
+            e.target.value = '';
+        });
+
+        // 4. Modal
         document.getElementById('boton-nuevo-producto').addEventListener('click', () => {
             formProducto.reset();
             document.getElementById('producto-id').value = '';
-            imagenBase64Temporal = '';
-            document.getElementById('img-vista-previa').style.display = 'none';
+            document.getElementById('campo-descripcion').value = '';
+            listaImagenesActuales = [];
+            actualizarGaleriaPreviaUI();
             document.getElementById('modal-titulo').textContent = 'Nuevo Producto';
             modal.style.display = 'flex';
         });
@@ -830,6 +919,7 @@
 
             document.getElementById('producto-id').value = prod.id;
             document.getElementById('campo-titulo').value = prod.titulo;
+            document.getElementById('campo-descripcion').value = prod.descripcion || '';
             document.getElementById('campo-marca').value = prod.marca || 'Sexitive';
             document.getElementById('campo-categoria').value = prod.categoria || 'cosmetica';
             document.getElementById('campo-color').value = prod.color || 'negro';
@@ -840,30 +930,31 @@
             document.getElementById('campo-cuotas').value = prod.cuotas || '';
             document.getElementById('campo-badge-descuento').value = prod.badge_descuento || '';
             document.getElementById('campo-envio-gratis').checked = !!prod.envio_gratis;
-            document.getElementById('campo-foto-url').value = (prod.imagen_url && !prod.imagen_url.startsWith('data:')) ? prod.imagen_url : '';
-            imagenBase64Temporal = prod.imagen_url || '';
 
-            const img = document.getElementById('img-vista-previa');
-            if (prod.imagen_url) {
-                img.src = prod.imagen_url;
-                img.style.display = 'block';
+            // Cargar imágenes existentes en la galería
+            if (prod.imagenes && Array.isArray(prod.imagenes) && prod.imagenes.length) {
+                listaImagenesActuales = [...prod.imagenes];
+            } else if (prod.imagen_url) {
+                listaImagenesActuales = [prod.imagen_url];
             } else {
-                img.style.display = 'none';
+                listaImagenesActuales = [];
             }
+            actualizarGaleriaPreviaUI();
 
             document.getElementById('modal-titulo').textContent = 'Modificar Producto';
             modal.style.display = 'flex';
         };
 
+        // 5. Guardar Producto
         formProducto.addEventListener('submit', async (e) => {
             e.preventDefault();
             const idExistente = document.getElementById('producto-id').value;
-            const urlEscrita = document.getElementById('campo-foto-url').value.trim();
-            const imagenFinal = imagenBase64Temporal || urlEscrita || 'https://placehold.co/400x400/F4E4D9/6D1D26?text=Nuevo+Producto';
+            const imagenPrincipal = listaImagenesActuales[0] || 'https://placehold.co/400x400/F4E4D9/6D1D26?text=Producto';
 
             const nuevoProd = {
                 id: idExistente || String(Date.now()),
                 titulo: document.getElementById('campo-titulo').value.trim(),
+                descripcion: document.getElementById('campo-descripcion').value.trim(),
                 marca: document.getElementById('campo-marca').value,
                 categoria: document.getElementById('campo-categoria').value,
                 color: document.getElementById('campo-color').value,
@@ -874,16 +965,17 @@
                 cuotas: document.getElementById('campo-cuotas').value.trim() || null,
                 badge_descuento: document.getElementById('campo-badge-descuento').value.trim() || null,
                 envio_gratis: document.getElementById('campo-envio-gratis').checked,
-                imagen_url: imagenFinal
+                imagen_url: imagenPrincipal,
+                imagenes: listaImagenesActuales.length ? listaImagenesActuales : [imagenPrincipal]
             };
 
             if (idExistente) {
                 const idx = productosLocales.findIndex(p => String(p.id) === String(idExistente));
                 if (idx !== -1) productosLocales[idx] = nuevoProd;
-                mostrarNotificacion("¡Producto actualizado! Ya se ve reflejado en la tienda.");
+                mostrarNotificacion("¡Producto actualizado con éxito!");
             } else {
                 productosLocales.unshift(nuevoProd);
-                mostrarNotificacion("¡Producto creado con éxito! Ya aparece en la tienda.");
+                mostrarNotificacion("¡Producto creado con éxito!");
             }
 
             localStorage.setItem('fi_catalogo_admin', JSON.stringify(productosLocales));
@@ -902,36 +994,25 @@
             mostrarNotificacion("Producto eliminado.");
         };
 
-        // ==========================================
-        // 3. GESTIÓN DEL NEWSLETTER (OPCIÓN 1)
-        // ==========================================
+        // 6. Suscriptores Newsletter
         async function cargarSuscriptores() {
-            if (clienteSupabase) {
-                try {
-                    const { data } = await clienteSupabase.from('suscriptores').select('*').order('created_at', { ascending: false });
-                    suscriptoresLocales = data || [];
-                } catch (e) {
-                    suscriptoresLocales = [];
-                }
+            const guardados = localStorage.getItem('fi_suscriptores_newsletter');
+            if (guardados) {
+                suscriptoresLocales = JSON.parse(guardados);
             } else {
-                const guardados = localStorage.getItem('fi_suscriptores_newsletter');
-                if (guardados) {
-                    suscriptoresLocales = JSON.parse(guardados);
-                } else {
-                    suscriptoresLocales = [
-                        { id: "s1", email: "carolina.m@gmail.com", fecha: "24/10/2026, 17:30" },
-                        { id: "s2", email: "lucia_perez@hotmail.com", fecha: "25/10/2026, 10:15" },
-                        { id: "s3", email: "valeria.ba@outlook.com", fecha: "25/10/2026, 11:40" }
-                    ];
-                    localStorage.setItem('fi_suscriptores_newsletter', JSON.stringify(suscriptoresLocales));
-                }
+                suscriptoresLocales = [
+                    { id: "s1", email: "carolina.m@gmail.com", fecha: "24/10/2026, 17:30" },
+                    { id: "s2", email: "lucia_perez@hotmail.com", fecha: "25/10/2026, 10:15" },
+                    { id: "s3", email: "valeria.ba@outlook.com", fecha: "25/10/2026, 11:40" }
+                ];
+                localStorage.setItem('fi_suscriptores_newsletter', JSON.stringify(suscriptoresLocales));
             }
             renderizarTablaNewsletter(suscriptoresLocales);
         }
 
         function renderizarTablaNewsletter(lista) {
             if (lista.length === 0) {
-                cuerpoTablaNewsletter.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:2rem; color:#777;">Aún no hay correos suscriptos. Cuando se anoten en la web aparecerán acá.</td></tr>`;
+                cuerpoTablaNewsletter.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:2rem; color:#777;">Aún no hay correos suscriptos.</td></tr>`;
                 return;
             }
 
@@ -939,10 +1020,10 @@
                 <tr>
                     <td><strong>${index + 1}</strong></td>
                     <td><strong>${s.email}</strong></td>
-                    <td style="color:#666;">${s.fecha || s.created_at || 'Reciente'}</td>
+                    <td style="color:#666;">${s.fecha || 'Reciente'}</td>
                     <td>
                         <div class="acciones-fila">
-                            <a href="mailto:${s.email}" class="boton-accion" style="text-decoration:none; display:inline-flex; align-items:center;">✉️ Escribir</a>
+                            <a href="mailto:${s.email}" class="boton-accion" style="text-decoration:none;">✉️ Escribir</a>
                             <button type="button" class="boton-accion boton-accion--borrar" onclick="window.eliminarSuscriptor('${s.id}')">🗑️</button>
                         </div>
                     </td>
@@ -961,58 +1042,35 @@
             mostrarNotificacion("Suscriptor eliminado de la lista.");
         };
 
-        // Botón 1: Redactar directo en Gmail con todos los correos en CCO (Copia Oculta)
         window.redactarEnGmail = function() {
-            if (suscriptoresLocales.length === 0) {
-                alert("No hay correos registrados todavía.");
-                return;
-            }
-
+            if (suscriptoresLocales.length === 0) { alert("No hay correos registrados."); return; }
             const listaMails = suscriptoresLocales.map(s => s.email).join(',');
             const asunto = encodeURIComponent("Novedades exclusivas | Fórmula Íntima 🌸");
             const cuerpo = encodeURIComponent("¡Hola!\n\nTe escribimos desde Fórmula Íntima para compartirte nuestros nuevos lanzamientos y beneficios exclusivos para la comunidad.\n\n");
-
-            // URL directa para abrir redactor de Gmail en CCO (BCC)
-            const urlGmail = `https://mail.google.com/mail/?view=cm&fs=1&bcc=${encodeURIComponent(listaMails)}&su=${asunto}&body=${cuerpo}`;
-            window.open(urlGmail, '_blank');
+            window.open(`https://mail.google.com/mail/?view=cm&fs=1&bcc=${encodeURIComponent(listaMails)}&su=${asunto}&body=${cuerpo}`, '_blank');
         };
 
-        // Botón 2: Copiar todos los correos al portapapeles
         window.copiarTodosLosCorreos = function() {
-            if (suscriptoresLocales.length === 0) {
-                alert("No hay correos para copiar.");
-                return;
-            }
+            if (suscriptoresLocales.length === 0) { alert("No hay correos para copiar."); return; }
             const listaMails = suscriptoresLocales.map(s => s.email).join(', ');
             navigator.clipboard.writeText(listaMails).then(() => {
-                mostrarNotificacion("¡Correos copiados al portapapeles! Listos para pegar en CCO.");
-            }).catch(() => {
-                prompt("Copia los correos manualmente:", listaMails);
+                mostrarNotificacion("¡Correos copiados al portapapeles en CCO!");
             });
         };
 
-        // Botón 3: Descargar Excel (CSV)
         window.descargarExcelSuscriptores = function() {
-            if (suscriptoresLocales.length === 0) {
-                alert("No hay correos para exportar.");
-                return;
-            }
-
-            let csvContent = "data:text/csv;charset=utf-8,\uFEFF"; // Byte Order Mark para compatibilidad con Excel
-            csvContent += "Numero,Correo Electronico,Fecha de Registro\n";
-
+            if (suscriptoresLocales.length === 0) { alert("No hay correos para exportar."); return; }
+            let csv = "data:text/csv;charset=utf-8,\uFEFFNumero,Correo Electronico,Fecha de Registro\n";
             suscriptoresLocales.forEach((s, i) => {
-                csvContent += `${i + 1},${s.email},"${s.fecha || s.created_at || 'Reciente'}"\n`;
+                csv += `${i + 1},${s.email},"${s.fecha || 'Reciente'}"\n`;
             });
-
-            const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", `suscriptores_formula_intima_${Date.now()}.csv`);
+            link.href = encodeURI(csv);
+            link.download = `suscriptores_formula_intima_${Date.now()}.csv`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            mostrarNotificacion("Archivo CSV descargado con éxito.");
+            mostrarNotificacion("Archivo Excel CSV descargado.");
         };
 
         function mostrarNotificacion(texto) {
